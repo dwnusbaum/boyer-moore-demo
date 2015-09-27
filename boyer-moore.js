@@ -17,10 +17,35 @@ function makeBadCharTable(needle) {
 
 function makeGoodSuffixTable(needle) {
     var table = []
-    for (var i = 0; i < needle.length; i++) {
-        table[i] = 1;
+    var lastPrefixIndex = needle.length - 1;
+
+    // Case 1. Suffix appears in needle
+    for (var i = needle.length - 1; i >= 0; i--) {
+        if (needle.startsWith(needle.substring(i + 1))) {
+            lastPrefixIndex = i + 1;
+        }
+        table[i] = lastPrefixIndex + (needle.length - 1 - i);
     }
+
+    // Case 2. Prefix of suffix appears in needle
+    for (var i = 0; i < needle.length - 1; i++) {
+        var suffixLength = getSuffixLength(needle, i);
+
+        if (needle.charAt(i - suffixLength) !== needle.charAt(needle.length - 1 - suffixLength)) {
+            table[needle.length - 1 - suffixLength] = needle.length - 1 - i + suffixLength;
+        }
+    }
+
     return table;
+}
+
+// Returns the length of the longest suffix of needle that ends on needle[index]
+function getSuffixLength(needle, index) {
+    var suffixLength = 0;
+    for (var i = index; i >= 0 && needle.charAt(i) == needle.charAt(needle.length - 1 - index + i); --i) {
+            suffixLength += 1;
+        }
+    return suffixLength;
 }
 
 function search(needle, haystack) {
@@ -49,3 +74,6 @@ function search(needle, haystack) {
 console.log(search("computer", "computer"));
 console.log(search("muter", "computer"));
 console.log(search("puter", "computer"));
+console.log(search("", "computer"));
+console.log(makeGoodSuffixTable("abcxxxabc"));
+console.log(makeGoodSuffixTable("abyxcdeyx"));
