@@ -53,16 +53,20 @@ function search(needle, haystack) {
     var goodSuffixTable = makeGoodSuffixTable(needle);
 
     var haystackIndex = needle.length - 1;
+    var previousHaystackIndex = -1;
     var needleIndex = needle.length - 1;
 
+
     while (haystackIndex < haystack.length) {
-        if (needleIndex < 0) {
+        if (needleIndex < 0 || haystackIndex == previousHaystackIndex) {
             return true;
         } else if (needle.charAt(needleIndex) === haystack.charAt(haystackIndex)) {
             haystackIndex--;
             needleIndex--;
         } else {
-            haystackIndex += Math.max(badCharTable(haystack.charAt(haystackIndex)), goodSuffixTable[needleIndex]);
+            var shift = Math.max(badCharTable(haystack.charAt(haystackIndex)), goodSuffixTable[needleIndex]);
+            previousHaystackIndex = shift >= needleIndex + 1 ? haystackIndex : previousHaystackIndex;
+            haystackIndex += shift;
             needleIndex = needle.length - 1;
         }
     }
@@ -75,5 +79,7 @@ console.log(search("computer", "computer"));
 console.log(search("muter", "computer"));
 console.log(search("puter", "computer"));
 console.log(search("", "computer"));
+console.log(search("example", "here is a simple example"));
+console.log(search("zaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
 console.log(makeGoodSuffixTable("abcxxxabc"));
 console.log(makeGoodSuffixTable("abyxcdeyx"));
