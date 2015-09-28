@@ -72,8 +72,9 @@ function makeGoodSuffixTable(needle) {
 function getSuffixLength(needle, index) {
     var suffixLength = 0;
     for (var i = index; i >= 0 && needle.charAt(i) == needle.charAt(needle.length - 1 - index + i); --i) {
-            suffixLength += 1;
-        }
+        suffixLength += 1;
+    }
+
     return suffixLength;
 }
 
