@@ -1,4 +1,4 @@
-describe("Boyer-Moore string search algorithm", function() {
+describe("boyer-moore.js", function() {
     var bm = require("../boyer-moore.js");
 
     describe("boyer-moore.js exports", function() {
