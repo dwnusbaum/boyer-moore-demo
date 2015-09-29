@@ -1,5 +1,3 @@
-"use strict";
-
 function search(needle, haystack) {
     var badCharTable = makeBadCharTable(needle);
     var goodSuffixTable = makeGoodSuffixTable(needle);
