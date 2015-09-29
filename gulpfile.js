@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var gutil = require('gulp-util');
 var babel = require('gulp-babel');
 var connect = require('gulp-connect');
 
@@ -17,6 +18,7 @@ gulp.task('html', function () {
 gulp.task('babel', function () {
   gulp.src('app/js/*.js')
     .pipe(babel())
+      .on('error', gutil.log)
     .pipe(gulp.dest('app/build/'));
 });
 
