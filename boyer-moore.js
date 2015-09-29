@@ -71,7 +71,7 @@ function makeGoodSuffixTable(needle) {
 // Returns the length of the longest suffix of needle that ends on needle[index]
 function getSuffixLength(needle, index) {
     var suffixLength = 0;
-    for (var i = index; i >= 0 && needle.charAt(i) == needle.charAt(needle.length - 1 - index + i); --i) {
+    for (var i = index; i >= 0 && needle.charAt(i) == needle.charAt(needle.length - 1 - index + i); i--) {
         suffixLength += 1;
     }
 
