@@ -1,0 +1,11 @@
+{
+  "name": "boyer-moore.js",
+  "version": "1.0.0",
+  "description": "Fast string search algorithm",
+  "main": "boyer-moore.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "author": "Devin Nusbaum",
+  "license": "BSD-2-Clause"
+}
