@@ -70,10 +70,16 @@ var SearchForm = React.createClass({
     },
     render: function() {
         return (
-            <form className="searchForm" onSubmit={this.handleSubmit}>
-                <input type="text" placeholder="Here is a simple example." ref="haystack" />
-                <input type="text" placeholder="example" ref="needle" />
-                <input type="submit" value="Search" />
+            <form className="form-inline" onSubmit={this.handleSubmit}>
+                <div className="form-group">
+                    <label>Text to search:</label>
+                    <input type="text" className="searchInput" placeholder="Here is a simple example." ref="haystack" />
+                </div>
+                <div className="form-group">
+                    <label>Text to search for:</label>
+                    <input type="text" className="searchInput" placeholder="example" ref="needle" />
+                </div>
+                <button type="submit">Begin Search</button>
             </form>
         );
     }
@@ -82,56 +88,95 @@ var SearchForm = React.createClass({
 var SearchVisualization = React.createClass({
     getInitialState: function() {
         return {
-            currentAction: 0,
-            totalActions: this.props.data.actions.length
+            currentAction: 0
         };
     },
-    handleMove: function() {
+    handleNext: function() {
+        this.setState({
+            currentAction: Math.min(this.state.currentAction + 1, this.props.data.actions.length - 1)
+        });
+        return;
+    },
+    handlePrevious: function() {
+        this.setState({
+            currentAction: Math.max(this.state.currentAction - 1, 0)
+        });
         return;
     },
     render: function() {
+        var currentHaystackIndex = this.props.data.actions[this.state.currentAction].haystackIndex;
+        var currentNeedleIndex = this.props.data.actions[this.state.currentAction].needleIndex;
         return (
             <div className="searchVisualization">
-                <Haystack>
-                    {this.props.data.haystack}
-                </Haystack>
-                <Needle>
-                    {this.props.data.needle}
-                </Needle>
-                <Pointer>
-                    {this.props.data.actions[this.state.currentAction].haystackIndex}
-                </Pointer>
-                <Explanation onMove={this.handleMove} action={this.props.data.actions[this.state.currentAction]} />
-            </div
+                <pre>
+                    <Haystack current={currentHaystackIndex}>
+                        {this.props.data.haystack}
+                    </Haystack>
+                    <Needle current={currentNeedleIndex}>
+                        {this.props.data.needle}
+                    </Needle>
+                    <Pointer current={currentHaystackIndex} />
+                </pre>
+                <VisualizationControls onNext={this.handleNext} onPrevious={this.handlePrevious} />
+                <Explanation action={this.props.data.actions[this.state.currentAction]} />
+            </div>
         );
     }
 });
 
 var Haystack = React.createClass({
     render: function() {
+        var haystack = this.props.children;
+        var current = this.props.current;
+        var beforeCurrentChar = haystack.slice(0, current);
+        var currentChar = haystack.slice(current, current + 1);
+        var afterCurrentChar = haystack.slice(Math.max(current + 1, 1));
+
         return (
-            <div className="haystack">
-                {this.props.children}
-            </div>
+            <samp className="block haystack">
+                {beforeCurrentChar}
+                <span className="highlight">{currentChar}</span>
+                {afterCurrentChar}
+            </samp>
         );
     }
 });
 
 var Needle = React.createClass({
     render: function() {
+        var needle = this.props.children;
+        var current = this.props.current;
+        var beforeCurrentChar = needle.slice(0, current);
+        var currentChar = needle.slice(current, current + 1);
+        var afterCurrentChar = needle.slice(Math.max(current + 1, 1));
+
         return (
-            <div className="needle">
-                {this.props.children}
-            </div>
+            <samp className="block needle">
+                {beforeCurrentChar}
+                <span className="highlight">{currentChar}</span>
+                {afterCurrentChar}
+            </samp>
         );
     }
 });
 
 var Pointer = React.createClass({
     render: function() {
+        var pointer = Array(this.props.current + 1).join(" ") + "^";
         return (
-            <div className="pointer">
-                {this.props.children}
+            <samp className="block pointer">
+                {pointer}
+            </samp>
+        );
+    }
+});
+
+var VisualizationControls = React.createClass({
+    render: function() {
+        return (
+            <div className="visualizationControls">
+                <button className="btn btn-default" type="submit" onClick={this.props.onNext}>Next</button>
+                <button className="btn btn-default" type="submit" onClick={this.props.onPrevious}>Previous</button>
             </div>
         );
     }
@@ -149,5 +194,5 @@ var Explanation = React.createClass({
 
 React.render(
     <SearchDemo />,
-    document.getElementById("content")
+    document.getElementById("demo")
 );

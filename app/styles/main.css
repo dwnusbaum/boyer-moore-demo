@@ -1,0 +1,47 @@
+button {
+    font-size: 18px;
+    margin: 5px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #eee;
+}
+
+.form-inline .form-group {
+    font-size: 20px;
+    display: inline;
+}
+
+.form-group {
+    padding: 5px;
+}
+
+.container {
+    width: 1000px;
+    padding: 0 0 0 10px;
+}
+
+.block {
+    display: block;
+}
+
+.searchInput {
+    margin: 5px;
+    padding: 5px;
+    width: 150px;
+    height: 16px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.needle, .haystack, .pointer {
+    font-size: 32px;
+}
+
+.highlight {
+    background-color: blue;
+    color: white;
+}
