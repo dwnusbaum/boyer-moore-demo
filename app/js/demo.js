@@ -1,35 +1,13 @@
+var React = require("react");
+var boyerMoore = require("./boyerMoore.js")
+
 var SearchDemo = React.createClass({
     getInitialState: function() {
+        console.log("test");
         return {
             haystack: "ok",
             needle: "ok",
-            actions: [
-                {
-                    haystackIndex: 1,
-                    needleIndex: 1,
-                    name: 'COMPARE_END'
-                },
-                {
-                    haystackIndex: 1,
-                    needleIndex: 1,
-                    name: 'COMPARE_EQUAL'
-                },
-                {
-                    haystackIndex: 0,
-                    needleIndex: 0,
-                    name: 'COMPARE_END'
-                },
-                {
-                    haystackIndex: 0,
-                    needleIndex: 0,
-                    name: 'COMPARE_EQUAL'
-                },
-                {
-                    haystackIndex: -1,
-                    needleIndex: -1,
-                    name: 'NEEDLE_FOUND'
-                }
-            ]
+            actions: boyerMoore.searchLog("ok", "ok")
         };
     },
     handleHaystackAndNeedleSubmit: function(searchData) {
@@ -56,13 +34,7 @@ var SearchForm = React.createClass({
         this.props.onHaystackAndNeedleSubmit({
             haystack: haystack,
             needle: needle,
-            actions: [
-                {
-                    haystackIndex: needle.length - 1,
-                    needleIndex: needle.length - 1,
-                    action: 'COMPARE_END'
-                }
-            ]
+            actions: boyerMoore.searchLog(haystack, needle)
         });
         React.findDOMNode(this.refs.haystack).value = '';
         React.findDOMNode(this.refs.needle).value = '';
@@ -72,14 +44,14 @@ var SearchForm = React.createClass({
         return (
             <form className="form-inline" onSubmit={this.handleSubmit}>
                 <div className="form-group">
-                    <label>Text to search:</label>
-                    <input type="text" className="searchInput" placeholder="Here is a simple example." ref="haystack" />
+                    <label>Haystack:</label>
+                    <input type="text" className="margin-left-10" placeholder="Here is a simple example." ref="haystack" />
                 </div>
                 <div className="form-group">
-                    <label>Text to search for:</label>
-                    <input type="text" className="searchInput" placeholder="example" ref="needle" />
+                    <label className="margin-left-10">Needle:</label>
+                    <input type="text" className="margin-left-10" placeholder="example" ref="needle" />
                 </div>
-                <button type="submit">Begin Search</button>
+                <button type="submit" className="margin-left-10">Begin Search</button>
             </form>
         );
     }
@@ -134,9 +106,9 @@ var Haystack = React.createClass({
 
         return (
             <samp className="block haystack">
-                {beforeCurrentChar}
+                <span>{beforeCurrentChar}</span>
                 <span className="highlight">{currentChar}</span>
-                {afterCurrentChar}
+                <span>{afterCurrentChar}</span>
             </samp>
         );
     }
@@ -152,9 +124,9 @@ var Needle = React.createClass({
 
         return (
             <samp className="block needle">
-                {beforeCurrentChar}
+                <span>{beforeCurrentChar}</span>
                 <span className="highlight">{currentChar}</span>
-                {afterCurrentChar}
+                <span>{afterCurrentChar}</span>
             </samp>
         );
     }
@@ -165,7 +137,7 @@ var Pointer = React.createClass({
         var pointer = Array(this.props.current + 1).join(" ") + "^";
         return (
             <samp className="block pointer">
-                {pointer}
+                <span>{pointer}</span>
             </samp>
         );
     }
@@ -175,8 +147,8 @@ var VisualizationControls = React.createClass({
     render: function() {
         return (
             <div className="visualizationControls">
-                <button className="btn btn-default" type="submit" onClick={this.props.onNext}>Next</button>
-                <button className="btn btn-default" type="submit" onClick={this.props.onPrevious}>Previous</button>
+                <button type="submit" onClick={this.props.onNext}>Next</button>
+                <button className="margin-left-10" type="submit" onClick={this.props.onPrevious}>Previous</button>
             </div>
         );
     }
@@ -184,6 +156,7 @@ var VisualizationControls = React.createClass({
 
 var Explanation = React.createClass({
     render: function() {
+        console.log(this.props.action);
         return (
             <div className="explanation">
                 {this.props.action.name}
