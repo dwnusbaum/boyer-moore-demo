@@ -6,6 +6,10 @@ describe("boyerMoore.js", function() {
             expect(boyerMoore.search).toBeDefined();
         });
 
+        it("exports a function called searchLog", function() {
+            expect(boyerMoore.searchLog).toBeDefined();
+        });
+
         it("exports a function called _makeBadCharTable", function() {
             expect(boyerMoore._makeBadCharTable).toBeDefined();
         });
@@ -40,6 +44,29 @@ describe("boyerMoore.js", function() {
 
             it("does not find a ('z' followed by 'a's) in (a string of all 'a's)", function() {
                 expect(boyerMoore.search("zaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")).toBe(false);
+            });
+        });
+
+        describe("boyerMoore.searchLog", function() {
+            it("returns the correct log for a search", function() {
+                var correctActionList = [
+                    {
+                        haystackIndex: 1,
+                        needleIndex: 1,
+                        action: 'COMPARE_EQUAL'
+                    },
+                    {
+                        haystackIndex: 0,
+                        needleIndex: 0,
+                        action: 'COMPARE_EQUAL'
+                    },
+                    {
+                        haystackIndex: -1,
+                        needleIndex: -1,
+                        action: 'MATCH'
+                    }
+                ];
+                expect(boyerMoore.searchLog("ok", "ok")).toEqual(correctActionList);
             });
         });
     });
