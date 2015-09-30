@@ -18,7 +18,7 @@ var SearchDemo = React.createClass({
         return (
             <div className="searchDemo">
                 <SearchForm onHaystackAndNeedleSubmit={this.handleHaystackAndNeedleSubmit} />
-                <SearchVisualization data={this.state} />
+                <SearchVisualization key={this.state.haystack + this.state.needle} data={this.state} />
             </div>
         );
     }
@@ -32,10 +32,11 @@ var SearchForm = React.createClass({
         if (!haystack || !needle) {
             return;
         }
+        console.log(boyerMoore.searchLog(needle, haystack));
         this.props.onHaystackAndNeedleSubmit({
             haystack: haystack,
             needle: needle,
-            actions: boyerMoore.searchLog(haystack, needle)
+            actions: boyerMoore.searchLog(needle, haystack)
         });
         React.findDOMNode(this.refs.haystack).value = '';
         React.findDOMNode(this.refs.needle).value = '';
@@ -76,6 +77,11 @@ var SearchVisualization = React.createClass({
         });
         return;
     },
+    handleReset: function() {
+        this.setState({
+            currentAction: 0
+        });
+    },
     render: function() {
         var haystackIndex = this.props.data.actions[this.state.currentAction].haystackIndex;
         var needleIndex = this.props.data.actions[this.state.currentAction].needleIndex;
@@ -90,7 +96,7 @@ var SearchVisualization = React.createClass({
                     </Needle>
                     <Pointer current={haystackIndex} />
                 </pre>
-                <VisualizationControls onNext={this.handleNext} onPrevious={this.handlePrevious} />
+                <VisualizationControls onNext={this.handleNext} onPrevious={this.handlePrevious} onReset={this.handleReset} />
                 <Explanation action={this.props.data.actions[this.state.currentAction]} />
             </div>
         );
@@ -154,6 +160,7 @@ var VisualizationControls = React.createClass({
             <div className="visualizationControls">
                 <button type="submit" onClick={this.props.onNext}>Next</button>
                 <button className="margin-left-10" type="submit" onClick={this.props.onPrevious}>Previous</button>
+                <button className="margin-left-10" type="submit" onClick={this.props.onReset}>Reset</button>
             </div>
         );
     }
