@@ -10,9 +10,14 @@
   "license": "BSD-2-Clause",
   "repository": "https://github.com/dwnusbaum/boyerMoore.js",
   "devDependencies": {
+    "browserify": "^11.2.0",
     "gulp": "^3.9.0",
     "gulp-babel": "^5.2.1",
     "gulp-connect": "^2.2.0",
-    "gulp-util": "^3.0.6"
+    "gulp-util": "^3.0.6",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "react": "^0.13.3"
   }
 }
