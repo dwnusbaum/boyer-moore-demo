@@ -3,11 +3,12 @@ var boyerMoore = require("./boyerMoore.js")
 
 var SearchDemo = React.createClass({
     getInitialState: function() {
-        console.log("test");
+        var haystack = "Here is a simple example.";
+        var needle = "example";
         return {
-            haystack: "ok",
-            needle: "ok",
-            actions: boyerMoore.searchLog("ok", "ok")
+            haystack: haystack,
+            needle: needle,
+            actions: boyerMoore.searchLog(needle, haystack)
         };
     },
     handleHaystackAndNeedleSubmit: function(searchData) {
@@ -76,18 +77,18 @@ var SearchVisualization = React.createClass({
         return;
     },
     render: function() {
-        var currentHaystackIndex = this.props.data.actions[this.state.currentAction].haystackIndex;
-        var currentNeedleIndex = this.props.data.actions[this.state.currentAction].needleIndex;
+        var haystackIndex = this.props.data.actions[this.state.currentAction].haystackIndex;
+        var needleIndex = this.props.data.actions[this.state.currentAction].needleIndex;
         return (
             <div className="searchVisualization">
                 <pre>
-                    <Haystack current={currentHaystackIndex}>
+                    <Haystack current={haystackIndex}>
                         {this.props.data.haystack}
                     </Haystack>
-                    <Needle current={currentNeedleIndex}>
+                    <Needle haystackIndex={haystackIndex} needleIndex={needleIndex}>
                         {this.props.data.needle}
                     </Needle>
-                    <Pointer current={currentHaystackIndex} />
+                    <Pointer current={haystackIndex} />
                 </pre>
                 <VisualizationControls onNext={this.handleNext} onPrevious={this.handlePrevious} />
                 <Explanation action={this.props.data.actions[this.state.currentAction]} />
@@ -117,13 +118,17 @@ var Haystack = React.createClass({
 var Needle = React.createClass({
     render: function() {
         var needle = this.props.children;
-        var current = this.props.current;
-        var beforeCurrentChar = needle.slice(0, current);
-        var currentChar = needle.slice(current, current + 1);
-        var afterCurrentChar = needle.slice(Math.max(current + 1, 1));
+        var haystackIndex = this.props.haystackIndex;
+        var needleIndex = this.props.needleIndex;
+
+        var beforeNeedle = Array(haystackIndex - needleIndex + 1).join(" ");
+        var beforeCurrentChar = needle.substring(0, needleIndex);
+        var currentChar = needle.slice(needleIndex, needleIndex + 1);
+        var afterCurrentChar = needle.slice(needleIndex + 1);
 
         return (
             <samp className="block needle">
+                <span>{beforeNeedle}</span>
                 <span>{beforeCurrentChar}</span>
                 <span className="highlight">{currentChar}</span>
                 <span>{afterCurrentChar}</span>
@@ -156,7 +161,6 @@ var VisualizationControls = React.createClass({
 
 var Explanation = React.createClass({
     render: function() {
-        console.log(this.props.action);
         return (
             <div className="explanation">
                 {this.props.action.name}
