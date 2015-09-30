@@ -16,14 +16,15 @@ gulp.task('html', function () {
 });
 
 gulp.task('babel', function () {
-  gulp.src('app/js/*.js')
+  gulp.src('./app/js/*.js')
     .pipe(babel())
       .on('error', gutil.log)
-    .pipe(gulp.dest('app/build/'));
+    .pipe(gulp.dest('./app/build/'));
 });
 
 gulp.task('watch', function () {
-  gulp.watch(['./app/*.html', './app/js/*.js'], ['babel', 'html']);
+  gulp.watch(['./app/js/*.js'], ['babel', 'html']);
+  gulp.watch(['./app/*.html', './app/styles/*.css'], ['html']);
 });
 
 gulp.task('default', ['babel', 'connect', 'watch']);
