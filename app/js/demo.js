@@ -46,11 +46,11 @@ var SearchForm = React.createClass({
         return (
             <form className="form-inline" onSubmit={this.handleSubmit}>
                 <div className="form-group">
-                    <label>Haystack:</label>
+                    <label>Text:</label>
                     <input type="text" className="margin-left-10" placeholder="Here is a simple example." ref="haystack" />
                 </div>
                 <div className="form-group">
-                    <label className="margin-left-10">Needle:</label>
+                    <label className="margin-left-10">Pattern:</label>
                     <input type="text" className="margin-left-10" placeholder="example" ref="needle" />
                 </div>
                 <button type="submit" className="margin-left-10">Begin Search</button>
@@ -113,6 +113,7 @@ var Haystack = React.createClass({
 
         return (
             <samp className="block haystack">
+                <span>   Text: </span>
                 <span>{beforeCurrentChar}</span>
                 <span className="highlight">{currentChar}</span>
                 <span>{afterCurrentChar}</span>
@@ -134,6 +135,7 @@ var Needle = React.createClass({
 
         return (
             <samp className="block needle">
+                <span>Pattern: </span>
                 <span>{beforeNeedle}</span>
                 <span>{beforeCurrentChar}</span>
                 <span className="highlight">{currentChar}</span>
@@ -148,6 +150,7 @@ var Pointer = React.createClass({
         var pointer = Array(this.props.current + 1).join(" ") + "^";
         return (
             <samp className="block pointer">
+                <span>         </span>
                 <span>{pointer}</span>
             </samp>
         );
