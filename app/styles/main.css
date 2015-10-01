@@ -91,7 +91,7 @@ input[type="text"] {
     line-height: 1.43;
 }
 
-.highlight {
-    background-color: blue;
+.highlight-matching-chars {
+    background-color: green;
     color: white;
 }
