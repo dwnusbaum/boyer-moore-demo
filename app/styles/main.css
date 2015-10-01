@@ -12,8 +12,8 @@ body {
 }
 
 .container {
-    width: 1000px;
-    padding: 0 0 0 10px;
+    /*width: 50%;*/
+    margin: 0 auto;
 }
 
 .margin-left-10 {
@@ -69,7 +69,7 @@ button:focus {
 
 input[type="text"] {
     height: 34px;
-    width: 250px;
+    width: 200px;
     padding: 6px 12px;
     font-size: 14px;
     line-height: 1.43;
@@ -84,6 +84,11 @@ input[type="text"] {
 .needle, .haystack, .pointer {
     font-family: Monaco, Consolas, monospace;
     font-size: 32px;
+}
+
+.explanation {
+    font-size: 14px;
+    line-height: 1.43;
 }
 
 .highlight {
