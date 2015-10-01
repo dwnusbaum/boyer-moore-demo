@@ -46,29 +46,6 @@ describe("boyerMoore.js", function() {
                 expect(boyerMoore.search("zaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")).toBe(false);
             });
         });
-
-        describe("boyerMoore.searchLog", function() {
-            it("returns the correct log for a search", function() {
-                var correctActionList = [
-                    {
-                        haystackIndex: 1,
-                        needleIndex: 1,
-                        action: 'COMPARE_EQUAL'
-                    },
-                    {
-                        haystackIndex: 0,
-                        needleIndex: 0,
-                        action: 'COMPARE_EQUAL'
-                    },
-                    {
-                        haystackIndex: -1,
-                        needleIndex: -1,
-                        action: 'MATCH'
-                    }
-                ];
-                expect(boyerMoore.searchLog("ok", "ok")).toEqual(correctActionList);
-            });
-        });
     });
 
     describe("boyerMoore.js private api", function() {

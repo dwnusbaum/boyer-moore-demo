@@ -1,6 +1,6 @@
 var React = require("react");
 
-var boyerMoore = require("./boyerMoore.js");
+var boyerMoore = require("./boyerMooreDemo.js");
 
 var SearchForm = React.createClass({
     handleSubmit: function(e) {

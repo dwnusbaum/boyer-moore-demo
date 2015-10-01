@@ -2,7 +2,7 @@ var React = require("react");
 
 var SearchForm = require("./searchForm.js");
 var SearchVisualization = require("./searchVisualization.js");
-var boyerMoore = require("./boyerMoore.js");
+var boyerMoore = require("./boyerMooreDemo.js");
 
 var SearchDemo = React.createClass({
     getInitialState: function() {
