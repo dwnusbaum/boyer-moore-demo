@@ -1,5 +1,7 @@
 var React = require("react");
 
+var boyerMoore = require("./boyerMoore.js");
+
 var SearchForm = React.createClass({
     handleSubmit: function(e) {
         e.preventDefault(); // Don't send the form to the server
@@ -8,7 +10,6 @@ var SearchForm = React.createClass({
         if (!haystack || !needle) {
             return;
         }
-        console.log(boyerMoore.searchLog(needle, haystack));
         this.props.onHaystackAndNeedleSubmit({
             haystack: haystack,
             needle: needle,
