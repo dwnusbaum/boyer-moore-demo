@@ -31,7 +31,7 @@ function galilRuleMatch(haystackIndex, needleIndex) {
 
 function compareEqual(haystackIndex, needleIndex) {
     var text = "The current character in the text and pattern match." +
-               "We shift the pattern left by one and compare the next" +
+               "We shift the pattern left by one and compare the next " +
                "character";
 
     return text;
