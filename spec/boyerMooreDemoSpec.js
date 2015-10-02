@@ -1,5 +1,5 @@
 describe("boyerMooreDemo.js", function() {
-    var boyerMoore = require("../app/js/boyerMooreDemo.js");
+    var boyerMoore = require("../demo/js/boyerMooreDemo.js");
 
     describe("boyerMooreDemo.js exports", function() {
         it("exports a function called searchLog", function() {
@@ -14,17 +14,17 @@ describe("boyerMooreDemo.js", function() {
                     {
                         haystackIndex: 1,
                         needleIndex: 1,
-                        action: 'COMPARE_EQUAL'
+                        name: 'COMPARE_EQUAL'
                     },
                     {
                         haystackIndex: 0,
                         needleIndex: 0,
-                        action: 'COMPARE_EQUAL'
+                        name: 'COMPARE_EQUAL'
                     },
                     {
                         haystackIndex: -1,
                         needleIndex: -1,
-                        action: 'MATCH'
+                        name: 'MATCH'
                     }
                 ];
                 expect(boyerMoore.searchLog("ok", "ok")).toEqual(correctActionList);
