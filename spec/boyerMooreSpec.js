@@ -39,7 +39,9 @@ describe("boyerMoore.js", function() {
             });
 
             it("does not find a ('z' followed by 'a's) in (a string of all 'a's)", function() {
-                expect(boyerMoore.search("zaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")).toBe(false);
+                var needle = "zaaaaaaaaaaaaaa";
+                var haystack = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+                expect(boyerMoore.search(needle, haystack)).toBe(false);
             });
         });
     });
