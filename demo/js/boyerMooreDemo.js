@@ -1,4 +1,4 @@
-var boyerMoore = require('./boyerMoore');
+var boyerMoore = require('lib/boyerMoore.js');
 
 function searchLog(needle, haystack) {
     var log = [];

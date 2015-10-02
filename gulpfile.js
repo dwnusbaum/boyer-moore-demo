@@ -10,35 +10,35 @@ var watchify = require('watchify');
 
 gulp.task('connect', ['javascript'], function() {
   connect.server({
-    root: 'app',
+    root: 'demo',
     livereload: true
   });
 });
 
 gulp.task('html', ['javascript'], function () {
-  gulp.src('./app/*.html')
+  gulp.src('./demo/*.html')
     .pipe(connect.reload());
 });
 
 gulp.task('javascript', ['babel'], function() {
-  var b = browserify('./app/build/translated/demo.js');
+  var b = browserify('./demo/build/translated/demo.js');
   var w = watchify(b);
   return w
     .bundle()
       .on('error', gutil.log)
     .pipe(source('bundle.js'))
-    .pipe(gulp.dest('./app/build/'));
+    .pipe(gulp.dest('./demo/build/'));
 });
 
 gulp.task('babel', function () {
-  return gulp.src('./app/js/*.js')
+  return gulp.src('./demo/js/*.js')
     .pipe(babel())
       .on('error', gutil.log)
-    .pipe(gulp.dest('./app/build/translated'));
+    .pipe(gulp.dest('./demo/build/translated'));
 });
 
 gulp.task('watch', function () {
-  gulp.watch(['./app/*.html', './app/styles/*.css', './app/js/*.js'], ['html']);
+  gulp.watch(['./demo/*.html', './demo/styles/*.css', './demo/js/*.js'], ['html']);
 });
 
 gulp.task('default', ['connect', 'watch']);
