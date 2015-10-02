@@ -1,13 +1,9 @@
 describe("boyerMoore.js", function() {
-    var boyerMoore = require("../app/js/boyerMoore.js");
+    var boyerMoore = require("lib/boyerMoore.js");
 
     describe("boyerMoore.js exports", function() {
         it("exports a function called search", function() {
             expect(boyerMoore.search).toBeDefined();
-        });
-
-        it("exports a function called searchLog", function() {
-            expect(boyerMoore.searchLog).toBeDefined();
         });
 
         it("exports a function called _makeBadCharTable", function() {
