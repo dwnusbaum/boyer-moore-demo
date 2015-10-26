@@ -5,6 +5,7 @@ var gutil = require('gulp-util');
 var babel = require('gulp-babel');
 var browserify = require('browserify');
 var connect = require('gulp-connect');
+var del = require('del');
 var source = require('vinyl-source-stream');
 var watchify = require('watchify');
 
@@ -20,6 +21,10 @@ gulp.task('html', ['javascript'], function () {
     .pipe(connect.reload());
 });
 
+gulp.task('clean', function(cb) {
+  return del(['./demo/build/'], cb);
+});
+
 gulp.task('javascript', ['babel'], function() {
   var b = browserify('./demo/build/translated/demo.js');
   var w = watchify(b);
@@ -30,7 +35,7 @@ gulp.task('javascript', ['babel'], function() {
     .pipe(gulp.dest('./demo/build/'));
 });
 
-gulp.task('babel', function () {
+gulp.task('babel', ['clean'], function () {
   return gulp.src('./demo/js/*.js')
     .pipe(babel())
       .on('error', gutil.log)
