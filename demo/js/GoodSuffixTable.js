@@ -2,6 +2,7 @@ var React = require("react");
 
 var GoodSuffixTable = React.createClass({
     render: function() {
+        console.log(this.props.children);
         var needleArray = this.props.children.split("");
         var goodSuffixTable = this.props.goodSuffixTable;
 
@@ -9,7 +10,7 @@ var GoodSuffixTable = React.createClass({
             return (
                 <td key={index}>
                     <samp>
-                        <span>{char}</span>
+                        <span>{index}</span>
                     </samp>
                 </td>
             );
