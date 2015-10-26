@@ -2,7 +2,6 @@ var React = require("react");
 
 var GoodSuffixTable = React.createClass({
     render: function() {
-        console.log(this.props.children);
         var needleArray = this.props.children.split("");
         var goodSuffixTable = this.props.goodSuffixTable;
 
