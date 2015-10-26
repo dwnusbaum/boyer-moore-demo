@@ -13,6 +13,8 @@ var SearchForm = React.createClass({
         this.props.onHaystackAndNeedleSubmit({
             haystack: haystack,
             needle: needle,
+            badCharTable: boyerMoore.makeBadCharTable(needle),
+            goodSuffixTable: boyerMoore.makeGoodSuffixTable(needle),
             actions: boyerMoore.searchLog(needle, haystack)
         });
         React.findDOMNode(this.refs.haystack).value = '';
