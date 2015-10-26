@@ -1,8 +1,8 @@
 var React = require("react");
 
-var SearchForm = require("./searchForm.js");
-var SearchVisualization = require("./searchVisualization.js");
-var boyerMoore = require("./boyerMooreDemo.js");
+var boyerMoore = require("./boyerMooreDemo");
+var SearchForm = require("./SearchForm");
+var SearchVisualization = require("./SearchVisualization");
 
 var SearchDemo = React.createClass({
     getInitialState: function() {
@@ -11,7 +11,9 @@ var SearchDemo = React.createClass({
         return {
             haystack: haystack,
             needle: needle,
-            actions: boyerMoore.searchLog(needle, haystack)
+            badCharTable: boyerMoore.makeBadCharTable(needle),
+            goodSuffixTable: boyerMoore.makeGoodSuffixTable(needle),
+            actions: boyerMoore.searchLog(needle, haystack),
         };
     },
     handleHaystackAndNeedleSubmit: function(searchData) {

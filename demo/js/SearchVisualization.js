@@ -1,10 +1,10 @@
 var React = require("react");
 
-var Haystack = require("./haystack.js");
-var Needle = require("./needle.js");
-var Pointer = require("./pointer.js");
-var Controls = require("./controls.js")
-var Explanation = require("./explanation.js")
+var Haystack = require("./Haystack");
+var Needle = require("./Needle");
+var Pointer = require("./Pointer");
+var Controls = require("./Controls")
+var Explanation = require("./Explanation")
 
 var SearchVisualization = React.createClass({
     getInitialState: function() {

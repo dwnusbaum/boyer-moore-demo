@@ -26,7 +26,7 @@ gulp.task('clean', function(cb) {
 });
 
 gulp.task('javascript', ['babel'], function() {
-  var b = browserify('./demo/build/translated/demo.js');
+  var b = browserify('./demo/build/translated/Demo.js');
   var w = watchify(b);
   return w
     .bundle()
