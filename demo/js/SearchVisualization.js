@@ -1,5 +1,7 @@
 var React = require("react");
 
+var BadCharTable = require("./BadCharTable");
+var GoodSuffixTable = require("./GoodSuffixTable");
 var Haystack = require("./Haystack");
 var Needle = require("./Needle");
 var Pointer = require("./Pointer");
@@ -41,6 +43,16 @@ var SearchVisualization = React.createClass({
 
         return (
             <div className="searchVisualization">
+                <pre>
+                    <BadCharTable badCharTable={this.props.data.badCharTable}>
+                        {needle}
+                    </BadCharTable>
+                </pre>
+                <pre>
+                    <GoodSuffixTable goodSuffixTable={this.props.data.goodSuffixTable}>
+                        {needle}
+                    </GoodSuffixTable>
+                </pre>
                 <pre>
                     <Haystack haystackIndex={haystackIndex} matchLength={matchLength} currentCharsMatch={currentCharsMatch}>
                         {haystack}

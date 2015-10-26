@@ -84,5 +84,7 @@ function searchLog(needle, haystack) {
 }
 
 module.exports = {
-    searchLog: searchLog
+    searchLog: searchLog,
+    makeBadCharTable: boyerMoore._makeBadCharTable,
+    makeGoodSuffixTable: boyerMoore._makeGoodSuffixTable,
 };

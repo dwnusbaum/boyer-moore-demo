@@ -95,3 +95,16 @@ input[type="text"] {
     background-color: green;
     color: white;
 }
+
+.shiftTable {
+    border-collapse: collapse;
+    border: 1px solid;
+}
+
+.shiftTable tr td {
+    border-collapse: collapse;
+    border-right: 1px solid;
+    border-top: 1px dotted #777;
+    width: 1.75em;
+    text-align: center;
+}
