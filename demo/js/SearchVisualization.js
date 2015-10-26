@@ -39,7 +39,7 @@ var SearchVisualization = React.createClass({
         var needleIndex = currentAction.needleIndex;
 
         var currentCharsMatch = haystack.charAt(haystackIndex) === needle.charAt(needleIndex);
-        var matchLength = this.props.data.needle.length - needleIndex;
+        var matchLength = needle.length - needleIndex;
 
         return (
             <div className="searchVisualization">
