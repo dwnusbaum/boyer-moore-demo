@@ -15,6 +15,14 @@ var BadCharTable = React.createClass({
             );
         });
 
+        tableHeader.push(
+            <td key={-1}>
+                <samp>
+                    <span>N/A</span>
+                </samp>
+            </td>
+        );
+
         var tableBody = needleArray.map(function(char, index) {
             return (
                 <td key={index}>
@@ -24,6 +32,14 @@ var BadCharTable = React.createClass({
                 </td>
             );
         });
+
+        tableBody.push(
+            <td key={-1}>
+                <samp>
+                    <span>{needleArray.length}</span>
+                </samp>
+            </td>
+        );
 
         return (
             <table className="shiftTable">
