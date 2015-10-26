@@ -30,7 +30,10 @@ gulp.task('javascript', ['babel'], function() {
   var w = watchify(b);
   return w
     .bundle()
-      .on('error', gutil.log)
+      .on('error', function(err) {
+        gutil.log(err);
+        this.emit('end');
+      })
     .pipe(source('bundle.js'))
     .pipe(gulp.dest('./demo/build/'));
 });
@@ -38,7 +41,10 @@ gulp.task('javascript', ['babel'], function() {
 gulp.task('babel', ['clean'], function () {
   return gulp.src('./demo/js/*.js')
     .pipe(babel())
-      .on('error', gutil.log)
+      .on('error', function(err) {
+        gutil.log(err);
+        this.emit('end');
+      })
     .pipe(gulp.dest('./demo/build/translated'));
 });
 
