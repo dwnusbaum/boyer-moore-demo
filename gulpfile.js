@@ -49,7 +49,7 @@ gulp.task('babel', ['clean'], function () {
 });
 
 gulp.task('watch', function () {
-  gulp.watch(['./demo/*.html', './demo/styles/*.css', './demo/js/*.js'], ['html']);
+  gulp.watch(['./demo/*.html', './demo/styles/*.css', './lib/*.js', './demo/js/*.js'], ['html']);
 });
 
 gulp.task('default', ['connect', 'watch']);
