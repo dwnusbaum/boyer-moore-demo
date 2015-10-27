@@ -9,7 +9,7 @@ var GoodSuffixTable = React.createClass({
             return (
                 <td key={index}>
                     <samp>
-                        <span>{index}</span>
+                        <span>{char}<sub>{index}</sub></span>
                     </samp>
                 </td>
             );
