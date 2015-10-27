@@ -2,6 +2,7 @@ var boyerMoore = require('lib/boyerMoore.js');
 
 function searchLog(needle, haystack) {
     var log = [];
+    var comparisons = 0;
     var badCharTable = boyerMoore._makeBadCharTable(needle);
     var goodSuffixTable = boyerMoore._makeGoodSuffixTable(needle);
 
@@ -12,6 +13,7 @@ function searchLog(needle, haystack) {
     while (haystackIndex < haystack.length) {
         if (needleIndex < 0) {
             log.push({
+                comparisons: comparisons,
                 haystackIndex: haystackIndex,
                 needleIndex: needleIndex,
                 name: 'MATCH'
@@ -19,24 +21,29 @@ function searchLog(needle, haystack) {
             return log;
         } else if (haystackIndex == previousHaystackIndex) {
             log.push({
+                comparisons: comparisons,
                 haystackIndex: haystackIndex,
                 needleIndex: needleIndex,
-                name: 'GALIL_RULE_MATCH'
+                name: 'GALIL_RULE_MATCH',
             });
             return log;
         } else if (needle.charAt(needleIndex) === haystack.charAt(haystackIndex)) {
+            comparisons++;
             log.push({
+                comparisons: comparisons,
                 haystackIndex: haystackIndex,
                 needleIndex: needleIndex,
-                name: 'COMPARE_EQUAL'
+                name: 'COMPARE_EQUAL',
             });
             haystackIndex--;
             needleIndex--;
         } else {
+            comparisons++;
             log.push({
+                comparisons: comparisons,
                 haystackIndex: haystackIndex,
                 needleIndex: needleIndex,
-                name: 'COMPARE_NOT_EQUAL'
+                name: 'COMPARE_NOT_EQUAL',
             });
             var badCharShift = badCharTable(haystack.charAt(haystackIndex));
             var goodSuffixShift = goodSuffixTable[needleIndex];
@@ -44,27 +51,30 @@ function searchLog(needle, haystack) {
 
             if (shift >= needleIndex + 1) {
                 /*log.push({
+                    comparisons: comparisons,
                     haystackIndex: haystackIndex,
                     needleIndex: needleIndex,
                     name: 'GALIL_RULE_UPDATE',
-                    previousHaystackIndex: previousHaystackIndex
+                    previousHaystackIndex: previousHaystackIndex,
                 });
                 */
             }
 
             if (badCharShift > goodSuffixShift) {
                 log.push({
+                    comparisons: comparisons,
                     haystackIndex: haystackIndex,
                     needleIndex: needleIndex,
                     name: 'SHIFT_BADCHAR_RULE',
-                    shift: badCharShift
+                    shift: badCharShift,
                 });
             } else {
                 log.push({
+                    comparisons: comparisons,
                     haystackIndex: haystackIndex,
                     needleIndex: needleIndex,
                     name: 'SHIFT_GOODSUFFIX_RULE',
-                    shift: goodSuffixShift
+                    shift: goodSuffixShift,
                 });
             }
 
@@ -76,9 +86,10 @@ function searchLog(needle, haystack) {
 
     // No match found
     log.push({
+        comparisons: comparisons,
         haystackIndex: haystackIndex,
         needleIndex: needleIndex,
-        name: 'NO_MATCH'
+        name: 'NO_MATCH',
     });
 
     return log;

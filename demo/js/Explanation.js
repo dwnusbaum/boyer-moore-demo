@@ -75,11 +75,24 @@ var texts = {
 var Explanation = React.createClass({
     render: function() {
         var action = this.props.action;
+        var haystackIndex = action.haystackIndex;
+        var needleIndex = action.needleIndex;
 
         return (
             <div className="explanation">
+                <span>
+                    Text index: {haystackIndex}
+                </span>
+                <br />
+                <span>
+                    Pattern index: {needleIndex}
+                </span>
+                <br />
+                <span>
+                    Comparisons: {action.comparisons}
+                </span>
                 <p>
-                    {texts[action.name](action.haystackIndex, action.needleIndex, action.shift)}
+                    {texts[action.name](haystackIndex, needleIndex, action.shift)}
                 </p>
             </div>
         );
