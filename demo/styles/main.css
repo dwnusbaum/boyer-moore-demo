@@ -1,19 +1,8 @@
-* {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
 body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.42857143;
     color: #333;
-}
-
-.container {
-    width: 800px;
-    /*margin: 0 auto;*/
 }
 
 .margin-left-10 {
@@ -22,63 +11,6 @@ body {
 
 .block {
     display: block;
-}
-
-button {
-    display: inline-block;
-    padding: 6px 12px;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.43;
-    margin-bottom: 0;
-    touch-action: manipulation;
-    cursor: pointer;
-    vertical-align: middle;
-    white-space: nowrap;
-    background-image: none;
-    border: 1px solid transparent;
-    border-radius: 4px;
-}
-
-button {
-    color: #333;
-    background-color: #fff;
-    border-color: #ccc;
-}
-
-button:hover {
-    color: #333;
-    background-color: #e6e6e6;
-    border-color: #adadad;
-}
-
-button:active {
-    box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
-}
-
-button:focus {
-    outline: 5px auto -webkit-focus-ring-color;
-    outline-offset: -2px;
-}
-
-.form-inline .form-group {
-    display: inline-block;
-    width: auto;
-    vertical-align: middle;
-}
-
-input[type="text"] {
-    height: 34px;
-    width: 200px;
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.43;
-    color: #555;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
 
 .needle, .haystack, .pointer {
@@ -101,10 +33,10 @@ input[type="text"] {
     border: 1px solid;
 }
 
-.shiftTable tr td {
+.shiftTable thead tr td, .shiftTable tbody tr td  {
     border-collapse: collapse;
     border-right: 1px solid;
     border-top: 1px dotted #777;
-    width: 1.75em;
+    width: 22px;
     text-align: center;
 }

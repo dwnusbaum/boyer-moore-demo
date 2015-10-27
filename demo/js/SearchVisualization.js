@@ -42,28 +42,38 @@ var SearchVisualization = React.createClass({
         var matchLength = needle.length - needleIndex;
 
         return (
-            <div className="searchVisualization">
-                <pre>
-                    <BadCharTable badCharTable={this.props.data.badCharTable}>
-                        {needle}
-                    </BadCharTable>
-                </pre>
-                <pre>
-                    <GoodSuffixTable goodSuffixTable={this.props.data.goodSuffixTable}>
-                        {needle}
-                    </GoodSuffixTable>
-                </pre>
-                <pre>
-                    <Haystack haystackIndex={haystackIndex} matchLength={matchLength} currentCharsMatch={currentCharsMatch}>
-                        {haystack}
-                    </Haystack>
-                    <Needle haystackIndex={haystackIndex} matchLength={matchLength} currentCharsMatch={currentCharsMatch}>
-                        {needle}
-                    </Needle>
-                    <Pointer current={haystackIndex} />
-                </pre>
-                <Controls onNext={this.handleNext} onPrevious={this.handlePrevious} onReset={this.handleReset} />
-                <Explanation action={currentAction} />
+            <div>
+                <div className="row">
+                    <div className="col-4">
+                        <pre>
+                            <Haystack haystackIndex={haystackIndex} matchLength={matchLength} currentCharsMatch={currentCharsMatch}>
+                                {haystack}
+                            </Haystack>
+                            <Needle haystackIndex={haystackIndex} matchLength={matchLength} currentCharsMatch={currentCharsMatch}>
+                                {needle}
+                            </Needle>
+                            <Pointer current={haystackIndex} />
+                        </pre>
+                    </div>
+                    <div className="col-2">
+                        <pre>
+                            <BadCharTable badCharTable={this.props.data.badCharTable}>
+                                {needle}
+                            </BadCharTable>
+                        </pre>
+                        <pre>
+                            <GoodSuffixTable goodSuffixTable={this.props.data.goodSuffixTable}>
+                                {needle}
+                            </GoodSuffixTable>
+                        </pre>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-6">
+                        <Controls onNext={this.handleNext} onPrevious={this.handlePrevious} onReset={this.handleReset} />
+                        <Explanation action={currentAction} />
+                    </div>
+                </div>
             </div>
         );
     }

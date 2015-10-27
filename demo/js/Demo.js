@@ -21,7 +21,7 @@ var SearchDemo = React.createClass({
     },
     render: function() {
         return (
-            <div className="searchDemo">
+            <div>
                 <SearchForm onHaystackAndNeedleSubmit={this.handleHaystackAndNeedleSubmit} />
                 <SearchVisualization key={this.state.haystack + this.state.needle} data={this.state} />
             </div>

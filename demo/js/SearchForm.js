@@ -23,17 +23,21 @@ var SearchForm = React.createClass({
     },
     render: function() {
         return (
-            <form className="form-inline" onSubmit={this.handleSubmit}>
-                <div className="form-group">
-                    <label>Text:</label>
-                    <input type="text" className="margin-left-10" placeholder="Here is a simple example." ref="haystack" />
+            <div className="row">
+                <div className="col-6">
+                    <form className="form-inline" onSubmit={this.handleSubmit}>
+                        <div className="form-group">
+                            <label>Text: </label>
+                            <input type="text" className="margin-left-10" placeholder="Here is a simple example." ref="haystack" />
+                        </div>
+                        <div className="form-group margin-left-10">
+                            <label>Pattern: </label>
+                            <input type="text" className="margin-left-10" placeholder="example" ref="needle" />
+                        </div>
+                        <button type="submit" className="margin-left-10">Begin Search</button>
+                    </form>
                 </div>
-                <div className="form-group">
-                    <label className="margin-left-10">Pattern:</label>
-                    <input type="text" className="margin-left-10" placeholder="example" ref="needle" />
-                </div>
-                <button type="submit" className="margin-left-10">Begin Search</button>
-            </form>
+            </div>
         );
     }
 });
