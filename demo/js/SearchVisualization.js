@@ -74,7 +74,12 @@ var SearchVisualization = React.createClass({
                 </div>
                 <div className="row">
                     <div className="col-6">
-                        <Explanation action={currentAction} />
+                        <Explanation
+                            action={currentAction}
+                            haystack={haystack}
+                            needle={needle}
+                            badCharTable={this.props.data.badCharTable}
+                            goodSuffixTable={this.props.data.goodSuffixTable} />
                         <Controls onNext={this.handleNext} onPrevious={this.handlePrevious} onReset={this.handleReset} />
                     </div>
                 </div>

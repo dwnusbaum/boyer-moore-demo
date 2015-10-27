@@ -1,63 +1,104 @@
 var React = require("react");
 
 function match () {
-    var text = "We have passed the end of the pattern on the left, so the " +
-               " pattern was found in the text.";
-
-    return text;
+    return (
+        <p>
+            We have passed the end of the pattern on the left, so the pattern
+            was found in the text.
+        </p>
+    );
 }
 
 function noMatch() {
-    var text = "We have passed the end of the text on the right, so the " +
-               " pattern was not found in the text.";
-
-    return text;
+    return (
+        <p>
+            We have passed the end of the text on the right, so the pattern was
+            not found in the text.
+        </p>
+    );
 }
 
 function galilRuleUpdate(haystackIndex, needleIndex) {
-    var text = "Store the current index in the text as the farthest we need " +
-               "to compare the pattern according to the Galil Rule.";
-
-    return text;
+    return (
+        <p>
+            Store the current text index as the farthest we need to compare the
+            pattern according to the Galil Rule.
+        </p>
+    );
 }
 
 function galilRuleMatch(haystackIndex, needleIndex) {
-    var text = "Because of the Galil Rule, we know that the rest of the " +
-               "pattern will match, and so we have found the pattern in " +
-               "the text";
-
-    return text;
+    return (
+        <p>
+            Because of the Galil Rule, we know that the rest of the pattern
+            will match, and so we have found the pattern in the text.
+        </p>
+    );
 }
 
 function compareEqual(haystackIndex, needleIndex) {
-    var text = "The current character in the text and pattern match." +
-               "We shift the pattern left by one and compare the next " +
-               "character";
-
-    return text;
+    return (
+        <p>
+            The current character in the text and pattern match. We shift the
+            pattern index left by one and compare the next characters.
+        </p>
+    );
 }
 
 function compareNotEqual(haystackIndex, needleIndex) {
-    var text = "The current character in the text and pattern do not " +
-               "match. We are going to shift the pattern to the right."
+    return (
+        <p>
+            The current character in the text and pattern do not match.
+        </p>
+    );
+}
+
+function shiftBadCharRule(haystackIndex, needleIndex, shift, haystack, needle, badCharTable, goodSuffixTable) {
+    const haystackChar = haystack.charAt(haystackIndex);
+    const badCharShift = badCharTable(haystackChar);
+    const goodSuffixShift = goodSuffixTable[needleIndex];
+
+    return (
+        <div>
+            <p>
+                We look up the mismatched character from the text in the bad
+                character table, and the current pattern index in the good
+                suffix table.
+            </p>
+            <div>badCharTable['{haystackChar}'] = {badCharShift}</div>
+            <div>goodSuffixTable[{needleIndex}] = {goodSuffixShift}</div>
+            <p>
+               Since {badCharShift}&gt;{goodSuffixShift} we shift the text
+               index right by {shift} characters.  We also reset the pattern
+               index to {needle.length - 1}.
+            </p>
+        </div>
+    );
 
     return text;
 }
 
-function shiftBadCharRule(haystackIndex, needleIndex, shift) {
-    var text = "The bad character rule is greater than the good suffix rule " +
-               "in this case, and we shift the pattern right by " + shift +
-               " characters";
+function shiftGoodSuffixRule(haystackIndex, needleIndex, shift, haystack, needle, badCharTable, goodSuffixTable) {
+    const haystackChar = haystack.charAt(haystackIndex);
+    const badCharShift = badCharTable(haystackChar);
+    const goodSuffixShift = goodSuffixTable[needleIndex];
 
-    return text;
-}
-
-function shiftGoodSuffixRule(haystackIndex, needleIndex, shift) {
-    var text = "The good suffix rule is greater than the bad character rule " +
-               "in this case, and we shift the pattern right by " + shift +
-               " characters";
-
-    return text;
+    return (
+        <div>
+            <p>
+                We look up the mismatched character from the text in the bad
+                character table, and the current pattern index in the good
+                suffix table.
+            </p>
+            <div>badCharTable['{haystackChar}'] = {badCharShift}</div>
+            <div>goodSuffixTable[{needleIndex}] = {goodSuffixShift}</div>
+            <p>
+               Since {badCharShift}&lt;{goodSuffixShift} we shift the text
+               index right by {shift} characters.  We also reset the pattern
+               index to {needle.length - 1}.
+            </p>
+        </div>
+    );
 }
 
 
@@ -74,26 +115,26 @@ var texts = {
 
 var Explanation = React.createClass({
     render: function() {
-        var action = this.props.action;
-        var haystackIndex = action.haystackIndex;
-        var needleIndex = action.needleIndex;
+        const action = this.props.action;
+        const haystackIndex = action.haystackIndex;
+        const needleIndex = action.needleIndex;
+        const haystack = this.props.haystack;
+        const needle = this.props.needle;
+        const badCharTable = this.props.badCharTable;
+        const goodSuffixTable = this.props.goodSuffixTable;
 
         return (
             <div className="explanation">
-                <span>
-                    Text index: {haystackIndex}
-                </span>
-                <br />
-                <span>
-                    Pattern index: {needleIndex}
-                </span>
-                <br />
-                <span>
+                <div>
+                    Text index: {haystackIndex}/{haystack.length - 1}
+                </div>
+                <div>
+                    Pattern index: {needleIndex}/{needle.length - 1}
+                </div>
+                <div>
                     Comparisons: {action.comparisons}
-                </span>
-                <p>
-                    {texts[action.name](haystackIndex, needleIndex, action.shift)}
-                </p>
+                </div>
+                {texts[action.name](haystackIndex, needleIndex, action.shift, haystack, needle, badCharTable, goodSuffixTable)}
             </div>
         );
     }
