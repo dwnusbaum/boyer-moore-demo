@@ -27,18 +27,23 @@ var BadCharTable = React.createClass({
         });
 
         return (
-            <table className="shiftTable">
-                <thead>
-                    <tr>
-                        {tableHeader}
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        {tableBody}
-                    </tr>
-                </tbody>
-            </table>
+            <div>
+                <div>
+                    Bad Character Table:
+                </div>
+                <table className="shiftTable">
+                    <thead>
+                        <tr>
+                            {tableHeader}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {tableBody}
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         );
     }
 });

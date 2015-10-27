@@ -56,16 +56,20 @@ var SearchVisualization = React.createClass({
                         </pre>
                     </div>
                     <div className="col-2">
-                        <pre>
-                            <BadCharTable badCharTable={this.props.data.badCharTable}>
-                                {needle}
-                            </BadCharTable>
-                        </pre>
-                        <pre>
-                            <GoodSuffixTable goodSuffixTable={this.props.data.goodSuffixTable}>
-                                {needle}
-                            </GoodSuffixTable>
-                        </pre>
+                        <div className="row">
+                            <div className="col-6">
+                                <BadCharTable badCharTable={this.props.data.badCharTable}>
+                                    {needle}
+                                </BadCharTable>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-6">
+                                <GoodSuffixTable goodSuffixTable={this.props.data.goodSuffixTable}>
+                                    {needle}
+                                </GoodSuffixTable>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className="row">
