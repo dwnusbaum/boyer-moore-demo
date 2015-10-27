@@ -5,8 +5,16 @@ body {
     color: #333;
 }
 
+.no-margin-bottom {
+    margin-bottom: 0;
+}
+
 .margin-left-10 {
     margin-left: 10px;
+}
+
+.no-margin-top {
+    margin-top: 0;
 }
 
 .block {
