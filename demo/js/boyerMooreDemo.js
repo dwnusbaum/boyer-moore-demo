@@ -43,12 +43,13 @@ function searchLog(needle, haystack) {
             var shift = Math.max(badCharShift, goodSuffixShift);
 
             if (shift >= needleIndex + 1) {
-                log.push({
+                /*log.push({
                     haystackIndex: haystackIndex,
                     needleIndex: needleIndex,
                     name: 'GALIL_RULE_UPDATE',
                     previousHaystackIndex: previousHaystackIndex
                 });
+                */
             }
 
             if (badCharShift > goodSuffixShift) {
