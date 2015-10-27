@@ -23,7 +23,7 @@ body {
 
 .needle, .haystack, .pointer {
     font-family: Monaco, Consolas, monospace;
-    font-size: 32px;
+    font-size: 24px;
 }
 
 .explanation {
