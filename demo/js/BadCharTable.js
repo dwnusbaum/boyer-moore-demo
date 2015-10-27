@@ -34,12 +34,6 @@ var BadCharTable = React.createClass({
 
         let tableHeader = [];
         needleSet.forEach(function(char, index) {
-            if (char === "other") {
-                tableHeader.push(
-                    <td className="no-vertical-border" key={-1}>
-                    </td>
-                );
-            }
             tableHeader.push(
                 <td key={index}>
                     <samp>
@@ -53,16 +47,12 @@ var BadCharTable = React.createClass({
 
         let tableBody = [];
         needleSet.forEach(function(char, index) {
-            if (char === "other") {
-                tableBody.push(
-                    <td className="no-vertical-border" key={-1}>
-                    </td>
-                );
-            }
             tableBody.push(
                 <td key={index}>
                     <samp>
-                        <span style={char === highlightChar ? highlightStyle : {}}>{badCharTable(char)}</span>
+                        <span style={char === highlightChar ? highlightStyle : {}}>
+                            {badCharTable(char)}
+                        </span>
                     </samp>
                 </td>
             );
