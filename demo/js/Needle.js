@@ -28,6 +28,7 @@ var Needle = React.createClass({
 
         return (
             <samp className="block needle">
+                <span>Pattern:&nbsp;</span>
                 <span>{prefix}</span>
                 <span style={this.props.currentCharsMatch ? matchStyle : noMatchStyle}>{current}</span>
                 <span className="highlight-matching-chars">{alreadyMatched}</span>

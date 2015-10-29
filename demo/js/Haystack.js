@@ -28,6 +28,7 @@ var Haystack = React.createClass({
 
         return (
             <samp className="block haystack">
+                <span>Text:&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 <span>{prefix}</span>
                 <span style={this.props.currentCharsMatch ? matchStyle : noMatchStyle}>{current}</span>
                 <span className="highlight-matching-chars">{alreadyMatched}</span>
