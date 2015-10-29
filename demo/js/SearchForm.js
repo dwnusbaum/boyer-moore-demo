@@ -28,7 +28,7 @@ var SearchForm = React.createClass({
                     <form className="form-inline" onSubmit={this.handleSubmit}>
                         <div className="form-group">
                             <label>Text: </label>
-                            <input type="text" className="margin-left-10" placeholder="Here is a simple example." ref="haystack" />
+                            <input type="text" className="margin-left-10 input-lg" placeholder="Here is a simple example." ref="haystack" />
                         </div>
                         <div className="form-group margin-left-10">
                             <label>Pattern: </label>
