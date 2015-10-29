@@ -42,8 +42,9 @@ const GoodSuffixTable = React.createClass({
         });
 
         let titleText = "The good suffix table tells us, given an index in " +
-                        "the pattern, i, how far we have to shift the pattern " +
-                        "to match the suffix of pattern starting at index i.";
+                        "the pattern, the smallest shift distance that would " +
+                        "align the pattern with a new instance of the " +
+                        "suffix of the pattern starting at that index.";
 
         return (
             <div>

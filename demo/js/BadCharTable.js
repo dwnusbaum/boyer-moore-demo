@@ -1,16 +1,16 @@
-var React = require("react");
+const React = require("react");
 
-var highlightActions = new Set([
+const highlightActions = new Set([
     "COMPARE_NOT_EQUAL",
     "SHIFT_BADCHAR_RULE",
     "SHIFT_GOODSUFFIX_RULE",
 ]);
 
-var highlightStyle = {
+const highlightStyle = {
     color: "blue",
 }
 
-var BadCharTable = React.createClass({
+const BadCharTable = React.createClass({
     render: function() {
         const badCharTable = this.props.badCharTable;
         const action = this.props.action;
@@ -58,14 +58,15 @@ var BadCharTable = React.createClass({
             );
         });
 
-        let titleText = "The bad character table tells us the farthest we " +
-                        "can shift the pattern so that the mismatched " +
-                        "character in the text matches the last character " +
-                        "in the pattern.";
+        let tooltip = "The bad character table tells us, given a mismatched " +
+                      "character from the haytack, the shift distance that " +
+                      "would align the rightmost instance of that character " +
+                      "in the pattern with the mismatched character in the " +
+                      "text";
 
         return (
             <div>
-                <div title={titleText}>
+                <div title={tooltip}>
                     Bad Character Table:
                 </div>
                 <table className="shiftTable">
