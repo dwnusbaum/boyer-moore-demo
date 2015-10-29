@@ -48,19 +48,19 @@ describe("boyerMoore.js", function() {
 
     describe("boyerMoore.js private api", function() {
         describe("boyerMoore._makeBadCharTable", function() {
-            it ("creates the proper table for \"abcd\"", function() {
-                var correctTable = {
-                    a: 3,
-                    b: 2,
-                    c: 1,
-                    d: 0,
+            it ("creates the proper table for \"abcda\"", function() {
+                var needle = "abcda";
+                var rightmost = {
+                    a: 4,
+                    b: 1,
+                    c: 2,
+                    d: 3,
                 };
-                var table = boyerMoore._makeBadCharTable("abcd");
-                expect(table("a")).toEqual(correctTable["a"]);
-                expect(table("b")).toEqual(correctTable["b"]);
-                expect(table("c")).toEqual(correctTable["c"]);
-                expect(table("d")).toEqual(correctTable["d"]);
-                expect(table("e")).toEqual("abcd".length);
+                var table = boyerMoore._makeBadCharTable(needle);
+                needle.split("").forEach(function(character) {
+                    expect(table(character)).toEqual(needle.length - 1 - rightmost[character]);
+                });
+                expect(table("other")).toEqual(needle.length);
             });
         });
 

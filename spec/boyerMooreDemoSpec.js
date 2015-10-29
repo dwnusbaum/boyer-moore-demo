@@ -12,16 +12,19 @@ describe("boyerMooreDemo.js", function() {
             it("returns the correct log for a search", function() {
                 var correctActionList = [
                     {
+                        comparisons: 1,
                         haystackIndex: 1,
                         needleIndex: 1,
                         name: 'COMPARE_EQUAL'
                     },
                     {
+                        comparisons: 2,
                         haystackIndex: 0,
                         needleIndex: 0,
                         name: 'COMPARE_EQUAL'
                     },
                     {
+                        comparisons: 2,
                         haystackIndex: -1,
                         needleIndex: -1,
                         name: 'MATCH'
