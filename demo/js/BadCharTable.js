@@ -58,9 +58,14 @@ var BadCharTable = React.createClass({
             );
         });
 
+        let titleText = "The bad character table tells us the farthest we " +
+                        "can shift the pattern so that the mismatched " +
+                        "character in the text matches the last character " +
+                        "in the pattern.";
+
         return (
             <div>
-                <div>
+                <div title={titleText}>
                     Bad Character Table:
                 </div>
                 <table className="shiftTable">

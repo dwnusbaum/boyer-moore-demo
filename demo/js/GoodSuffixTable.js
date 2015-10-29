@@ -1,27 +1,27 @@
-var React = require("react");
+const React = require("react");
 
-var highlightActions = new Set([
+const highlightActions = new Set([
     "COMPARE_NOT_EQUAL",
     "SHIFT_BADCHAR_RULE",
     "SHIFT_GOODSUFFIX_RULE",
 ]);
 
-var highlightStyle = {
+const highlightStyle = {
     color: "blue",
 }
 
-var GoodSuffixTable = React.createClass({
+const GoodSuffixTable = React.createClass({
     render: function() {
-        var goodSuffixTable = this.props.goodSuffixTable;
-        var action = this.props.action;
-        var needleArray = this.props.children.split("");
+        const goodSuffixTable = this.props.goodSuffixTable;
+        const action = this.props.action;
+        const needleArray = this.props.children.split("");
 
-        var highlightIndex = -1;
+        let highlightIndex = -1;
         if (highlightActions.has(action.name)) {
             highlightIndex = action.needleIndex;
         }
 
-        var tableHeader = needleArray.map(function(char, index) {
+        let tableHeader = needleArray.map(function(char, index) {
             return (
                 <td key={index}>
                     <samp>
@@ -31,7 +31,7 @@ var GoodSuffixTable = React.createClass({
             );
         });
 
-        var tableBody = needleArray.map(function(_, index) {
+        let tableBody = needleArray.map(function(_, index) {
             return (
                 <td key={index}>
                     <samp>
@@ -41,9 +41,13 @@ var GoodSuffixTable = React.createClass({
             );
         });
 
+        let titleText = "The good suffix table tells us, given an index in " +
+                        "the pattern, i, how far we have to shift the pattern " +
+                        "to match the suffix of pattern starting at index i.";
+
         return (
             <div>
-                <div>
+                <div title={titleText}>
                     Good Suffix Table:
                 </div>
                 <table className="shiftTable">
