@@ -1,4 +1,5 @@
 var React = require("react");
+var ReactDOM = require("react-dom");
 
 var boyerMoore = require("./boyerMooreDemo");
 var SearchForm = require("./SearchForm");
@@ -29,7 +30,7 @@ var SearchDemo = React.createClass({
     }
 });
 
-React.render(
+ReactDOM.render(
     <SearchDemo />,
     document.getElementById("demo")
 );
