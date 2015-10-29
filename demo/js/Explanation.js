@@ -125,15 +125,6 @@ var Explanation = React.createClass({
 
         return (
             <div className="explanation">
-                <div>
-                    Text index: {haystackIndex}/{haystack.length - 1}
-                </div>
-                <div>
-                    Pattern index: {needleIndex}/{needle.length - 1}
-                </div>
-                <div>
-                    Comparisons: {action.comparisons}
-                </div>
                 {texts[action.name](haystackIndex, needleIndex, action.shift, haystack, needle, badCharTable, goodSuffixTable)}
             </div>
         );

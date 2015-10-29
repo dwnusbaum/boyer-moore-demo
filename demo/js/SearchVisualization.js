@@ -1,14 +1,15 @@
-var React = require("react");
+const React = require("react");
 
-var BadCharTable = require("./BadCharTable");
-var GoodSuffixTable = require("./GoodSuffixTable");
-var Haystack = require("./Haystack");
-var Needle = require("./Needle");
-var Pointer = require("./Pointer");
-var Controls = require("./Controls")
-var Explanation = require("./Explanation")
+const BadCharTable = require("./BadCharTable");
+const Controls = require("./Controls");
+const Explanation = require("./Explanation");
+const GoodSuffixTable = require("./GoodSuffixTable");
+const Haystack = require("./Haystack");
+const Needle = require("./Needle");
+const Pointer = require("./Pointer");
+const SearchInfo = require("./SearchInfo");
 
-var SearchVisualization = React.createClass({
+const SearchVisualization = React.createClass({
     getInitialState: function() {
         return {
             actionIndex: 0
@@ -32,19 +33,19 @@ var SearchVisualization = React.createClass({
         });
     },
     render: function() {
-        var haystack = this.props.data.haystack;
-        var needle = this.props.data.needle;
-        var currentAction = this.props.data.actions[this.state.actionIndex];
-        var haystackIndex = currentAction.haystackIndex;
-        var needleIndex = currentAction.needleIndex;
+        const haystack = this.props.data.haystack;
+        const needle = this.props.data.needle;
+        const currentAction = this.props.data.actions[this.state.actionIndex];
+        const haystackIndex = currentAction.haystackIndex;
+        const needleIndex = currentAction.needleIndex;
 
-        var currentCharsMatch = haystack.charAt(haystackIndex) === needle.charAt(needleIndex);
-        var matchLength = needle.length - needleIndex;
+        const currentCharsMatch = haystack.charAt(haystackIndex) === needle.charAt(needleIndex);
+        const matchLength = needle.length - needleIndex;
 
         return (
             <div>
                 <div className="row">
-                    <div className="col-4">
+                    <div className="col-6">
                         <pre>
                             <Haystack haystackIndex={haystackIndex} matchLength={matchLength} currentCharsMatch={currentCharsMatch}>
                                 {haystack}
@@ -55,32 +56,36 @@ var SearchVisualization = React.createClass({
                             <Pointer current={haystackIndex} />
                         </pre>
                     </div>
+                </div>
+                <div className="row">
                     <div className="col-2">
-                        <div className="row">
-                            <div className="col-6">
-                                <BadCharTable badCharTable={this.props.data.badCharTable} action={currentAction} haystack={haystack}>
-                                    {needle}
-                                </BadCharTable>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-6">
-                                <GoodSuffixTable goodSuffixTable={this.props.data.goodSuffixTable} action={currentAction}>
-                                    {needle}
-                                </GoodSuffixTable>
-                            </div>
-                        </div>
+                        <BadCharTable badCharTable={this.props.data.badCharTable} action={currentAction} haystack={haystack}>
+                            {needle}
+                        </BadCharTable>
+                    </div>
+                    <div className="col-2">
+                        <GoodSuffixTable goodSuffixTable={this.props.data.goodSuffixTable} action={currentAction}>
+                            {needle}
+                        </GoodSuffixTable>
+                    </div>
+                    <div className="col-2">
+                        <SearchInfo
+                            action={currentAction}
+                            haystack={haystack}
+                            haystackIndex={haystackIndex}
+                            needle={needle}
+                            needleIndex={needleIndex} />
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-6">
+                        <Controls onNext={this.handleNext} onPrevious={this.handlePrevious} onReset={this.handleReset} />
                         <Explanation
                             action={currentAction}
                             haystack={haystack}
                             needle={needle}
                             badCharTable={this.props.data.badCharTable}
                             goodSuffixTable={this.props.data.goodSuffixTable} />
-                        <Controls onNext={this.handleNext} onPrevious={this.handlePrevious} onReset={this.handleReset} />
                     </div>
                 </div>
             </div>
