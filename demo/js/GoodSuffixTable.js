@@ -12,13 +12,13 @@ const highlightStyle = {
 }
 
 const modalStyle = {
-  content : {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    transform: 'translate(-50%, -50%)'
-  }
+    content : {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        transform: 'translate(-50%, -50%)'
+    }
 };
 
 const GoodSuffixTable = React.createClass({
@@ -60,11 +60,6 @@ const GoodSuffixTable = React.createClass({
                 </td>
             );
         });
-
-        let titleText = "The good suffix table tells us, given an index in " +
-                        "the pattern, the smallest shift distance that would " +
-                        "align the pattern with a new instance of the " +
-                        "suffix of the pattern starting at that index.";
 
         return (
             <div>
