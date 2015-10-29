@@ -35,7 +35,7 @@ const BadCharTable = React.createClass({
         const badCharTable = this.props.badCharTable;
         const action = this.props.action;
         const haystack = this.props.haystack;
-        const needle = this.props.children;
+        const needle = this.props.needle;
 
         let needleSet = new Set(needle.split(""));
         // Add a dummy element definitely not in the needle array to show the

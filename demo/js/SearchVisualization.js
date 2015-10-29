@@ -59,9 +59,12 @@ const SearchVisualization = React.createClass({
                 </div>
                 <div className="row">
                     <div className="col-2">
-                        <BadCharTable badCharTable={this.props.data.badCharTable} action={currentAction} haystack={haystack}>
-                            {needle}
-                        </BadCharTable>
+                        <BadCharTable
+                            badCharTable={this.props.data.badCharTable}
+                            action={currentAction}
+                            haystack={haystack}
+                            needle={needle} />
+
                     </div>
                     <div className="col-2">
                         <GoodSuffixTable goodSuffixTable={this.props.data.goodSuffixTable} action={currentAction}>
