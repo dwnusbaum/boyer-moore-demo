@@ -1,7 +1,12 @@
-var React = require("react");
+import React from "react";
 
-var Controls = React.createClass({
-    handleKeyDown: function(event) {
+class Controls extends React.Component {
+    constructor() {
+        super();
+        this.handleKeyDown = this.handleKeyDown.bind(this);
+    }
+
+    handleKeyDown(event) {
         var leftArrowKey = 37;
         var rightArrowKey = 39;
 
@@ -11,14 +16,17 @@ var Controls = React.createClass({
             this.props.onNext();
         }
         return;
-    },
-    componentDidMount: function() {
+    }
+
+    componentDidMount() {
         window.addEventListener('keydown', this.handleKeyDown);
-    },
-    componentWillUnmount: function() {
+    }
+
+    componentWillUnmount() {
         window.removeEventListener('keydown', this.handleKeyDown);
-    },
-    render: function() {
+    }
+
+    render() {
         return (
             <div className="visualizationControls">
                 <button type="submit" onClick={this.props.onReset}>Reset</button>
@@ -27,6 +35,6 @@ var Controls = React.createClass({
             </div>
         );
     }
-});
+}
 
-module.exports = Controls;
+export default Controls;
