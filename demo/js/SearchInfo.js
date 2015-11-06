@@ -1,7 +1,7 @@
-const React = require("react");
+import React from "react";
 
-const SearchInfo = React.createClass({
-    render: function() {
+class SearchInfo extends React.Component {
+    render() {
         const haystack = this.props.haystack;
         const needle = this.props.needle;
         const action = this.props.action;
@@ -24,6 +24,6 @@ const SearchInfo = React.createClass({
             </div>
         );
     }
-});
+}
 
-module.exports = SearchInfo;
+export default SearchInfo;
