@@ -57,7 +57,7 @@ const SearchVisualization = React.createClass({
                                 haystackIndex={haystackIndex}
                                 matchLength={matchLength}
                                 currentCharsMatch={currentCharsMatch} />
-                            <Pointer current={haystackIndex} />
+                            <Pointer haystackIndex={haystackIndex} />
                         </pre>
                     </div>
                 </div>
