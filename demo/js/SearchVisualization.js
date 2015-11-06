@@ -1,38 +1,46 @@
-const React = require("react");
+import React from "react";
 
-const BadCharTable = require("./BadCharTable");
-const Controls = require("./Controls");
-const Explanation = require("./Explanation");
-const GoodSuffixTable = require("./GoodSuffixTable");
-const Haystack = require("./Haystack");
-const Needle = require("./Needle");
-const Pointer = require("./Pointer");
-const SearchInfo = require("./SearchInfo");
+import BadCharTable from "./BadCharTable";
+import Controls from "./Controls";
+import Explanation from "./Explanation";
+import GoodSuffixTable from "./GoodSuffixTable";
+import Haystack from "./Haystack";
+import Needle from "./Needle";
+import Pointer from "./Pointer";
+import SearchInfo from "./SearchInfo";
 
-const SearchVisualization = React.createClass({
-    getInitialState: function() {
-        return {
+class SearchVisualization extends React.Component {
+    constructor() {
+        super();
+        this.handleNext = this.handleNext.bind(this);
+        this.handlePrevious = this.handlePrevious.bind(this);
+        this.handleReset = this.handleReset.bind(this);
+        this.state = {
             actionIndex: 0
         };
-    },
-    handleNext: function() {
+    }
+
+    handleNext() {
         this.setState({
             actionIndex: Math.min(this.state.actionIndex + 1, this.props.data.actions.length - 1)
         });
         return;
-    },
-    handlePrevious: function() {
+    }
+
+    handlePrevious() {
         this.setState({
             actionIndex: Math.max(this.state.actionIndex - 1, 0)
         });
         return;
-    },
-    handleReset: function() {
+    }
+
+    handleReset() {
         this.setState({
             actionIndex: 0
         });
-    },
-    render: function() {
+    }
+
+    render() {
         const haystack = this.props.data.haystack;
         const needle = this.props.data.needle;
         const currentAction = this.props.data.actions[this.state.actionIndex];
@@ -71,7 +79,9 @@ const SearchVisualization = React.createClass({
 
                     </div>
                     <div className="col-2">
-                        <GoodSuffixTable goodSuffixTable={this.props.data.goodSuffixTable} action={currentAction}>
+                        <GoodSuffixTable
+                            goodSuffixTable={this.props.data.goodSuffixTable}
+                            action={currentAction}>
                             {needle}
                         </GoodSuffixTable>
                     </div>
@@ -84,7 +94,10 @@ const SearchVisualization = React.createClass({
                 </div>
                 <div className="row">
                     <div className="col-6">
-                        <Controls onNext={this.handleNext} onPrevious={this.handlePrevious} onReset={this.handleReset} />
+                        <Controls
+                            onNext={this.handleNext}
+                            onPrevious={this.handlePrevious}
+                            onReset={this.handleReset} />
                         <Explanation
                             action={currentAction}
                             haystack={haystack}
@@ -96,6 +109,6 @@ const SearchVisualization = React.createClass({
             </div>
         );
     }
-});
+}
 
-module.exports = SearchVisualization;
+export default SearchVisualization;
