@@ -47,9 +47,11 @@ const SearchVisualization = React.createClass({
                 <div className="row">
                     <div className="col-6">
                         <pre>
-                            <Haystack haystackIndex={haystackIndex} matchLength={matchLength} currentCharsMatch={currentCharsMatch}>
-                                {haystack}
-                            </Haystack>
+                            <Haystack
+                                haystack={haystack}
+                                haystackIndex={haystackIndex}
+                                matchLength={matchLength}
+                                currentCharsMatch={currentCharsMatch} />
                             <Needle haystackIndex={haystackIndex} matchLength={matchLength} currentCharsMatch={currentCharsMatch}>
                                 {needle}
                             </Needle>

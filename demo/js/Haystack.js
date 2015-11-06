@@ -1,41 +1,35 @@
-var React = require("react");
+import React from "react";
 
-var matchStyle = {
+const matchStyle = {
     color: "green"
 };
 
-var noMatchStyle = {
+const noMatchStyle = {
     color: "red"
 };
 
-var Haystack = React.createClass({
-    render: function() {
-        var haystack = this.props.children;
-        var haystackIndex = this.props.haystackIndex;
-        var matchLength = this.props.matchLength;
+let Haystack = ({haystack, haystackIndex, matchLength, currentCharsMatch}) => {
+    const prefix = haystack.substring(0, haystackIndex);
+    const suffix = haystack.substring(Math.max(haystackIndex + matchLength, 1));
+    const match = haystack.substring(haystackIndex, haystackIndex + matchLength);
+    let current = match.charAt(0);
+    let alreadyMatched = match.substring(1);
 
-        var prefix = haystack.substring(0, haystackIndex);
-        var match = haystack.substring(haystackIndex, haystackIndex + matchLength);
-        var current = match.charAt(0);
-        var alreadyMatched = match.substring(1);
-        var suffix = haystack.substring(Math.max(haystackIndex + matchLength, 1));
-
-        // Fix highlighting of matches that start at index 0
-        if (haystackIndex < 0) {
-            current = "";
-            alreadyMatched = match;
-        }
-
-        return (
-            <samp className="block haystack">
-                <span>Text:&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                <span>{prefix}</span>
-                <span style={this.props.currentCharsMatch ? matchStyle : noMatchStyle}>{current}</span>
-                <span className="highlight-matching-chars">{alreadyMatched}</span>
-                <span>{suffix}</span>
-            </samp>
-        );
+    // Fix highlighting of matches that start at index 0
+    if (haystackIndex < 0) {
+        current = "";
+        alreadyMatched = match;
     }
-});
 
-module.exports = Haystack;
+    return (
+        <samp className="block haystack">
+            <span>Text:&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span>{prefix}</span>
+            <span style={currentCharsMatch ? matchStyle : noMatchStyle}>{current}</span>
+            <span className="highlight-matching-chars">{alreadyMatched}</span>
+            <span>{suffix}</span>
+        </samp>
+    );
+};
+
+export default Haystack;
