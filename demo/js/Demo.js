@@ -1,26 +1,30 @@
-var React = require("react");
-var ReactDOM = require("react-dom");
+import React from "react";
+import ReactDOM from "react-dom";
 
-var boyerMoore = require("./boyerMooreDemo");
-var SearchForm = require("./SearchForm");
-var SearchVisualization = require("./SearchVisualization");
+import BoyerMoore from "./boyerMooreDemo";
+import SearchForm from "./SearchForm";
+import SearchVisualization from "./SearchVisualization";
 
-var SearchDemo = React.createClass({
-    getInitialState: function() {
-        var haystack = "Here is a simple example.";
-        var needle = "example";
-        return {
+class SearchDemo extends React.Component {
+    constructor() {
+        super();
+        this.handleHaystackAndNeedleSubmit = this.handleHaystackAndNeedleSubmit.bind(this);
+        const haystack = "Here is a simple example.";
+        const needle = "example";
+        this.state = {
             haystack: haystack,
             needle: needle,
-            badCharTable: boyerMoore.makeBadCharTable(needle),
-            goodSuffixTable: boyerMoore.makeGoodSuffixTable(needle),
-            actions: boyerMoore.searchLog(needle, haystack),
+            badCharTable: BoyerMoore.makeBadCharTable(needle),
+            goodSuffixTable: BoyerMoore.makeGoodSuffixTable(needle),
+            actions: BoyerMoore.searchLog(needle, haystack),
         };
-    },
-    handleHaystackAndNeedleSubmit: function(searchData) {
+    }
+
+    handleHaystackAndNeedleSubmit(searchData) {
         this.setState(searchData);
-    },
-    render: function() {
+    }
+
+    render() {
         return (
             <div>
                 <SearchForm onHaystackAndNeedleSubmit={this.handleHaystackAndNeedleSubmit} />
@@ -28,7 +32,7 @@ var SearchDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 ReactDOM.render(
     <SearchDemo />,
