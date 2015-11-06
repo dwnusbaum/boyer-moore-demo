@@ -79,9 +79,7 @@ const SearchVisualization = React.createClass({
                         <SearchInfo
                             action={currentAction}
                             haystack={haystack}
-                            haystackIndex={haystackIndex}
-                            needle={needle}
-                            needleIndex={needleIndex} />
+                            needle={needle} />
                     </div>
                 </div>
                 <div className="row">

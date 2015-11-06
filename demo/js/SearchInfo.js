@@ -1,29 +1,25 @@
 import React from "react";
 
-class SearchInfo extends React.Component {
-    render() {
-        const haystack = this.props.haystack;
-        const needle = this.props.needle;
-        const action = this.props.action;
-        const haystackIndex = action.haystackIndex;
-        const needleIndex = action.needleIndex;
+let SearchInfo = ({action, haystack, needle}) => {
+    const haystackIndex = action.haystackIndex;
+    const needleIndex = action.needleIndex;
+    const comparisons = action.comparisons;
 
-        return (
+    return (
+        <div>
             <div>
-                <div>
-                    Text index: {haystackIndex}/{haystack.length - 1}
-                </div>
-                <div>
-                    Pattern index: {needleIndex}/{needle.length - 1}
-                </div>
-                <hr />
-                <div>
-                    Total Comparisons: {action.comparisons}
-                </div>
-
+                Text index: {haystackIndex}/{haystack.length - 1}
             </div>
-        );
-    }
-}
+            <div>
+                Pattern index: {needleIndex}/{needle.length - 1}
+            </div>
+            <hr />
+            <div>
+                Total Comparisons: {comparisons}
+            </div>
+
+        </div>
+    );
+};
 
 export default SearchInfo;
