@@ -1,4 +1,32 @@
-var React = require("react");
+import React from "react";
+
+class Explanation extends React.Component {
+    render() {
+        const action = this.props.action;
+        const haystackIndex = action.haystackIndex;
+        const needleIndex = action.needleIndex;
+        const haystack = this.props.haystack;
+        const needle = this.props.needle;
+        const badCharTable = this.props.badCharTable;
+        const goodSuffixTable = this.props.goodSuffixTable;
+        const texts = {
+            MATCH: match,
+            NO_MATCH: noMatch,
+            GALIL_RULE_MATCH: galilRuleMatch,
+            COMPARE_EQUAL: compareEqual,
+            COMPARE_NOT_EQUAL: compareNotEqual,
+            GALIL_RULE_UPDATE: galilRuleUpdate,
+            SHIFT_BADCHAR_RULE: shiftBadCharRule,
+            SHIFT_GOODSUFFIX_RULE: shiftGoodSuffixRule
+        };
+
+        return (
+            <div className="explanation">
+                {texts[action.name](haystackIndex, needleIndex, action.shift, haystack, needle, badCharTable, goodSuffixTable)}
+            </div>
+        );
+    }
+}
 
 function match () {
     return (
@@ -101,34 +129,4 @@ function shiftGoodSuffixRule(haystackIndex, needleIndex, shift, haystack, needle
     );
 }
 
-
-var texts = {
-    MATCH: match,
-    NO_MATCH: noMatch,
-    GALIL_RULE_MATCH: galilRuleMatch,
-    COMPARE_EQUAL: compareEqual,
-    COMPARE_NOT_EQUAL: compareNotEqual,
-    GALIL_RULE_UPDATE: galilRuleUpdate,
-    SHIFT_BADCHAR_RULE: shiftBadCharRule,
-    SHIFT_GOODSUFFIX_RULE: shiftGoodSuffixRule
-};
-
-var Explanation = React.createClass({
-    render: function() {
-        const action = this.props.action;
-        const haystackIndex = action.haystackIndex;
-        const needleIndex = action.needleIndex;
-        const haystack = this.props.haystack;
-        const needle = this.props.needle;
-        const badCharTable = this.props.badCharTable;
-        const goodSuffixTable = this.props.goodSuffixTable;
-
-        return (
-            <div className="explanation">
-                {texts[action.name](haystackIndex, needleIndex, action.shift, haystack, needle, badCharTable, goodSuffixTable)}
-            </div>
-        );
-    }
-});
-
-module.exports = Explanation;
+export default Explanation;
