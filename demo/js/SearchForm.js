@@ -1,27 +1,33 @@
-var React = require("react");
+import React from "react";
+import ReactDOM from "react-dom";
+import BoyerMoore from "./BoyerMooreDemo.js";
 
-var boyerMoore = require("./boyerMooreDemo.js");
+class SearchForm extends React.Component {
+    constructor() {
+        super();
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
 
-var SearchForm = React.createClass({
-    handleSubmit: function(e) {
-        e.preventDefault(); // Don't send the form to the server
-        var haystack = React.findDOMNode(this.refs.haystack).value.trim();
-        var needle = React.findDOMNode(this.refs.needle).value.trim();
+    handleSubmit(event) {
+        event.preventDefault(); // Don't send the form to the server
+        const haystack = ReactDOM.findDOMNode(this.refs.haystack).value.trim();
+        const needle = ReactDOM.findDOMNode(this.refs.needle).value.trim();
         if (!haystack || !needle) {
             return;
         }
         this.props.onHaystackAndNeedleSubmit({
             haystack: haystack,
             needle: needle,
-            badCharTable: boyerMoore.makeBadCharTable(needle),
-            goodSuffixTable: boyerMoore.makeGoodSuffixTable(needle),
-            actions: boyerMoore.searchLog(needle, haystack)
+            badCharTable: BoyerMoore.makeBadCharTable(needle),
+            goodSuffixTable: BoyerMoore.makeGoodSuffixTable(needle),
+            actions: BoyerMoore.searchLog(needle, haystack)
         });
-        React.findDOMNode(this.refs.haystack).value = '';
-        React.findDOMNode(this.refs.needle).value = '';
+        ReactDOM.findDOMNode(this.refs.haystack).value = '';
+        ReactDOM.findDOMNode(this.refs.needle).value = '';
         return;
-    },
-    render: function() {
+    }
+
+    render() {
         return (
             <div className="row">
                 <div className="col-6">
@@ -40,6 +46,6 @@ var SearchForm = React.createClass({
             </div>
         );
     }
-});
+}
 
-module.exports = SearchForm;
+export default SearchForm;
