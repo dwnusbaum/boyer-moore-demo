@@ -39,12 +39,6 @@ function searchLog(needle, haystack) {
             needleIndex--;
         } else {
             comparisons++;
-            log.push({
-                comparisons: comparisons,
-                haystackIndex: haystackIndex,
-                needleIndex: needleIndex,
-                name: 'COMPARE_NOT_EQUAL',
-            });
             var badCharShift = badCharTable(haystack.charAt(haystackIndex));
             var goodSuffixShift = goodSuffixTable[needleIndex];
             var shift = Math.max(badCharShift, goodSuffixShift);

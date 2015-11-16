@@ -45,14 +45,6 @@ function compareEqual(haystackIndex, needleIndex) {
     );
 }
 
-function compareNotEqual(haystackIndex, needleIndex) {
-    return (
-        <p>
-            The current character in the text and pattern do not match.
-        </p>
-    );
-}
-
 function shiftBadCharRule(haystackIndex, needleIndex, shift, haystack, needle, badCharTable, goodSuffixTable) {
     const haystackChar = haystack.charAt(haystackIndex);
     const badCharShift = badCharTable(haystackChar);
@@ -61,6 +53,7 @@ function shiftBadCharRule(haystackIndex, needleIndex, shift, haystack, needle, b
     return (
         <div>
             <p>
+                The current character in the text and pattern do not match.
                 We look up the mismatched character from the text in the bad
                 character table, and the current pattern index in the good
                 suffix table.
@@ -86,6 +79,7 @@ function shiftGoodSuffixRule(haystackIndex, needleIndex, shift, haystack, needle
     return (
         <div>
             <p>
+                The current character in the text and pattern do not match.
                 We look up the mismatched character from the text in the bad
                 character table, and the current pattern index in the good
                 suffix table.
@@ -109,7 +103,6 @@ let Explanation = ({action, haystack, needle, badCharTable, goodSuffixTable}) =>
         NO_MATCH: noMatch,
         GALIL_RULE_MATCH: galilRuleMatch,
         COMPARE_EQUAL: compareEqual,
-        COMPARE_NOT_EQUAL: compareNotEqual,
         GALIL_RULE_UPDATE: galilRuleUpdate,
         SHIFT_BADCHAR_RULE: shiftBadCharRule,
         SHIFT_GOODSUFFIX_RULE: shiftGoodSuffixRule
