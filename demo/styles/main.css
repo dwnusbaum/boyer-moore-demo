@@ -5,6 +5,10 @@ body {
     color: #333;
 }
 
+.center-horizontal {
+    margin: 0 auto;
+}
+
 .no-margin-bottom {
     margin-bottom: 0;
 }
@@ -41,6 +45,7 @@ body {
 }
 
 .shiftTable {
+    font-family: Monaco, Consolas, monospace;
     border-collapse: collapse;
     border: 1px solid;
 }

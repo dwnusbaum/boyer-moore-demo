@@ -56,11 +56,9 @@ const BadCharTable = React.createClass({
         needleSet.forEach(function(char, index) {
             tableHeader.push(
                 <td key={index}>
-                    <samp>
-                        <span style={char === highlightChar ? highlightStyle : {}}>
-                            {char}
-                        </span>
-                    </samp>
+                    <span style={char === highlightChar ? highlightStyle : {}}>
+                        {char}
+                    </span>
                 </td>
             );
         });
@@ -69,11 +67,9 @@ const BadCharTable = React.createClass({
         needleSet.forEach(function(char, index) {
             tableBody.push(
                 <td key={index}>
-                    <samp>
-                        <span style={char === highlightChar ? highlightStyle : {}}>
-                            {badCharTable(char)}
-                        </span>
-                    </samp>
+                    <span style={char === highlightChar ? highlightStyle : {}}>
+                        {badCharTable(char)}
+                    </span>
                 </td>
             );
         });
@@ -106,10 +102,37 @@ const BadCharTable = React.createClass({
                     </div>
                     <p>
                         The bad character table tells us, given a mismatched
-                        character from the haytack, the shift distance that
-                        would align the rightmost instance of that character
-                        in the pattern with the mismatched character in the
-                        text.
+                        character from the text, the shift distance that would
+                        align the rightmost instance of that character in the
+                        pattern with the mismatched character in the text.
+                    </p>
+                    <p>
+                        For example, if the pattern is "example" then the bad
+                        character table is:
+                    </p>
+                    <table className="shiftTable center-horizontal">
+                        <thead>
+                            <tr>
+                                {"exampl".split("").concat(["other"]).map(function(char) {
+                                    return (<td key={char}>{char}</td>);
+                                })}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                {"exampl".split("").concat(["other"]).map(function(char) {
+                                    return (<td key={char}>{badCharTable(char)}</td>);
+                                })}
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>
+                        If we are comparing the text to the pattern, and we
+                        find an "m" that does not match the current character
+                        in the pattern, then we know that we must shift the
+                        text index 3 characters to the right and reset the
+                        pattern index to 7 (aligning the "m"s) before the
+                        pattern could match the text.
                     </p>
                 </Modal>
             </div>
