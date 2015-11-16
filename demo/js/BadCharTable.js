@@ -98,7 +98,7 @@ const BadCharTable = React.createClass({
                 <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} style={modalStyle}>
                     <div className="row">
                         <div className="col-5">
-                            <h3 className="no-margin-bottom margin-top-5">Good Suffix Table</h3>
+                            <h3 className="no-margin-bottom margin-top-5">Bad Character Table</h3>
                         </div>
                         <div className="col-1">
                             <button className="no-margin-top" onClick={this.closeModal}>Close</button>
