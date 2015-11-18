@@ -110,6 +110,7 @@ let Explanation = ({action, haystack, needle, badCharTable, goodSuffixTable}) =>
 
     return (
         <div className="explanation">
+            <h3>Explanation of the Current Step:</h3>
             {texts[action.name](haystackIndex, needleIndex, action.shift, haystack, needle, badCharTable, goodSuffixTable)}
         </div>
     );
