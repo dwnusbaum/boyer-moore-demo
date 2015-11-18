@@ -1,5 +1,6 @@
 import React from "react";
 
+import BadCharModal from "./BadCharModal";
 import BadCharTable from "./BadCharTable";
 import Controls from "./Controls";
 import Explanation from "./Explanation";
@@ -71,12 +72,12 @@ class SearchVisualization extends React.Component {
                 </div>
                 <div className="row">
                     <div className="col-2">
+                        <BadCharModal />
                         <BadCharTable
                             badCharTable={this.props.data.badCharTable}
                             action={currentAction}
                             haystack={haystack}
                             needle={needle} />
-
                     </div>
                     <div className="col-2">
                         <GoodSuffixTable

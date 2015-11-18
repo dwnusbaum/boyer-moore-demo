@@ -1,5 +1,4 @@
 const React = require("react");
-const Modal = require("react-modal");
 
 const highlightActions = new Set([
     "COMPARE_NOT_EQUAL",
@@ -11,26 +10,7 @@ const highlightStyle = {
     color: "blue",
 }
 
-const modalStyle = {
-    content : {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        transform: 'translate(-50%, -50%)'
-    }
-};
-
 const BadCharTable = React.createClass({
-    getInitialState: function() {
-        return { modalIsOpen: false };
-    },
-    openModal: function() {
-        this.setState({modalIsOpen: true});
-    },
-    closeModal: function() {
-        this.setState({modalIsOpen: false});
-    },
     render: function() {
         const badCharTable = this.props.badCharTable;
         const action = this.props.action;
@@ -76,9 +56,6 @@ const BadCharTable = React.createClass({
 
         return (
             <div>
-                <div>
-                    <a href="#" onClick={this.openModal}>Bad Character Table</a>
-                </div>
                 <table className="shiftTable">
                     <thead>
                         <tr>
@@ -91,50 +68,6 @@ const BadCharTable = React.createClass({
                         </tr>
                     </tbody>
                 </table>
-                <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} style={modalStyle}>
-                    <div className="row">
-                        <div className="col-5">
-                            <h3 className="no-margin-bottom margin-top-5">Bad Character Table</h3>
-                        </div>
-                        <div className="col-1">
-                            <button className="no-margin-top" onClick={this.closeModal}>Close</button>
-                        </div>
-                    </div>
-                    <p>
-                        The bad character table tells us, given a mismatched
-                        character from the text, the shift distance that would
-                        align the rightmost instance of that character in the
-                        pattern with the mismatched character in the text.
-                    </p>
-                    <p>
-                        For example, if the pattern is "example" then the bad
-                        character table is:
-                    </p>
-                    <table className="shiftTable center-horizontal">
-                        <thead>
-                            <tr>
-                                {"exampl".split("").concat(["other"]).map(function(char) {
-                                    return (<td key={char}>{char}</td>);
-                                })}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                {"exampl".split("").concat(["other"]).map(function(char) {
-                                    return (<td key={char}>{badCharTable(char)}</td>);
-                                })}
-                            </tr>
-                        </tbody>
-                    </table>
-                    <p>
-                        If we are comparing the text to the pattern, and we
-                        find an "m" that does not match the current character
-                        in the pattern, then we know that we must shift the
-                        text index 3 characters to the right and reset the
-                        pattern index to 7 (aligning the "m"s) before the
-                        pattern could match the text.
-                    </p>
-                </Modal>
             </div>
         );
     }
