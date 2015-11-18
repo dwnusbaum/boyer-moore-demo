@@ -51,12 +51,16 @@ class GoodSuffixModal extends React.Component {
                             <button className="no-margin-top" onClick={this.closeModal}>Close</button>
                         </div>
                     </div>
-                    <p>
-                        The good suffix table tells us, given an index in the
-                        pattern, the smallest shift distance that would align
-                        a prefix of the pattern with the suffix of the pattern
-                        that we have matched so far in the text.
-                    </p>
+                    <div className="row">
+                        <div className="col-6">
+                            <p>
+                                The good suffix table tells us, given an index in the
+                                pattern, the smallest shift distance that would align
+                                a prefix of the pattern with the suffix of the pattern
+                                that we have matched so far in the text.
+                            </p>
+                        </div>
+                    </div>
                 </Modal>
             </div>
         );

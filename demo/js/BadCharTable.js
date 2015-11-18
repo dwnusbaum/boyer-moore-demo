@@ -49,7 +49,7 @@ let BadCharTable = ({badCharTable, action, haystack, needle}) => {
     });
 
     return (
-        <div>
+        <div className="inline-block">
             <table className="shiftTable">
                 <thead>
                     <tr>

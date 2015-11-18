@@ -53,28 +53,34 @@ class BadCharModal extends React.Component {
                             <button className="no-margin-top" onClick={this.closeModal}>Close</button>
                         </div>
                     </div>
-                    <p>
-                        The bad character table tells us, given a mismatched
-                        character from the text, the shift distance that would
-                        align the rightmost instance of that character in the
-                        pattern with the mismatched character in the text.
-                    </p>
-                    <p>
-                        For example, if the pattern is "example" then the bad
-                        character table is:
-                    </p>
-                    <BadCharTable
-                        badCharTable={BoyerMoore.makeBadCharTable(needle)}
-                        action={{name: undefined}}
-                        needle={needle} />
-                    <p>
-                        If we are comparing the text to the pattern, and we
-                        find an "m" that does not match the current character
-                        in the pattern, then we know that we must shift the
-                        text index 3 characters to the right and reset the
-                        pattern index to 7 (aligning the "m"s) before the
-                        pattern could match the text.
-                    </p>
+                    <div className="row">
+                        <div className="col-6">
+                            <p>
+                                The bad character table tells us, given a mismatched
+                                character from the text, the shift distance that would
+                                align the rightmost instance of that character in the
+                                pattern with the mismatched character in the text.
+                            </p>
+                            <p>
+                                For example, if the pattern is "example" then the bad
+                                character table is:
+                            </p>
+                            <div className="text-center"> {/* Text-center will center the table */}
+                                <BadCharTable
+                                    badCharTable={BoyerMoore.makeBadCharTable(needle)}
+                                    action={{name: undefined}}
+                                    needle={needle} />
+                            </div>
+                            <p>
+                                If we are comparing the text to the pattern, and we
+                                find an "m" that does not match the current character
+                                in the pattern, then we know that we must shift the
+                                text index 3 characters to the right and reset the
+                                pattern index to 7 (aligning the "m"s) before the
+                                pattern could match the text.
+                            </p>
+                        </div>
+                    </div>
                 </Modal>
             </div>
         );

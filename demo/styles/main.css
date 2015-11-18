@@ -5,8 +5,12 @@ body {
     color: #333;
 }
 
-.center-horizontal {
-    margin: 0 auto;
+.text-center {
+    text-align: center;
+}
+
+.inline-block {
+    display: inline-block;
 }
 
 .no-margin-bottom {
@@ -32,11 +36,6 @@ body {
 .needle, .haystack, .pointer {
     font-family: Monaco, Consolas, monospace;
     font-size: 24px;
-}
-
-.explanation {
-    font-size: 14px;
-    line-height: 1.43;
 }
 
 .highlight-matching-chars {
