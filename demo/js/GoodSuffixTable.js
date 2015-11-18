@@ -44,9 +44,7 @@ const GoodSuffixTable = React.createClass({
         let tableHeader = needleArray.map(function(char, index) {
             return (
                 <td key={index}>
-                    <samp>
-                        <span style={index === highlightIndex ? highlightStyle : {}}>{char}<sub>{index}</sub></span>
-                    </samp>
+                    <span style={index === highlightIndex ? highlightStyle : {}}>{char}<sub>{index}</sub></span>
                 </td>
             );
         });
@@ -54,9 +52,7 @@ const GoodSuffixTable = React.createClass({
         let tableBody = needleArray.map(function(_, index) {
             return (
                 <td key={index}>
-                    <samp>
-                        <span style={index === highlightIndex ? highlightStyle : {}}>{goodSuffixTable[index]}</span>
-                    </samp>
+                    <span style={index === highlightIndex ? highlightStyle : {}}>{goodSuffixTable[index]}</span>
                 </td>
             );
         });
@@ -90,8 +86,8 @@ const GoodSuffixTable = React.createClass({
                     <p>
                         The good suffix table tells us, given an index in the
                         pattern, the smallest shift distance that would align
-                        the pattern with a new instance of the suffix of the
-                        pattern starting at that index.
+                        a prefix of the pattern with the suffix of the pattern
+                        that we have matched so far in the text.
                     </p>
                 </Modal>
             </div>
