@@ -22,7 +22,7 @@ let Haystack = ({haystack, haystackIndex, matchLength, currentCharsMatch}) => {
     }
 
     return (
-        <samp className="block haystack">
+        <samp className="haystack">
             <span>Text:&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <span>{prefix}</span>
             <span style={currentCharsMatch ? matchStyle : noMatchStyle}>{current}</span>

@@ -22,7 +22,7 @@ let Needle = ({needle, haystackIndex, matchLength, currentCharsMatch}) => {
     }
 
     return (
-        <samp className="block needle">
+        <samp className="needle">
             <span>Pattern:&nbsp;</span>
             <span>{prefix}</span>
             <span style={currentCharsMatch ? matchStyle : noMatchStyle}>{current}</span>
