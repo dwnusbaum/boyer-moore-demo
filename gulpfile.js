@@ -31,7 +31,7 @@ gulp.task('javascript', ['babel'], function() {
   return w
     .bundle()
       .on('error', function(err) {
-        gutil.log(err);
+        gutil.log(err.toString());
         this.emit('end');
       })
     .pipe(source('bundle.js'))
@@ -42,7 +42,7 @@ gulp.task('babel', ['clean'], function () {
   return gulp.src('./demo/js/*.js')
     .pipe(babel())
       .on('error', function(err) {
-        gutil.log(err);
+        gutil.log(err.toString() + '\n' + err.codeFrame);
         this.emit('end');
       })
     .pipe(gulp.dest('./demo/build/translated'));
