@@ -65,7 +65,7 @@ class BadCharModal extends React.Component {
                                 For example, if the pattern is "example" then the bad
                                 character table is:
                             </p>
-                        {/* Text-center will center the table because it is an inline-block element */}
+                            {/* Text-center will center the table because it is an inline-block element */}
                             <div className="text-center">
                                 <BadCharTable
                                     badCharTable={BoyerMoore.makeBadCharTable(needle)}
