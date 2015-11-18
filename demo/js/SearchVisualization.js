@@ -73,6 +73,12 @@ class SearchVisualization extends React.Component {
                 </div>
                 <div className="row">
                     <div className="col-2">
+                        <SearchInfo
+                            action={currentAction}
+                            haystack={haystack}
+                            needle={needle} />
+                    </div>
+                    <div className="col-2">
                         <BadCharModal />
                         <BadCharTable
                             badCharTable={this.props.data.badCharTable}
@@ -87,12 +93,6 @@ class SearchVisualization extends React.Component {
                             action={currentAction}
                             needle={needle} />
                     </div>
-                    <div className="col-2">
-                        <SearchInfo
-                            action={currentAction}
-                            haystack={haystack}
-                            needle={needle} />
-                    </div>
                 </div>
                 <div className="row">
                     <div className="col-6">
@@ -100,6 +100,10 @@ class SearchVisualization extends React.Component {
                             onNext={this.handleNext}
                             onPrevious={this.handlePrevious}
                             onReset={this.handleReset} />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-6">
                         <Explanation
                             action={currentAction}
                             haystack={haystack}

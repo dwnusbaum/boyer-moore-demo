@@ -28,10 +28,10 @@ class Controls extends React.Component {
 
     render() {
         return (
-            <div className="visualizationControls">
-                <button type="submit" onClick={this.props.onReset}>Reset</button>
-                <button className="margin-left-10" type="submit" onClick={this.props.onPrevious}>Previous</button>
-                <button className="margin-left-10" type="submit" onClick={this.props.onNext}>Next</button>
+            <div className="margin-top-5">
+                <button type="submit" onClick={this.props.onReset}>First Step</button>
+                <button className="margin-left-10" type="submit" onClick={this.props.onPrevious}>Previous Step</button>
+                <button className="margin-left-10" type="submit" onClick={this.props.onNext}>Next Step</button>
             </div>
         );
     }
