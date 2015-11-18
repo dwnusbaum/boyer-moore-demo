@@ -4,6 +4,7 @@ import BadCharModal from "./BadCharModal";
 import BadCharTable from "./BadCharTable";
 import Controls from "./Controls";
 import Explanation from "./Explanation";
+import GoodSuffixModal from "./GoodSuffixModal";
 import GoodSuffixTable from "./GoodSuffixTable";
 import Haystack from "./Haystack";
 import Needle from "./Needle";
@@ -80,11 +81,11 @@ class SearchVisualization extends React.Component {
                             needle={needle} />
                     </div>
                     <div className="col-2">
+                        <GoodSuffixModal />
                         <GoodSuffixTable
                             goodSuffixTable={this.props.data.goodSuffixTable}
-                            action={currentAction}>
-                            {needle}
-                        </GoodSuffixTable>
+                            action={currentAction}
+                            needle={needle} />
                     </div>
                     <div className="col-2">
                         <SearchInfo
