@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import BoyerMoore from "./BoyerMooreDemo.js";
+import BoyerMoore from "./BoyerMooreDemo";
 
 class SearchForm extends React.Component {
     constructor() {
