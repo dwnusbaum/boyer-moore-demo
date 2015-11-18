@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import BoyerMoore from "./boyerMooreDemo";
+import BoyerMoore from "./BoyerMooreDemo";
 import SearchForm from "./SearchForm";
 import SearchVisualization from "./SearchVisualization";
 
