@@ -35,7 +35,7 @@ let GoodSuffixTable = ({goodSuffixTable, action, needle}) => {
     });
 
     return (
-        <div>
+        <div className="inline-block">
             <table className="shiftTable">
                 <thead>
                     <tr>

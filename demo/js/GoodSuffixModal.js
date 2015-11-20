@@ -37,6 +37,7 @@ class GoodSuffixModal extends React.Component {
     }
 
     render() {
+        const needle = "example";
         return (
             <div>
                 <div>
@@ -59,6 +60,20 @@ class GoodSuffixModal extends React.Component {
                                 a prefix of the pattern with the suffix of the pattern
                                 that we have matched so far in the text.
                             </p>
+                            <p>
+                                For example, if the pattern is "example" then the good
+                                suffix table is:
+                            </p>
+                            {/* Text-center will center the table because it is an inline-block element. */ }
+                            <div className="text-center">
+                                <GoodSuffixTable
+                                    goodSuffixTable={BoyerMoore.makeGoodSuffixTable(needle)}
+                                    /* An action is required for highlighting, but in this case we
+                                     * don't want to highlight anything
+                                     */
+                                    action={{name: undefined}}
+                                    needle={needle} />
+                            </div>
                         </div>
                     </div>
                 </Modal>
