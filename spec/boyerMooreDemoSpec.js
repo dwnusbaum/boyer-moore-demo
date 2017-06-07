@@ -1,5 +1,5 @@
 describe("boyerMooreDemo.js", function() {
-    var boyerMoore = require("../demo/js/BoyerMooreDemo.js");
+    var boyerMoore = require("../src/BoyerMooreDemo.js");
 
     describe("boyerMooreDemo.js exports", function() {
         it("exports a function called searchLog", function() {

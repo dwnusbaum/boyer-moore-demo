@@ -4,23 +4,24 @@
   "description": "Boyer-Moore fast string search algorithm.",
   "main": "boyerMoore.js",
   "scripts": {
+    "dev": "webpack-dev-server --content-base build",
+    "start": "webpack --config webpack.config.js",
     "test": "jasmine"
   },
   "author": "Devin Nusbaum",
   "license": "BSD-2-Clause",
   "repository": "https://github.com/dwnusbaum/boyerMoore.js",
   "devDependencies": {
-    "browserify": "^11.2.0",
-    "del": "^2.0.2",
-    "gulp": "^3.9.0",
-    "gulp-babel": "^5.2.1",
-    "gulp-connect": "^2.2.0",
-    "gulp-util": "^3.0.6",
-    "react": "^0.14.1",
-    "react-dom": "^0.14.1",
-    "react-modal": "^0.6.1",
-    "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.4.0"
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-react": "^6.24.1",
+    "copy-webpack-plugin": "^4.0.1",
+    "jasmine": "^2.6.0",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-modal": "^1.7.7",
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {}
 }
