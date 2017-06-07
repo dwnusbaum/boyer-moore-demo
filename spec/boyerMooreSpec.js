@@ -25,7 +25,7 @@ describe("boyerMoore.js", function() {
                 expect(boyerMoore.search("computer", "computer")).toBe(true);
             });
 
-            it("find \"puter\" in \"computer\"", function() {
+            it("finds \"puter\" in \"computer\"", function() {
                 expect(boyerMoore.search("puter", "computer")).toBe(true);
             });
 
