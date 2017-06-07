@@ -1,7 +1,7 @@
 {
-  "name": "boyerMoore.js",
+  "name": "boyer-moore-demo",
   "version": "1.0.0",
-  "description": "Boyer-Moore fast string search algorithm.",
+  "description": "Interactive demonstration of the Boyer-Moore string search algorithm.",
   "main": "boyerMoore.js",
   "scripts": {
     "dev": "webpack-dev-server --content-base build",
@@ -10,7 +10,7 @@
   },
   "author": "Devin Nusbaum",
   "license": "BSD-2-Clause",
-  "repository": "https://github.com/dwnusbaum/boyerMoore.js",
+  "repository": "https://github.com/dwnusbaum/boyer-moore-demo",
   "devDependencies": {
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
