@@ -43,7 +43,12 @@ class GoodSuffixModal extends React.Component {
                 <div>
                     <a href="#" onClick={this.openModal}>Good Suffix Table</a>
                 </div>
-                <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} style={modalStyle}>
+                <Modal 
+                    isOpen={this.state.modalIsOpen} 
+                    onRequestClose={this.closeModal} 
+                    style={modalStyle}
+                    contentLabel="Good Suffix Rule Explanation"
+                >
                     <div className="row">
                         <div className="col-5">
                             <h3 className="no-margin-bottom margin-top-5">Good Suffix Table</h3>

@@ -44,7 +44,12 @@ class BadCharModal extends React.Component {
                 <div>
                     <a href="#" onClick={this.openModal}>Bad Character Table</a>
                 </div>
-                <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} style={modalStyle}>
+                <Modal 
+                    isOpen={this.state.modalIsOpen} 
+                    onRequestClose={this.closeModal} 
+                    style={modalStyle}
+                    contentLabel="Bad Character Rule Explanation"
+                >
                     <div className="row">
                         <div className="col-5">
                             <h3 className="no-margin-bottom margin-top-5">Bad Character Table</h3>
