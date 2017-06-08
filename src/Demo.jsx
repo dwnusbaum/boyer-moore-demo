@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import BoyerMoore from "./BoyerMooreDemo";
+import BoyerMoore from "./BoyerMoore";
 import SearchForm from "./SearchForm";
 import SearchVisualization from "./SearchVisualization";
 
@@ -16,12 +16,8 @@ class SearchDemo extends React.Component {
             needle: needle,
             badCharTable: BoyerMoore.makeBadCharTable(needle),
             goodSuffixTable: BoyerMoore.makeGoodSuffixTable(needle),
-            actions: BoyerMoore.searchLog(needle, haystack),
-        };
-    }
-
-    handleHaystackAndNeedleSubmit(searchData) {
-        this.setState(searchData);
+            actions: BoyerMoore.search(needle, haystack).log,
+        });
     }
 
     render() {

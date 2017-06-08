@@ -2,7 +2,7 @@ import React from "react";
 import Modal from "react-modal";
 
 import BadCharTable from "./BadCharTable";
-import BoyerMoore from "./BoyerMooreDemo";
+import BoyerMoore from "./BoyerMoore";
 
 const modalStyle = {
     content : {

@@ -2,7 +2,7 @@ import React from "react";
 import Modal from "react-modal";
 
 import GoodSuffixTable from "./GoodSuffixTable";
-import BoyerMoore from "./BoyerMooreDemo";
+import BoyerMoore from "./BoyerMoore";
 
 const modalStyle = {
     content : {
