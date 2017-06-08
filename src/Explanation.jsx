@@ -3,8 +3,8 @@ import React from "react";
 function match () {
     return (
         <p>
-            We have passed the end of the pattern on the left, so the pattern
-            was found in the text.
+            The pattern index is less than 0, so the pattern was found in the
+            text.
         </p>
     );
 }
@@ -12,17 +12,8 @@ function match () {
 function noMatch() {
     return (
         <p>
-            We have passed the end of the text on the right, so the pattern was
-            not found in the text.
-        </p>
-    );
-}
-
-function galilRuleUpdate(haystackIndex, needleIndex) {
-    return (
-        <p>
-            Store the current text index as the farthest we need to compare the
-            pattern according to the Galil Rule.
+            The text index is greater than or equal to the text length, so the
+            pattern was not found in the text.
         </p>
     );
 }
@@ -30,8 +21,8 @@ function galilRuleUpdate(haystackIndex, needleIndex) {
 function galilRuleMatch(haystackIndex, needleIndex) {
     return (
         <p>
-            Because of the Galil Rule, we know that the rest of the pattern
-            will match, and so we have found the pattern in the text.
+            Because of the Galil Rule, the rest of the pattern will match, so 
+            the pattern is in the text.
         </p>
     );
 }
@@ -39,16 +30,18 @@ function galilRuleMatch(haystackIndex, needleIndex) {
 function compareEqual(haystackIndex, needleIndex) {
     return (
         <p>
-            The current character in the text and pattern match. We shift the
-            pattern index left by one and compare the next characters.
+            The current character in the text and pattern match. We decrement
+            the text and pattern indices to compare the next characters.
         </p>
     );
 }
 
-function shiftBadCharRule(haystackIndex, needleIndex, shift, haystack, needle, badCharTable, goodSuffixTable) {
+function shiftRule(haystackIndex, needleIndex, shift, haystack, needle, badCharTable, goodSuffixTable) {
     const haystackChar = haystack.charAt(haystackIndex);
     const badCharShift = badCharTable(haystackChar);
     const goodSuffixShift = goodSuffixTable[needleIndex];
+    const comparison = badCharShift >= goodSuffixShift ? ">=" : "<";
+    const chosen = badCharShift > goodSuffixShift ? "bad character" : "good suffix";
 
     return (
         <div>
@@ -61,36 +54,13 @@ function shiftBadCharRule(haystackIndex, needleIndex, shift, haystack, needle, b
             <div>badCharTable['{haystackChar}'] = {badCharShift}</div>
             <div>goodSuffixTable[{needleIndex}] = {goodSuffixShift}</div>
             <p>
-               Since {badCharShift}&gt;{goodSuffixShift} we shift the text
-               index right by {shift} characters.  We also reset the pattern
-               index to {needle.length - 1}.
+               Since {badCharShift} {comparison} {goodSuffixShift} we use 
+               the {chosen} rule and increase the text index by {shift}.
             </p>
-        </div>
-    );
-
-    return text;
-}
-
-function shiftGoodSuffixRule(haystackIndex, needleIndex, shift, haystack, needle, badCharTable, goodSuffixTable) {
-    const haystackChar = haystack.charAt(haystackIndex);
-    const badCharShift = badCharTable(haystackChar);
-    const goodSuffixShift = goodSuffixTable[needleIndex];
-
-    return (
-        <div>
-            <p>
-                The current character in the text and pattern do not match.
-                We look up the mismatched character from the text in the bad
-                character table, and the current pattern index in the good
-                suffix table.
-            </p>
-            <div>badCharTable['{haystackChar}'] = {badCharShift}</div>
-            <div>goodSuffixTable[{needleIndex}] = {goodSuffixShift}</div>
-            <p>
-               Since {badCharShift}&lt;{goodSuffixShift} we shift the text
-               index right by {shift} characters.  We also reset the pattern
-               index to {needle.length - 1}.
-            </p>
+            { needleIndex == needle.length - 1 
+                ? undefined
+                : <p>We also reset the pattern index to {needle.length - 1}.</p> 
+            }
         </div>
     );
 }
@@ -103,9 +73,8 @@ let Explanation = ({action, haystack, needle, badCharTable, goodSuffixTable}) =>
         NO_MATCH: noMatch,
         GALIL_RULE_MATCH: galilRuleMatch,
         COMPARE_EQUAL: compareEqual,
-        GALIL_RULE_UPDATE: galilRuleUpdate,
-        SHIFT_BADCHAR_RULE: shiftBadCharRule,
-        SHIFT_GOODSUFFIX_RULE: shiftGoodSuffixRule
+        SHIFT_BADCHAR_RULE: shiftRule,
+        SHIFT_GOODSUFFIX_RULE: shiftRule
     };
 
     return (
