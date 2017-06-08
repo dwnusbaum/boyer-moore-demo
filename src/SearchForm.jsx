@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import BoyerMoore from "./BoyerMoore";
 
 class SearchForm extends React.Component {
     constructor() {
@@ -15,13 +14,7 @@ class SearchForm extends React.Component {
         if (!haystack || !needle) {
             return;
         }
-        this.props.onHaystackAndNeedleSubmit({
-            haystack: haystack,
-            needle: needle,
-            badCharTable: BoyerMoore.makeBadCharTable(needle),
-            goodSuffixTable: BoyerMoore.makeGoodSuffixTable(needle),
-            actions: BoyerMoore.searchLog(needle, haystack)
-        });
+        this.props.onHaystackAndNeedleSubmit(haystack, needle);
         ReactDOM.findDOMNode(this.refs.haystack).value = '';
         ReactDOM.findDOMNode(this.refs.needle).value = '';
         return;

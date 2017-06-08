@@ -9,9 +9,16 @@ class SearchDemo extends React.Component {
     constructor() {
         super();
         this.handleHaystackAndNeedleSubmit = this.handleHaystackAndNeedleSubmit.bind(this);
+    }
+
+    componentWillMount() {
         const haystack = "Here is a simple example.";
         const needle = "example";
-        this.state = {
+        this.handleHaystackAndNeedleSubmit(haystack, needle);
+    }
+
+    handleHaystackAndNeedleSubmit(haystack, needle) {
+        this.setState({
             haystack: haystack,
             needle: needle,
             badCharTable: BoyerMoore.makeBadCharTable(needle),
