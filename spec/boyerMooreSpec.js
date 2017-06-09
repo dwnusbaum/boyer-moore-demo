@@ -1,5 +1,5 @@
 describe("boyerMoore.js", function() {
-    var boyerMoore = require("../src/boyerMoore.js");
+    var boyerMoore = require("../src/boyerMoore.ts").default;
 
     describe("boyerMoore.js exports", function() {
         it("exports a function called search", function() {

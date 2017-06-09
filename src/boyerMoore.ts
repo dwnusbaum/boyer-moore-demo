@@ -1,5 +1,21 @@
-function search(needle, haystack) {
-    var log = [];
+export interface SearchLog {
+    comparisons: number;
+    haystackIndex: number;
+    needleIndex: number;
+    name: string;
+    shift?: number;
+}
+
+export interface SearchResult {
+    isMatch: boolean;
+    log: SearchLog[];
+}
+
+export type BadCharTable = (badChar: string) => number;
+export type GoodSuffixTable = number[];
+
+function search(needle: string, haystack: string): SearchResult {
+    var log: SearchLog[] = [];
     var comparisons = 0;
     var badCharTable = makeBadCharTable(needle);
     var goodSuffixTable = makeGoodSuffixTable(needle);
@@ -75,13 +91,13 @@ function search(needle, haystack) {
     return { isMatch: false, log: log };
 }
 
-function makeBadCharTable(needle) {
-    var rightmostIndex = [];
+function makeBadCharTable(needle: string): BadCharTable {
+    var rightmostIndex: { [index: string]: number } = {};
     for (var i = 0; i < needle.length; i++) {
         rightmostIndex[needle.charAt(i)] = i;
     }
 
-    var lookup = function(badChar) {
+    var lookup = function(badChar: string): number {
         if (rightmostIndex[badChar]) {
             return needle.length - 1 - rightmostIndex[badChar];
         } else {
@@ -92,7 +108,7 @@ function makeBadCharTable(needle) {
     return lookup;
 }
 
-function makeGoodSuffixTable(needle) {
+function makeGoodSuffixTable(needle: string): GoodSuffixTable {
     var table = []
     var lastPrefixIndex = needle.length - 1;
 
@@ -117,7 +133,7 @@ function makeGoodSuffixTable(needle) {
 }
 
 // Returns the length of the longest suffix of needle that ends on needle[index]
-function getSuffixLength(needle, index) {
+function getSuffixLength(needle: string, index: number): number {
     var suffixLength = 0;
     for (var i = index; i >= 0 && needle.charAt(i) == needle.charAt(needle.length - 1 - index + i); i--) {
         suffixLength += 1;
@@ -126,9 +142,9 @@ function getSuffixLength(needle, index) {
     return suffixLength;
 }
 
-module.exports = {
-    search: search,
-    makeBadCharTable: makeBadCharTable,
-    makeGoodSuffixTable: makeGoodSuffixTable,
-    getSuffixLength: getSuffixLength
+export default {
+    search,
+    makeBadCharTable,
+    makeGoodSuffixTable,
+    getSuffixLength
 };
