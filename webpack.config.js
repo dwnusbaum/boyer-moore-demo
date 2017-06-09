@@ -8,8 +8,17 @@ const config = {
         filename: "bundle.js",
         path: path.resolve(__dirname, "build"),
     },
+    devtool: "source-map",
     module: {
         rules: [
+            {
+                test: /\.tsx?$/,
+                exclude: /node_modules/,
+                loader: "ts-loader",
+                options: {
+                    transpileOnly: true
+                }
+            },
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
@@ -19,7 +28,8 @@ const config = {
                         presets: ["react"]
                     }
                 }
-            }
+            },
+            { enforce: "pre", test: /\.js$/, use: { loader: "source-map-loader" } }
         ]
     },
     plugins: [
@@ -29,8 +39,12 @@ const config = {
         ])
     ],
     resolve: {
-        extensions: ["*", ".js", ".jsx"]
-    }
+        extensions: ["*", ".js", ".jsx", ".ts", ".tsx"]
+    },
+    externals: {
+        "react": "React",
+        "react-dom": "ReactDOM"
+    },
 }
 
 module.exports = config;

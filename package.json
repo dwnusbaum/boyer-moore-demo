@@ -12,6 +12,9 @@
   "license": "BSD-2-Clause",
   "repository": "https://github.com/dwnusbaum/boyer-moore-demo",
   "devDependencies": {
+    "@types/react": "^15.0.27",
+    "@types/react-dom": "^15.5.0",
+    "@types/react-modal": "^1.6.6",
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
     "babel-preset-react": "^6.24.1",
@@ -20,6 +23,9 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-modal": "^1.7.7",
+    "source-map-loader": "^0.2.1",
+    "ts-loader": "^2.1.0",
+    "typescript": "^2.3.4",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5"
   },
