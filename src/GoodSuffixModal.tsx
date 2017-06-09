@@ -1,8 +1,12 @@
-import React from "react";
-import Modal from "react-modal";
+import * as React from "react";
+import * as Modal from "react-modal";
 
 import GoodSuffixTable from "./GoodSuffixTable";
 import BoyerMoore from "./BoyerMoore";
+
+export interface GoodSuffixModalState {
+    modalIsOpen: boolean;
+}
 
 const modalStyle = {
     content : {
@@ -14,7 +18,7 @@ const modalStyle = {
     }
 };
 
-class GoodSuffixModal extends React.Component {
+class GoodSuffixModal extends React.Component<undefined, GoodSuffixModalState> {
     constructor() {
         super();
         this.state = {

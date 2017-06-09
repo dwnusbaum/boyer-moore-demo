@@ -1,4 +1,11 @@
-import React from "react";
+import * as React from "react";
+
+export interface NeedleProps { 
+    needle: string;
+    haystackIndex: number;
+    matchLength: number;
+    currentCharsMatch: boolean; 
+}
 
 const matchStyle = {
     color: "green"
@@ -8,7 +15,7 @@ const noMatchStyle = {
     color: "red"
 };
 
-let Needle = ({needle, haystackIndex, matchLength, currentCharsMatch}) => {
+let Needle = ({needle, haystackIndex, matchLength, currentCharsMatch}: NeedleProps) => {
     const spacePrefixedNeedle = Array(haystackIndex + matchLength - needle.length + 1).join(" ") + needle;
     const prefix = spacePrefixedNeedle.substring(0, haystackIndex);
     const match = spacePrefixedNeedle.substring(haystackIndex, haystackIndex + matchLength);

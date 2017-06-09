@@ -1,6 +1,10 @@
-import React from "react";
+import * as React from "react";
 
-let Pointer = ({haystackIndex}) => {
+export interface PointerProps {
+    haystackIndex: number;
+}
+
+let Pointer = ({haystackIndex}: PointerProps) => {
     const pointer = Array(haystackIndex + 2).join(" ") + "^";
     return (
         <samp className="pointer">

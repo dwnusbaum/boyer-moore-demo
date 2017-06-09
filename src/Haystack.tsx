@@ -1,4 +1,11 @@
-import React from "react";
+import * as React from "react";
+
+export interface HaystackProps {
+    haystack: string;
+    haystackIndex: number;
+    matchLength: number;
+    currentCharsMatch: boolean;
+}
 
 const matchStyle = {
     color: "green"
@@ -8,7 +15,7 @@ const noMatchStyle = {
     color: "red"
 };
 
-let Haystack = ({haystack, haystackIndex, matchLength, currentCharsMatch}) => {
+let Haystack = ({haystack, haystackIndex, matchLength, currentCharsMatch}: HaystackProps) => {
     const prefix = haystack.substring(0, haystackIndex);
     const suffix = haystack.substring(Math.max(haystackIndex + matchLength, 1));
     const match = haystack.substring(haystackIndex, haystackIndex + matchLength);

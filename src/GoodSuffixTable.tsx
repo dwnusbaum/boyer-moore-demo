@@ -1,4 +1,10 @@
-import React from "react";
+import * as React from "react";
+
+export interface GoodSuffixTableProps {
+    goodSuffixTable: number[];
+    action: any;
+    needle: string;
+}
 
 const highlightActions = new Set([
     "COMPARE_NOT_EQUAL",
@@ -10,7 +16,7 @@ const highlightStyle = {
     color: "blue",
 }
 
-let GoodSuffixTable = ({goodSuffixTable, action, needle}) => {
+let GoodSuffixTable = ({goodSuffixTable, action, needle}: GoodSuffixTableProps) => {
     const needleArray = needle.split("");
 
     let highlightIndex = -1;
