@@ -1,8 +1,9 @@
-import React from "react";
-import Modal from "react-modal";
+import * as React from "react";
+import * as Modal from "react-modal";
 
 import BadCharTable from "./BadCharTable";
 import BoyerMoore from "./boyerMoore";
+import { ModalState } from "./ModalState";
 
 const modalStyle = {
     content : {
@@ -14,7 +15,7 @@ const modalStyle = {
     }
 };
 
-class BadCharModal extends React.Component {
+class BadCharModal extends React.Component<undefined, ModalState> {
     constructor() {
         super();
         this.state = {
@@ -38,7 +39,6 @@ class BadCharModal extends React.Component {
 
     render() {
         const needle = "example";
-
         return (
             <div>
                 <div>
@@ -73,8 +73,9 @@ class BadCharModal extends React.Component {
                             {/* Text-center will center the table because it is an inline-block element */}
                             <div className="text-center">
                                 <BadCharTable
-                                    badCharTable={BoyerMoore.makeBadCharTable(needle)}
-                                    action={{name: undefined}}
+                                    ruleTable={BoyerMoore.makeBadCharTable(needle)}
+                                    action={{comparisons: 0, haystackIndex: 0, needleIndex: 0, name: ""}}
+                                    haystack=""
                                     needle={needle} />
                             </div>
                             <p>

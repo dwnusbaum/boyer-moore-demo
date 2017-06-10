@@ -1,13 +1,7 @@
 import * as React from "react";
 
-import { BadCharTable as BadCharTableType, SearchLog } from "./boyerMoore";
-
-export interface BadCharTableProps {
-    badCharTable: BadCharTableType;
-    action: SearchLog;
-    haystack: string;
-    needle: string;
-}
+import { BadCharTable as BadCharTableType } from "./boyerMoore";
+import { RuleTableProps } from "./RuleTableProps";
 
 const highlightActions = new Set([
     "COMPARE_NOT_EQUAL",
@@ -19,7 +13,7 @@ const highlightStyle = {
     color: "blue",
 }
 
-let BadCharTable = ({badCharTable, action, haystack, needle}: BadCharTableProps) => {
+let BadCharTable = ({ruleTable, action, haystack, needle}: RuleTableProps<BadCharTableType>) => {
     let needleSet = new Set(needle.split(""));
     // Add a dummy element that is not in the needle array to show the shift
     // amount for characters not in the needle.
@@ -51,7 +45,7 @@ let BadCharTable = ({badCharTable, action, haystack, needle}: BadCharTableProps)
         tableBody.push(
             <td key={index}>
                 <span style={char === highlightChar ? highlightStyle : {}}>
-                    {badCharTable(char)}
+                    {ruleTable(char)}
                 </span>
             </td>
         );

@@ -81,7 +81,7 @@ class SearchVisualization extends React.Component {
                     <div className="col-2">
                         <BadCharModal />
                         <BadCharTable
-                            badCharTable={this.props.data.badCharTable}
+                            ruleTable={this.props.data.badCharTable}
                             action={currentAction}
                             haystack={haystack}
                             needle={needle} />
