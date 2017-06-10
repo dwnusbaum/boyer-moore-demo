@@ -1,9 +1,9 @@
 import * as React from "react";
 
-import { GoodSuffixTable, SearchLog } from "./boyerMoore";
+import { GoodSuffixTable as GoodSuffixTableType, SearchLog } from "./boyerMoore";
 
 export interface GoodSuffixTableProps {
-    goodSuffixTable: GoodSuffixTable;
+    goodSuffixTable: GoodSuffixTableType;
     action: SearchLog;
     needle: string;
 }
