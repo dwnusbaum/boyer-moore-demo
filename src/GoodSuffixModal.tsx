@@ -80,7 +80,7 @@ class GoodSuffixModal extends React.Component<undefined, GoodSuffixModalState> {
                                     /* An action is required for highlighting, but in this case we
                                      * don't want to highlight anything
                                      */
-                                    action={{name: undefined}}
+                                    action={{comparisons: 0, haystackIndex: 0, needleIndex: 0, name: ""}}
                                     needle={needle} />
                             </div>
                         </div>
