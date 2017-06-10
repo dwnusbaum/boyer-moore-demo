@@ -1,3 +1,7 @@
+export interface BadCharTable {
+    (badChar: string): number;
+}
+
 export interface SearchLog {
     comparisons: number;
     haystackIndex: number;
@@ -11,7 +15,6 @@ export interface SearchResult {
     log: SearchLog[];
 }
 
-export type BadCharTable = (badChar: string) => number;
 export type GoodSuffixTable = number[];
 
 function search(needle: string, haystack: string): SearchResult {
