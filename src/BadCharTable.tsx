@@ -1,4 +1,13 @@
-import React from "react";
+import * as React from "react";
+
+import { BadCharTable as BadCharTableType, SearchLog } from "./boyerMoore";
+
+export interface BadCharTableProps {
+    badCharTable: BadCharTableType;
+    action: SearchLog;
+    haystack: string;
+    needle: string;
+}
 
 const highlightActions = new Set([
     "COMPARE_NOT_EQUAL",
@@ -10,7 +19,7 @@ const highlightStyle = {
     color: "blue",
 }
 
-let BadCharTable = ({badCharTable, action, haystack, needle}) => {
+let BadCharTable = ({badCharTable, action, haystack, needle}: BadCharTableProps) => {
     let needleSet = new Set(needle.split(""));
     // Add a dummy element that is not in the needle array to show the shift
     // amount for characters not in the needle.
@@ -26,7 +35,7 @@ let BadCharTable = ({badCharTable, action, haystack, needle}) => {
         }
     }
 
-    let tableHeader = [];
+    let tableHeader: JSX.Element[] = [];
     needleSet.forEach(function(char, index) {
         tableHeader.push(
             <td key={index}>
@@ -37,7 +46,7 @@ let BadCharTable = ({badCharTable, action, haystack, needle}) => {
         );
     });
 
-    let tableBody = [];
+    let tableBody: JSX.Element[] = [];
     needleSet.forEach(function(char, index) {
         tableBody.push(
             <td key={index}>
