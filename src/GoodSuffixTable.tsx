@@ -1,8 +1,10 @@
 import * as React from "react";
 
+import { GoodSuffixTable, SearchLog } from "./boyerMoore";
+
 export interface GoodSuffixTableProps {
-    goodSuffixTable: number[];
-    action: any;
+    goodSuffixTable: GoodSuffixTable;
+    action: SearchLog;
     needle: string;
 }
 
@@ -16,7 +18,7 @@ const highlightStyle = {
     color: "blue",
 }
 
-let GoodSuffixTable = ({goodSuffixTable, action, needle}: GoodSuffixTableProps) => {
+let GoodSuffixTable = ({goodSuffixTable, action, needle}: GoodSuffixTableProps): JSX.Element => {
     const needleArray = needle.split("");
 
     let highlightIndex = -1;
