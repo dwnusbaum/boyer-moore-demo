@@ -89,7 +89,7 @@ class SearchVisualization extends React.Component {
                     <div className="col-2">
                         <GoodSuffixModal />
                         <GoodSuffixTable
-                            goodSuffixTable={this.props.data.goodSuffixTable}
+                            ruleTable={this.props.data.goodSuffixTable}
                             action={currentAction}
                             needle={needle} />
                     </div>
