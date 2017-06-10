@@ -2,7 +2,7 @@ import * as React from "react";
 import * as Modal from "react-modal";
 
 import GoodSuffixTable from "./GoodSuffixTable";
-import BoyerMoore from "./BoyerMoore";
+import BoyerMoore from "./boyerMoore";
 
 export interface GoodSuffixModalState {
     modalIsOpen: boolean;
