@@ -1,29 +1,34 @@
-import React from "react";
+import * as React from "react";
 
-class Controls extends React.Component {
+export interface ControlsProps {
+    onNext: () => void;
+    onPrevious: () => void;
+    onReset: () => void;
+}
+
+const LEFT_ARROW_KEY = 37;
+const RIGHT_ARROW_KEY = 39;
+
+class Controls extends React.Component<ControlsProps, void> {
     constructor() {
         super();
         this.handleKeyDown = this.handleKeyDown.bind(this);
     }
 
-    handleKeyDown(event) {
-        var leftArrowKey = 37;
-        var rightArrowKey = 39;
-
-        if (event.keyCode === leftArrowKey) {
+    handleKeyDown(event: KeyboardEvent): void {
+        if (event.keyCode === LEFT_ARROW_KEY) {
             this.props.onPrevious();
-        } else if (event.keyCode === rightArrowKey) {
+        } else if (event.keyCode === RIGHT_ARROW_KEY) {
             this.props.onNext();
         }
-        return;
     }
 
     componentDidMount() {
-        window.addEventListener('keydown', this.handleKeyDown);
+        document.addEventListener('keydown', this.handleKeyDown);
     }
 
     componentWillUnmount() {
-        window.removeEventListener('keydown', this.handleKeyDown);
+        document.removeEventListener('keydown', this.handleKeyDown);
     }
 
     render() {
