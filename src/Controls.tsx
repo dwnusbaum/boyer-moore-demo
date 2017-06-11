@@ -24,6 +24,9 @@ class Controls extends React.Component<ControlsProps, void> {
     }
 
     componentDidMount() {
+        // TODO(dnusbaum): These global listeners trigger even if someone is
+        // navigating left and right in a text input. Maybe they should only
+        // trigger when the SearchForm inputs don't have focus?
         document.addEventListener('keydown', this.handleKeyDown);
     }
 
