@@ -3,7 +3,7 @@ const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const config = {
-    entry: path.resolve(__dirname, "src", "Demo.jsx"),
+    entry: path.resolve(__dirname, "src", "Demo.tsx"),
     output: {
         filename: "bundle.js",
         path: path.resolve(__dirname, "build"),

@@ -1,11 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 
-import BoyerMoore from "./boyerMoore";
+import * as BoyerMoore from "./boyerMoore";
 import SearchForm from "./SearchForm";
-import SearchVisualization from "./SearchVisualization";
+import { SearchVisualization, SearchData } from "./SearchVisualization";
 
-class SearchDemo extends React.Component {
+class SearchDemo extends React.Component<{}, SearchData> {
     constructor() {
         super();
         this.handleHaystackAndNeedleSubmit = this.handleHaystackAndNeedleSubmit.bind(this);
@@ -17,13 +17,13 @@ class SearchDemo extends React.Component {
         this.handleHaystackAndNeedleSubmit(haystack, needle);
     }
 
-    handleHaystackAndNeedleSubmit(haystack, needle) {
+    handleHaystackAndNeedleSubmit(haystack: string, needle: string): void {
         this.setState({
             haystack: haystack,
             needle: needle,
-            badCharTable: BoyerMoore.makeBadCharTable(needle),
-            goodSuffixTable: BoyerMoore.makeGoodSuffixTable(needle),
-            actions: BoyerMoore.search(needle, haystack).log,
+            badCharTable: BoyerMoore.default.makeBadCharTable(needle),
+            goodSuffixTable: BoyerMoore.default.makeGoodSuffixTable(needle),
+            actions: BoyerMoore.default.search(needle, haystack).log,
         });
     }
 
@@ -31,7 +31,7 @@ class SearchDemo extends React.Component {
         return (
             <div>
                 <SearchForm onHaystackAndNeedleSubmit={this.handleHaystackAndNeedleSubmit} />
-                <SearchVisualization key={this.state.haystack + this.state.needle} data={this.state} />
+                <SearchVisualization {...this.state} />
             </div>
         );
     }

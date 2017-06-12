@@ -15,7 +15,7 @@ const modalStyle = {
     }
 };
 
-class BadCharModal extends React.Component<undefined, ModalState> {
+class BadCharModal extends React.Component<{}, ModalState> {
     constructor() {
         super();
         this.state = {
@@ -44,9 +44,9 @@ class BadCharModal extends React.Component<undefined, ModalState> {
                 <div>
                     <a href="#" onClick={this.openModal}>Bad Character Table</a>
                 </div>
-                <Modal 
-                    isOpen={this.state.modalIsOpen} 
-                    onRequestClose={this.closeModal} 
+                <Modal
+                    isOpen={this.state.modalIsOpen}
+                    onRequestClose={this.closeModal}
                     style={modalStyle}
                     contentLabel="Bad Character Rule Explanation"
                 >

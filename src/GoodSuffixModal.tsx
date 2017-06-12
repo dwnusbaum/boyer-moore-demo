@@ -15,7 +15,7 @@ const modalStyle = {
     }
 };
 
-class GoodSuffixModal extends React.Component<undefined, ModalState> {
+class GoodSuffixModal extends React.Component<{}, ModalState> {
     constructor() {
         super();
         this.state = {
@@ -44,9 +44,9 @@ class GoodSuffixModal extends React.Component<undefined, ModalState> {
                 <div>
                     <a href="#" onClick={this.openModal}>Good Suffix Table</a>
                 </div>
-                <Modal 
-                    isOpen={this.state.modalIsOpen} 
-                    onRequestClose={this.closeModal} 
+                <Modal
+                    isOpen={this.state.modalIsOpen}
+                    onRequestClose={this.closeModal}
                     style={modalStyle}
                     contentLabel="Good Suffix Rule Explanation"
                 >

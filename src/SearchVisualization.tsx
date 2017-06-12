@@ -1,5 +1,6 @@
-import React from "react";
+import * as React from "react";
 
+import { BadCharTable as BadCharTableType, GoodSuffixTable as GoodSuffixTableType, SearchLog } from "./boyerMoore";
 import BadCharModal from "./BadCharModal";
 import BadCharTable from "./BadCharTable";
 import Controls from "./Controls";
@@ -11,7 +12,19 @@ import Needle from "./Needle";
 import Pointer from "./Pointer";
 import SearchInfo from "./SearchInfo";
 
-class SearchVisualization extends React.Component {
+export interface SearchData {
+    haystack: string;
+    needle: string;
+    badCharTable: BadCharTableType;
+    goodSuffixTable: GoodSuffixTableType;
+    actions: SearchLog[];
+}
+
+export interface VisualizationState {
+    actionIndex: number;
+}
+
+export class SearchVisualization extends React.Component<SearchData, VisualizationState> {
     constructor() {
         super();
         this.handleNext = this.handleNext.bind(this);
@@ -22,30 +35,28 @@ class SearchVisualization extends React.Component {
         };
     }
 
-    handleNext() {
+    handleNext(): void {
         this.setState({
-            actionIndex: Math.min(this.state.actionIndex + 1, this.props.data.actions.length - 1)
+            actionIndex: Math.min(this.state.actionIndex + 1, this.props.actions.length - 1)
         });
-        return;
     }
 
-    handlePrevious() {
+    handlePrevious(): void {
         this.setState({
             actionIndex: Math.max(this.state.actionIndex - 1, 0)
         });
-        return;
     }
 
-    handleReset() {
+    handleReset(): void {
         this.setState({
             actionIndex: 0
         });
     }
 
     render() {
-        const haystack = this.props.data.haystack;
-        const needle = this.props.data.needle;
-        const currentAction = this.props.data.actions[this.state.actionIndex];
+        const haystack = this.props.haystack;
+        const needle = this.props.needle;
+        const currentAction = this.props.actions[this.state.actionIndex];
         const haystackIndex = currentAction.haystackIndex;
         const needleIndex = currentAction.needleIndex;
 
@@ -81,7 +92,7 @@ class SearchVisualization extends React.Component {
                     <div className="col-2">
                         <BadCharModal />
                         <BadCharTable
-                            ruleTable={this.props.data.badCharTable}
+                            ruleTable={this.props.badCharTable}
                             action={currentAction}
                             haystack={haystack}
                             needle={needle} />
@@ -89,8 +100,9 @@ class SearchVisualization extends React.Component {
                     <div className="col-2">
                         <GoodSuffixModal />
                         <GoodSuffixTable
-                            ruleTable={this.props.data.goodSuffixTable}
+                            ruleTable={this.props.goodSuffixTable}
                             action={currentAction}
+                            haystack=""
                             needle={needle} />
                     </div>
                 </div>
@@ -108,13 +120,11 @@ class SearchVisualization extends React.Component {
                             action={currentAction}
                             haystack={haystack}
                             needle={needle}
-                            badCharTable={this.props.data.badCharTable}
-                            goodSuffixTable={this.props.data.goodSuffixTable} />
+                            badCharTable={this.props.badCharTable}
+                            goodSuffixTable={this.props.goodSuffixTable} />
                     </div>
                 </div>
             </div>
         );
     }
 }
-
-export default SearchVisualization;
