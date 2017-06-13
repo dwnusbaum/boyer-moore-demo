@@ -4,9 +4,10 @@
   "description": "Interactive demonstration of the Boyer-Moore string search algorithm.",
   "main": "boyerMoore.js",
   "scripts": {
-    "dev": "webpack-dev-server --content-base build",
-    "start": "webpack --config webpack.config.js",
-    "test": "jasmine-ts"
+    "dev-server": "webpack-dev-server --content-base build",
+    "test": "jasmine-ts",
+    "tsc": "tsc",
+    "webpack": "webpack --config webpack.config.js"
   },
   "author": "Devin Nusbaum",
   "license": "BSD-2-Clause",
