@@ -1,9 +1,9 @@
 import * as React from "react";
 
-import { BadCharTable, GoodSuffixTable, SearchLog } from "./boyerMoore"
+import { BadCharTable, GoodSuffixTable, SearchAction, SearchLogEntry } from "./boyerMoore"
 
 export interface ExplanationProps {
-    action: SearchLog;
+    logEntry: SearchLogEntry;
     haystack: string;
     needle: string;
     badCharTable: BadCharTable;
@@ -31,7 +31,7 @@ function noMatch(): JSX.Element {
 function galilRuleMatch(): JSX.Element {
     return (
         <p>
-            Because of the Galil Rule, the rest of the pattern will match, so 
+            Because of the Galil Rule, the rest of the pattern will match, so
             the pattern is in the text.
         </p>
     );
@@ -46,11 +46,12 @@ function compareEqual(): JSX.Element {
     );
 }
 
-function shiftRule({action, haystack, needle, badCharTable, goodSuffixTable}: ExplanationProps): JSX.Element {
-    const needleIndex = action.needleIndex;
-    const haystackChar = haystack.charAt(action.haystackIndex);
+function shiftRule({logEntry, haystack, needle, badCharTable, goodSuffixTable}: ExplanationProps): JSX.Element {
+    const needleIndex = logEntry.needleIndex;
+    const haystackChar = haystack.charAt(logEntry.haystackIndex);
     const badCharShift = badCharTable(haystackChar);
     const goodSuffixShift = goodSuffixTable[needleIndex];
+    const shift = badCharShift >= goodSuffixShift ? badCharShift : goodSuffixShift;
     const comparison = badCharShift >= goodSuffixShift ? ">=" : "<";
     const chosen = badCharShift > goodSuffixShift ? "bad character" : "good suffix";
 
@@ -65,33 +66,34 @@ function shiftRule({action, haystack, needle, badCharTable, goodSuffixTable}: Ex
             <div>badCharTable['{haystackChar}'] = {badCharShift}</div>
             <div>goodSuffixTable[{needleIndex}] = {goodSuffixShift}</div>
             <p>
-               Since {badCharShift} {comparison} {goodSuffixShift} we use 
-               the {chosen} rule and increase the text index by {action.shift}.
+               Since {badCharShift} {comparison} {goodSuffixShift} we use
+               the {chosen} rule and increase the text index by {shift}.
             </p>
-            { needleIndex == needle.length - 1 
+            { needleIndex == needle.length - 1
                 ? undefined
-                : <p>We also reset the pattern index to {needle.length - 1}.</p> 
+                : <p>We also reset the pattern index to {needle.length - 1}.</p>
             }
         </div>
     );
 }
 
-let Explanation = ({action, haystack, needle, badCharTable, goodSuffixTable}: ExplanationProps) => {
-    const haystackIndex = action.haystackIndex;
-    const needleIndex = action.needleIndex;
-    const texts: { [index: string]: (props?: ExplanationProps) => JSX.Element } = {
-        MATCH: match,
-        NO_MATCH: noMatch,
-        GALIL_RULE_MATCH: galilRuleMatch,
-        COMPARE_EQUAL: compareEqual,
-        SHIFT_BADCHAR_RULE: shiftRule,
-        SHIFT_GOODSUFFIX_RULE: shiftRule
-    };
+const explanations: Map<SearchAction, (props?: ExplanationProps) => JSX.Element> = new Map([
+    [SearchAction.COMPARE_EQUAL, compareEqual],
+    [SearchAction.GALIL_RULE_MATCH, galilRuleMatch],
+    [SearchAction.MATCH, match],
+    [SearchAction.NO_MATCH, noMatch],
+    [SearchAction.SHIFT, shiftRule],
+]);
 
+let Explanation = ({logEntry, haystack, needle, badCharTable, goodSuffixTable}: ExplanationProps) => {
+    const explanation = explanations.get(logEntry.action);
     return (
         <div className="explanation">
             <h3>Explanation of the Current Step:</h3>
-            {texts[action.name]({action, haystack, needle, badCharTable, goodSuffixTable})}
+            { explanation
+                ? explanation({logEntry, haystack, needle, badCharTable, goodSuffixTable})
+                : <p></p>
+            }
         </div>
     );
 };

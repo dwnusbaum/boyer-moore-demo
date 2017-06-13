@@ -2,7 +2,7 @@ import * as React from "react";
 import * as Modal from "react-modal";
 
 import GoodSuffixTable from "./GoodSuffixTable";
-import BoyerMoore from "./boyerMoore";
+import { makeGoodSuffixTable } from "./boyerMoore";
 import { ModalState } from "./ModalState";
 
 const modalStyle = {
@@ -73,11 +73,11 @@ class GoodSuffixModal extends React.Component<{}, ModalState> {
                             {/* Text-center will center the table because it is an inline-block element. */ }
                             <div className="text-center">
                                 <GoodSuffixTable
-                                    ruleTable={BoyerMoore.makeGoodSuffixTable(needle)}
+                                    ruleTable={makeGoodSuffixTable(needle)}
                                     /* An action is required for highlighting, but in this case we
                                      * don't want to highlight anything
                                      */
-                                    action={{comparisons: 0, haystackIndex: 0, needleIndex: 0, name: ""}}
+                                    logEntry={{comparisons: 0, haystackIndex: 0, needleIndex: 0, name: ""}}
                                     haystack={""}
                                     needle={needle} />
                             </div>

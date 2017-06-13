@@ -1,17 +1,17 @@
 import * as React from "react";
 
-import { SearchLog } from "./boyerMoore";
+import { SearchLogEntry } from "./boyerMoore";
 
 export interface SearchInfoProps {
-    action: SearchLog;
+    logEntry: SearchLogEntry;
     haystack: string;
     needle: string;
 }
 
-let SearchInfo = ({action, haystack, needle}: SearchInfoProps): JSX.Element => {
-    const haystackIndex = action.haystackIndex;
-    const needleIndex = action.needleIndex;
-    const comparisons = action.comparisons;
+let SearchInfo = ({logEntry, haystack, needle}: SearchInfoProps): JSX.Element => {
+    const haystackIndex = logEntry.haystackIndex;
+    const needleIndex = logEntry.needleIndex;
+    const comparisons = logEntry.comparisons;
 
     return (
         <div>

@@ -21,9 +21,9 @@ class SearchDemo extends React.Component<{}, SearchData> {
         this.setState({
             haystack: haystack,
             needle: needle,
-            badCharTable: BoyerMoore.default.makeBadCharTable(needle),
-            goodSuffixTable: BoyerMoore.default.makeGoodSuffixTable(needle),
-            actions: BoyerMoore.default.search(needle, haystack).log,
+            badCharTable: BoyerMoore.makeBadCharTable(needle),
+            goodSuffixTable: BoyerMoore.makeGoodSuffixTable(needle),
+            log: BoyerMoore.search(needle, haystack).log,
         });
     }
 

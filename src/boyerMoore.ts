@@ -2,23 +2,30 @@ export interface BadCharTable {
     (badChar: string): number;
 }
 
-export interface SearchLog {
+export type GoodSuffixTable = number[];
+
+export enum SearchAction {
+    COMPARE_EQUAL,
+    GALIL_RULE_MATCH,
+    MATCH,
+    NO_MATCH,
+    SHIFT,
+}
+
+export interface SearchLogEntry {
     comparisons: number;
     haystackIndex: number;
     needleIndex: number;
-    name: string;
-    shift?: number;
+    action: SearchAction;
 }
 
 export interface SearchResult {
     isMatch: boolean;
-    log: SearchLog[];
+    log: SearchLogEntry[];
 }
 
-export type GoodSuffixTable = number[];
-
-function search(needle: string, haystack: string): SearchResult {
-    var log: SearchLog[] = [];
+export function search(needle: string, haystack: string): SearchResult {
+    var log: SearchLogEntry[] = [];
     var comparisons = 0;
     var badCharTable = makeBadCharTable(needle);
     var goodSuffixTable = makeGoodSuffixTable(needle);
@@ -33,7 +40,7 @@ function search(needle: string, haystack: string): SearchResult {
                 comparisons: comparisons,
                 haystackIndex: haystackIndex,
                 needleIndex: needleIndex,
-                name: 'MATCH'
+                action: SearchAction.MATCH,
             });
             return { isMatch: true, log: log };
         } else if (haystackIndex == previousHaystackIndex) {
@@ -41,7 +48,7 @@ function search(needle: string, haystack: string): SearchResult {
                 comparisons: comparisons,
                 haystackIndex: haystackIndex,
                 needleIndex: needleIndex,
-                name: 'GALIL_RULE_MATCH',
+                action: SearchAction.GALIL_RULE_MATCH,
             });
             return { isMatch: true, log: log };
         } else if (needle.charAt(needleIndex) === haystack.charAt(haystackIndex)) {
@@ -50,7 +57,7 @@ function search(needle: string, haystack: string): SearchResult {
                 comparisons: comparisons,
                 haystackIndex: haystackIndex,
                 needleIndex: needleIndex,
-                name: 'COMPARE_EQUAL',
+                action: SearchAction.COMPARE_EQUAL,
             });
             haystackIndex--;
             needleIndex--;
@@ -60,23 +67,12 @@ function search(needle: string, haystack: string): SearchResult {
             var goodSuffixShift = goodSuffixTable[needleIndex];
             var shift = Math.max(badCharShift, goodSuffixShift);
 
-            if (badCharShift > goodSuffixShift) {
-                log.push({
-                    comparisons: comparisons,
-                    haystackIndex: haystackIndex,
-                    needleIndex: needleIndex,
-                    name: 'SHIFT_BADCHAR_RULE',
-                    shift: badCharShift,
-                });
-            } else {
-                log.push({
-                    comparisons: comparisons,
-                    haystackIndex: haystackIndex,
-                    needleIndex: needleIndex,
-                    name: 'SHIFT_GOODSUFFIX_RULE',
-                    shift: goodSuffixShift,
-                });
-            }
+            log.push({
+                comparisons: comparisons,
+                haystackIndex: haystackIndex,
+                needleIndex: needleIndex,
+                action: SearchAction.SHIFT,
+            });
 
             previousHaystackIndex = shift >= needleIndex + 1 ? haystackIndex : previousHaystackIndex;
             haystackIndex += shift;
@@ -88,13 +84,13 @@ function search(needle: string, haystack: string): SearchResult {
         comparisons: comparisons,
         haystackIndex: haystackIndex,
         needleIndex: needleIndex,
-        name: 'NO_MATCH',
+        action: SearchAction.NO_MATCH,
     });
 
     return { isMatch: false, log: log };
 }
 
-function makeBadCharTable(needle: string): BadCharTable {
+export function makeBadCharTable(needle: string): BadCharTable {
     var rightmostIndex: { [index: string]: number } = {};
     for (var i = 0; i < needle.length; i++) {
         rightmostIndex[needle.charAt(i)] = i;
@@ -111,13 +107,13 @@ function makeBadCharTable(needle: string): BadCharTable {
     return lookup;
 }
 
-function makeGoodSuffixTable(needle: string): GoodSuffixTable {
+export function makeGoodSuffixTable(needle: string): GoodSuffixTable {
     var table = []
     var lastPrefixIndex = needle.length - 1;
 
     // Case 1. Suffix appears in needle
     for (var i = needle.length - 1; i >= 0; i--) {
-        if (needle.startsWith(needle.substring(i + 1))) {
+        if (needle.indexOf(needle.substring(i + 1)) === 0) {
             lastPrefixIndex = i + 1;
         }
         table[i] = lastPrefixIndex + (needle.length - 1 - i);
@@ -136,7 +132,7 @@ function makeGoodSuffixTable(needle: string): GoodSuffixTable {
 }
 
 // Returns the length of the longest suffix of needle that ends on needle[index]
-function getSuffixLength(needle: string, index: number): number {
+export function getSuffixLength(needle: string, index: number): number {
     var suffixLength = 0;
     for (var i = index; i >= 0 && needle.charAt(i) == needle.charAt(needle.length - 1 - index + i); i--) {
         suffixLength += 1;
@@ -144,10 +140,3 @@ function getSuffixLength(needle: string, index: number): number {
 
     return suffixLength;
 }
-
-export default {
-    search,
-    makeBadCharTable,
-    makeGoodSuffixTable,
-    getSuffixLength
-};

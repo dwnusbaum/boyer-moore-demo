@@ -1,8 +1,8 @@
-import { SearchLog } from "./boyerMoore";
+import { SearchLogEntry } from "./boyerMoore";
 
 export interface RuleTableProps<T> {
     ruleTable: T;
-    action: SearchLog;
+    logEntry: SearchLogEntry|null;
     haystack: string;
     needle: string;
 }

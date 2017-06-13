@@ -12,7 +12,7 @@
   "license": "BSD-2-Clause",
   "repository": "https://github.com/dwnusbaum/boyer-moore-demo",
   "devDependencies": {
-    "@types/jasmine": "^2.5.51",
+    "@types/jasmine": "^2.5.52",
     "@types/react": "^15.0.27",
     "@types/react-dom": "^15.5.0",
     "@types/react-modal": "^1.6.6",

@@ -1,24 +1,18 @@
 import * as React from "react";
 
-import { GoodSuffixTable as GoodSuffixTableType } from "./boyerMoore";
+import { GoodSuffixTable as GoodSuffixTableType, SearchAction } from "./boyerMoore";
 import { RuleTableProps } from "./RuleTableProps";
-
-const highlightActions = new Set([
-    "COMPARE_NOT_EQUAL",
-    "SHIFT_BADCHAR_RULE",
-    "SHIFT_GOODSUFFIX_RULE",
-]);
 
 const highlightStyle = {
     color: "blue",
 }
 
-let GoodSuffixTable = ({ruleTable, action, haystack, needle}: RuleTableProps<GoodSuffixTableType>): JSX.Element => {
+let GoodSuffixTable = ({ruleTable, logEntry, haystack, needle}: RuleTableProps<GoodSuffixTableType>): JSX.Element => {
     const needleArray = needle.split("");
 
     let highlightIndex = -1;
-    if (highlightActions.has(action.name)) {
-        highlightIndex = action.needleIndex;
+    if (logEntry && logEntry.action === SearchAction.SHIFT) {
+        highlightIndex = logEntry.needleIndex;
     }
 
     let tableHeader = needleArray.map(function(char, index) {

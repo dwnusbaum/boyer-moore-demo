@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { BadCharTable as BadCharTableType, GoodSuffixTable as GoodSuffixTableType, SearchLog } from "./boyerMoore";
+import { BadCharTable as BadCharTableType, GoodSuffixTable as GoodSuffixTableType, SearchLogEntry } from "./boyerMoore";
 import BadCharModal from "./BadCharModal";
 import BadCharTable from "./BadCharTable";
 import Controls from "./Controls";
@@ -17,11 +17,11 @@ export interface SearchData {
     needle: string;
     badCharTable: BadCharTableType;
     goodSuffixTable: GoodSuffixTableType;
-    actions: SearchLog[];
+    log: SearchLogEntry[];
 }
 
 export interface VisualizationState {
-    actionIndex: number;
+    logEntryIndex: number;
 }
 
 export class SearchVisualization extends React.Component<SearchData, VisualizationState> {
@@ -31,34 +31,34 @@ export class SearchVisualization extends React.Component<SearchData, Visualizati
         this.handlePrevious = this.handlePrevious.bind(this);
         this.handleReset = this.handleReset.bind(this);
         this.state = {
-            actionIndex: 0
+            logEntryIndex: 0
         };
     }
 
     handleNext(): void {
         this.setState({
-            actionIndex: Math.min(this.state.actionIndex + 1, this.props.actions.length - 1)
+            logEntryIndex: Math.min(this.state.logEntryIndex + 1, this.props.log.length - 1)
         });
     }
 
     handlePrevious(): void {
         this.setState({
-            actionIndex: Math.max(this.state.actionIndex - 1, 0)
+            logEntryIndex: Math.max(this.state.logEntryIndex - 1, 0)
         });
     }
 
     handleReset(): void {
         this.setState({
-            actionIndex: 0
+            logEntryIndex: 0
         });
     }
 
     render() {
         const haystack = this.props.haystack;
         const needle = this.props.needle;
-        const currentAction = this.props.actions[this.state.actionIndex];
-        const haystackIndex = currentAction.haystackIndex;
-        const needleIndex = currentAction.needleIndex;
+        const currentLogEntry = this.props.log[this.state.logEntryIndex];
+        const haystackIndex = currentLogEntry.haystackIndex;
+        const needleIndex = currentLogEntry.needleIndex;
 
         const currentCharsMatch = haystack.charAt(haystackIndex) === needle.charAt(needleIndex);
         const matchLength = needle.length - needleIndex;
@@ -85,7 +85,7 @@ export class SearchVisualization extends React.Component<SearchData, Visualizati
                 <div className="row">
                     <div className="col-2">
                         <SearchInfo
-                            action={currentAction}
+                            logEntry={currentLogEntry}
                             haystack={haystack}
                             needle={needle} />
                     </div>
@@ -93,7 +93,7 @@ export class SearchVisualization extends React.Component<SearchData, Visualizati
                         <BadCharModal />
                         <BadCharTable
                             ruleTable={this.props.badCharTable}
-                            action={currentAction}
+                            logEntry={currentLogEntry}
                             haystack={haystack}
                             needle={needle} />
                     </div>
@@ -101,7 +101,7 @@ export class SearchVisualization extends React.Component<SearchData, Visualizati
                         <GoodSuffixModal />
                         <GoodSuffixTable
                             ruleTable={this.props.goodSuffixTable}
-                            action={currentAction}
+                            logEntry={currentLogEntry}
                             haystack=""
                             needle={needle} />
                     </div>
@@ -117,7 +117,7 @@ export class SearchVisualization extends React.Component<SearchData, Visualizati
                 <div className="row">
                     <div className="col-6">
                         <Explanation
-                            action={currentAction}
+                            logEntry={currentLogEntry}
                             haystack={haystack}
                             needle={needle}
                             badCharTable={this.props.badCharTable}
