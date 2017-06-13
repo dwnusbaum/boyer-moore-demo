@@ -77,7 +77,7 @@ class GoodSuffixModal extends React.Component<{}, ModalState> {
                                     /* An action is required for highlighting, but in this case we
                                      * don't want to highlight anything
                                      */
-                                    logEntry={{comparisons: 0, haystackIndex: 0, needleIndex: 0, name: ""}}
+                                    logEntry={null}
                                     haystack={""}
                                     needle={needle} />
                             </div>
