@@ -1,6 +1,10 @@
 import * as React from "react";
 
-import { BadCharTable as BadCharTableType, GoodSuffixTable as GoodSuffixTableType, SearchLogEntry } from "./boyerMoore";
+import {
+    BadCharTable as BadCharTableType,
+    GoodSuffixTable as GoodSuffixTableType,
+    SearchLogEntry
+} from "./boyerMoore";
 import BadCharModal from "./BadCharModal";
 import BadCharTable from "./BadCharTable";
 import Controls from "./Controls";

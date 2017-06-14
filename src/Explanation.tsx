@@ -1,6 +1,11 @@
 import * as React from "react";
 
-import { BadCharTable, GoodSuffixTable, SearchAction, SearchLogEntry } from "./boyerMoore"
+import {
+    BadCharTable,
+    GoodSuffixTable,
+    SearchAction,
+    SearchLogEntry
+} from "./boyerMoore"
 
 export interface ExplanationProps {
     logEntry: SearchLogEntry;
