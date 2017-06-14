@@ -19,16 +19,6 @@ const config = {
                     transpileOnly: true
                 }
             },
-            {
-                test: /\.jsx?$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader",
-                    options: {
-                        presets: ["react"]
-                    }
-                }
-            },
             { enforce: "pre", test: /\.js$/, use: { loader: "source-map-loader" } }
         ]
     },
