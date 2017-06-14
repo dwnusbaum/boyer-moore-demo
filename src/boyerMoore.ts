@@ -12,6 +12,7 @@ export enum SearchAction {
     SHIFT,
 }
 
+// Records each step of the search algorithm.
 export interface SearchLogEntry {
     comparisons: number;
     haystackIndex: number;
@@ -122,7 +123,6 @@ export function makeGoodSuffixTable(needle: string): GoodSuffixTable {
     // Case 2. Prefix of suffix appears in needle
     for (var i = 0; i < needle.length - 1; i++) {
         var suffixLength = getSuffixLength(needle, i);
-
         if (needle.charAt(i - suffixLength) !== needle.charAt(needle.length - 1 - suffixLength)) {
             table[needle.length - 1 - suffixLength] = needle.length - 1 - i + suffixLength;
         }
@@ -131,12 +131,16 @@ export function makeGoodSuffixTable(needle: string): GoodSuffixTable {
     return table;
 }
 
-// Returns the length of the longest suffix of needle that ends on needle[index]
+// Returns the length of the longest substring of the needle ending at
+// (index + 1) that is also a suffix of the needle.
+// Examples:
+// getSuffixLength("abab", 1) === 2, since the substring "ab" ends at index 1
+// and is also a suffix of "abab".
+// getSuffixLength(needle, needle.length - 1) always returns needle.length.
 export function getSuffixLength(needle: string, index: number): number {
     var suffixLength = 0;
     for (var i = index; i >= 0 && needle.charAt(i) == needle.charAt(needle.length - 1 - index + i); i--) {
         suffixLength += 1;
     }
-
     return suffixLength;
 }
