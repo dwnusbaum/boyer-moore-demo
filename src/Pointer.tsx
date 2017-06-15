@@ -8,7 +8,7 @@ let Pointer = ({haystackIndex}: PointerProps) => {
     const pointer = Array(haystackIndex + 2).join(" ") + "^";
     return (
         <samp className="pointer">
-            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <span>{pointer}</span>
         </samp>
     );

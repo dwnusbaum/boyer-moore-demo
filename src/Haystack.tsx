@@ -7,12 +7,17 @@ export interface HaystackProps {
     currentCharsMatch: boolean;
 }
 
+const previousMatchStyle = {
+    backgroundColor: "green",
+    color: "white",
+}
+
 const matchStyle = {
-    color: "green"
+    color: "green",
 };
 
 const noMatchStyle = {
-    color: "red"
+    color: "red",
 };
 
 let Haystack = ({haystack, haystackIndex, matchLength, currentCharsMatch}: HaystackProps) => {
@@ -30,10 +35,10 @@ let Haystack = ({haystack, haystackIndex, matchLength, currentCharsMatch}: Hayst
 
     return (
         <samp className="haystack">
-            <span>Text:&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span> Haystack: </span>
             <span>{prefix}</span>
             <span style={currentCharsMatch ? matchStyle : noMatchStyle}>{current}</span>
-            <span className="highlight-matching-chars">{alreadyMatched}</span>
+            <span style={previousMatchStyle}>{alreadyMatched}</span>
             <span>{suffix}</span>
         </samp>
     );

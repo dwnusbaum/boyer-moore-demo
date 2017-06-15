@@ -1,18 +1,23 @@
 import * as React from "react";
 
-export interface NeedleProps { 
+export interface NeedleProps {
     needle: string;
     haystackIndex: number;
     matchLength: number;
-    currentCharsMatch: boolean; 
+    currentCharsMatch: boolean;
+}
+
+const previousMatchStyle = {
+    backgroundColor: "green",
+    color: "white",
 }
 
 const matchStyle = {
-    color: "green"
+    color: "green",
 };
 
 const noMatchStyle = {
-    color: "red"
+    color: "red",
 };
 
 let Needle = ({needle, haystackIndex, matchLength, currentCharsMatch}: NeedleProps) => {
@@ -30,10 +35,10 @@ let Needle = ({needle, haystackIndex, matchLength, currentCharsMatch}: NeedlePro
 
     return (
         <samp className="needle">
-            <span>Pattern:&nbsp;</span>
+            <span> Needle:   </span>
             <span>{prefix}</span>
             <span style={currentCharsMatch ? matchStyle : noMatchStyle}>{current}</span>
-            <span className="highlight-matching-chars">{alreadyMatched}</span>
+            <span style={previousMatchStyle}>{alreadyMatched}</span>
         </samp>
     );
 };
