@@ -26,11 +26,11 @@ let BadCharTable = ({ruleTable, logEntry, haystack, needle}: RuleTableProps<BadC
     let tableHeader: JSX.Element[] = [];
     needleSet.forEach(function(char, index) {
         tableHeader.push(
-            <td key={index}>
+            <th key={index}>
                 <span style={char === highlightChar ? highlightStyle : {}}>
                     {char}
                 </span>
-            </td>
+            </th>
         );
     });
 
@@ -46,8 +46,8 @@ let BadCharTable = ({ruleTable, logEntry, haystack, needle}: RuleTableProps<BadC
     });
 
     return (
-        <div className="inline-block">
-            <table className="shiftTable">
+        <div>
+            <table>
                 <thead>
                     <tr>
                         {tableHeader}

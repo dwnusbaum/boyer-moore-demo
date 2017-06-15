@@ -17,9 +17,9 @@ let GoodSuffixTable = ({ruleTable, logEntry, haystack, needle}: RuleTableProps<G
 
     let tableHeader = needleArray.map(function(char, index) {
         return (
-            <td key={index}>
+            <th key={index}>
                 <span style={index === highlightIndex ? highlightStyle : {}}>{char}<sub>{index}</sub></span>
-            </td>
+            </th>
         );
     });
 
@@ -32,8 +32,8 @@ let GoodSuffixTable = ({ruleTable, logEntry, haystack, needle}: RuleTableProps<G
     });
 
     return (
-        <div className="inline-block">
-            <table className="shiftTable">
+        <div>
+            <table>
                 <thead>
                     <tr>
                         {tableHeader}
