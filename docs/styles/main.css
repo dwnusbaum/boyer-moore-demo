@@ -1,0 +1,79 @@
+body {
+    color: black;
+    font-size: 1.7em;
+    font-weight: normal;
+    letter-spacing: normal;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: "column";
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    margin: 0 -1em;
+}
+
+.flex-row-item {
+    margin: 0 1em;
+}
+
+.flex-row-right-item {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: 1em;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.margin-top {
+    margin-top: 1.5rem;
+}
+
+.needle, .haystack, .pointer {
+    display: block;
+    font-size: 1.5em;
+}
+
+.highlight-matching-chars {
+    background-color: green;
+    color: white;
+}
+
+p {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+pre {
+    overflow: auto;
+    word-break: normal !important;
+    word-wrap: normal !important;
+    white-space: pre !important;
+}
+
+table thead tr th {
+    background-color: #f4f5f6;
+}
+
+th {
+    background-color: #f4f5f6;
+    border-top: 0.1rem solid #e1e1e1;
+    border-bottom: 0.1rem solid #e1e1e1;
+}
+
+td:first-child, th:first-child {
+    padding: 0.5rem 1rem;
+}
+
+td, th {
+    border-collapse: collapse;
+    border-left: 0.1rem solid #e1e1e1;
+    border-right: 0.1rem solid #e1e1e1;
+    padding: 0.5rem 1rem;
+}
