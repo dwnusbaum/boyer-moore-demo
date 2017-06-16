@@ -1,38 +1,43 @@
 body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.42857143;
-    color: #333;
+    color: black;
+    font-size: 1.7em;
+    font-weight: normal;
+    letter-spacing: normal;
 }
 
-.text-center {
-    text-align: center;
+.flex-column {
+    display: flex;
+    flex-direction: "column";
 }
 
-.inline-block {
-    display: inline-block;
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    margin: 0 -1em;
 }
 
-.no-margin-bottom {
-    margin-bottom: 0;
+.flex-row-item {
+    margin: 0 1em;
 }
 
-.no-margin-top {
+.flex-row-right-item {
     margin-top: 0;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: 1em;
 }
 
-.margin-left-10 {
-    margin-left: 10px;
+.flex-wrap {
+    flex-wrap: wrap;
 }
 
-.margin-top-5 {
-    margin-top: 5px;
+.margin-top {
+    margin-top: 1.5rem;
 }
 
 .needle, .haystack, .pointer {
     display: block;
-    font-family: Monaco, Consolas, monospace;
-    font-size: 24px;
+    font-size: 1.5em;
 }
 
 .highlight-matching-chars {
@@ -40,16 +45,35 @@ body {
     color: white;
 }
 
-.shiftTable {
-    font-family: Monaco, Consolas, monospace;
-    border-collapse: collapse;
-    border: 1px solid;
+p {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
-.shiftTable thead tr td, .shiftTable tbody tr td  {
+pre {
+    overflow: auto;
+    word-break: normal !important;
+    word-wrap: normal !important;
+    white-space: pre !important;
+}
+
+table thead tr th {
+    background-color: #f4f5f6;
+}
+
+th {
+    background-color: #f4f5f6;
+    border-top: 0.1rem solid #e1e1e1;
+    border-bottom: 0.1rem solid #e1e1e1;
+}
+
+td:first-child, th:first-child {
+    padding: 0.5rem 1rem;
+}
+
+td, th {
     border-collapse: collapse;
-    border-right: 1px solid;
-    border-top: 1px dotted #777;
-    width: 26px;
-    text-align: center;
+    border-left: 0.1rem solid #e1e1e1;
+    border-right: 0.1rem solid #e1e1e1;
+    padding: 0.5rem 1rem;
 }

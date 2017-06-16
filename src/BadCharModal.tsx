@@ -7,11 +7,9 @@ import { ModalState } from "./ModalState";
 
 const modalStyle = {
     content : {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        transform: 'translate(-50%, -50%)'
+        maxHeight: "600px",
+        maxWidth: "600px",
+        margin: "auto auto",
     }
 };
 
@@ -50,43 +48,40 @@ class BadCharModal extends React.Component<{}, ModalState> {
                     style={modalStyle}
                     contentLabel="Bad Character Rule Explanation"
                 >
-                    <div className="row">
-                        <div className="col-5">
-                            <h3 className="no-margin-bottom margin-top-5">Bad Character Table</h3>
+                    <div className="flex-row">
+                        <div className="flex-row-item">
+                            <h3>Bad Character Table</h3>
                         </div>
-                        <div className="col-1">
-                            <button className="no-margin-top" onClick={this.closeModal}>Close</button>
+                        <div className="flex-row-right-item">
+                            <button onClick={this.closeModal}>Close</button>
                         </div>
                     </div>
-                    <div className="row">
-                        <div className="col-6">
-                            <p>
-                                The bad character table tells us, given a mismatched
-                                character from the text, the shift distance that would
-                                align the rightmost instance of that character in the
-                                pattern with the mismatched character in the text.
-                            </p>
-                            <p>
-                                For example, if the pattern is "example" then the bad
-                                character table is:
-                            </p>
-                            {/* Text-center will center the table because it is an inline-block element */}
-                            <div className="text-center">
-                                <BadCharTable
-                                    ruleTable={makeBadCharTable(needle)}
-                                    logEntry={null}
-                                    haystack=""
-                                    needle={needle} />
-                            </div>
-                            <p>
-                                If we are comparing the text to the pattern, and we
-                                find an "m" that does not match the current character
-                                in the pattern, then we know that we must shift the
-                                text index 3 characters to the right and reset the
-                                pattern index to 7 (aligning the "m"s) before the
-                                pattern could match the text.
-                            </p>
+                    <div>
+                        <p>
+                            The bad character table tells us, given a mismatched
+                            character from the haystack, the shift distance that would
+                            align the rightmost instance of that character in the
+                            needle with the mismatched character in the haystack.
+                        </p>
+                        <p>
+                            For example, if the needle is "example" then the bad
+                            character table is:
+                        </p>
+                        <div>
+                            <BadCharTable
+                                ruleTable={makeBadCharTable(needle)}
+                                logEntry={null}
+                                haystack=""
+                                needle={needle} />
                         </div>
+                        <p>
+                            If we are comparing the haystack to the needle, and we
+                            find an "m" that does not match the current character
+                            in the needle, then we know that we must shift the
+                            haystack index 3 characters to the right and reset the
+                            needle index to 7 (aligning the "m"s) before the
+                            needle could match the haystack.
+                        </p>
                     </div>
                 </Modal>
             </div>

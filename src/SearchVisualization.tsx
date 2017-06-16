@@ -14,7 +14,7 @@ import GoodSuffixTable from "./GoodSuffixTable";
 import Haystack from "./Haystack";
 import Needle from "./Needle";
 import Pointer from "./Pointer";
-import SearchInfo from "./SearchInfo";
+import SearchInfo from "./SearchInfo"
 
 export interface SearchData {
     haystack: string;
@@ -68,64 +68,52 @@ export class SearchVisualization extends React.Component<SearchData, Visualizati
         const matchLength = needle.length - needleIndex;
 
         return (
-            <div>
-                <div className="row">
-                    <div className="col-6">
-                        <pre>
-                            <Haystack
-                                haystack={haystack}
-                                haystackIndex={haystackIndex}
-                                matchLength={matchLength}
-                                currentCharsMatch={currentCharsMatch} />
-                            <Needle
-                                needle={needle}
-                                haystackIndex={haystackIndex}
-                                matchLength={matchLength}
-                                currentCharsMatch={currentCharsMatch} />
-                            <Pointer haystackIndex={haystackIndex} />
-                        </pre>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-2">
-                        <SearchInfo
-                            logEntry={currentLogEntry}
+            <div style={{display: "flex", flexDirection: "column"}}>
+                <SearchInfo
+                    logEntry={currentLogEntry}
+                    haystack={haystack}
+                    needle={needle} />
+                <div>
+                    <pre>
+                        <Haystack
                             haystack={haystack}
-                            needle={needle} />
-                    </div>
-                    <div className="col-2">
-                        <BadCharModal />
-                        <BadCharTable
-                            ruleTable={this.props.badCharTable}
-                            logEntry={currentLogEntry}
-                            haystack={haystack}
-                            needle={needle} />
-                    </div>
-                    <div className="col-2">
-                        <GoodSuffixModal />
-                        <GoodSuffixTable
-                            ruleTable={this.props.goodSuffixTable}
-                            logEntry={currentLogEntry}
-                            haystack=""
-                            needle={needle} />
-                    </div>
+                            haystackIndex={haystackIndex}
+                            matchLength={matchLength}
+                            currentCharsMatch={currentCharsMatch} />
+                        <Needle
+                            needle={needle}
+                            haystackIndex={haystackIndex}
+                            matchLength={matchLength}
+                            currentCharsMatch={currentCharsMatch} />
+                        <Pointer haystackIndex={haystackIndex} />
+                    </pre>
                 </div>
-                <div className="row">
-                    <div className="col-6">
-                        <Controls
-                            onNext={this.handleNext}
-                            onPrevious={this.handlePrevious}
-                            onReset={this.handleReset} />
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-6">
+                <Controls
+                    onNext={this.handleNext}
+                    onPrevious={this.handlePrevious}
+                    onReset={this.handleReset} />
+                <div className="flex-row flex-wrap">
+                    <div className="flex-row-item" style={{flex: "2 0 400px"}}>
                         <Explanation
                             logEntry={currentLogEntry}
                             haystack={haystack}
                             needle={needle}
                             badCharTable={this.props.badCharTable}
                             goodSuffixTable={this.props.goodSuffixTable} />
+                    </div>
+                    <div className="flex-row-item margin-top">
+                        <BadCharModal />
+                        <BadCharTable
+                            ruleTable={this.props.badCharTable}
+                            logEntry={currentLogEntry}
+                            haystack={haystack}
+                            needle={needle} />
+                        <GoodSuffixModal />
+                        <GoodSuffixTable
+                            ruleTable={this.props.goodSuffixTable}
+                            logEntry={currentLogEntry}
+                            haystack=""
+                            needle={needle} />
                     </div>
                 </div>
             </div>

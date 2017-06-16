@@ -31,10 +31,6 @@ const config = {
     resolve: {
         extensions: ["*", ".js", ".jsx", ".ts", ".tsx"]
     },
-    externals: {
-        "react": "React",
-        "react-dom": "ReactDOM"
-    },
 }
 
 module.exports = config;

@@ -93,8 +93,7 @@ const explanations: Map<SearchAction, (props?: ExplanationProps) => JSX.Element>
 let Explanation = ({logEntry, haystack, needle, badCharTable, goodSuffixTable}: ExplanationProps) => {
     const explanation = explanations.get(logEntry.action);
     return (
-        <div className="explanation">
-            <h3>Explanation of the Current Step:</h3>
+        <div>
             { explanation
                 ? explanation({logEntry, haystack, needle, badCharTable, goodSuffixTable})
                 : <p></p>

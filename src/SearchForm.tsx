@@ -31,31 +31,23 @@ class SearchForm extends React.Component<SearchFormProps, void> {
 
     render(): JSX.Element {
         return (
-            <div className="row">
-                <div className="col-6">
-                    <form className="form-inline" onSubmit={this.handleSubmit}>
-                        <div className="form-group">
-                            <label>Text: </label>
-                            <input
-                                type="text"
-                                className="margin-left-10 input-lg"
-                                placeholder="Here is a simple example."
-                                ref={(input) => this.haystackInput = input }
-                            />
-                        </div>
-                        <div className="form-group margin-left-10">
-                            <label>Pattern: </label>
-                            <input
-                                type="text"
-                                className="margin-left-10"
-                                placeholder="example"
-                                ref={(input) => this.needleInput = input }
-                            />
-                        </div>
-                        <button type="submit" className="margin-left-10">Begin Search</button>
-                    </form>
-                </div>
-            </div>
+            <form onSubmit={this.handleSubmit}>
+                <label htmlFor="haystackInput">Haystack</label>
+                <input
+                    type="text"
+                    placeholder="Here is a simple example."
+                    id="haystackInput"
+                    ref={(input) => this.haystackInput = input }
+                />
+                <label htmlFor="needleInput">Needle</label>
+                <input
+                    type="text"
+                    placeholder="example"
+                    id="needleInput"
+                    ref={(input) => this.needleInput = input }
+                />
+                <button type="submit" className="button">Search</button>
+            </form>
         );
     }
 }

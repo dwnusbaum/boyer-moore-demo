@@ -36,10 +36,16 @@ class Controls extends React.Component<ControlsProps, void> {
 
     render() {
         return (
-            <div className="margin-top-5">
-                <button type="submit" onClick={this.props.onReset}>First Step</button>
-                <button className="margin-left-10" type="submit" onClick={this.props.onPrevious}>Previous Step</button>
-                <button className="margin-left-10" type="submit" onClick={this.props.onNext}>Next Step</button>
+            <div className="flex-row">
+                <div style={{marginTop: 0, marginBottom: 0, marginLeft: "1em", marginRight: 0}}>
+                    <button type="submit" className="button button-outline" onClick={this.props.onPrevious}>Previous Step</button>
+                </div>
+                <div className="flex-row-item">
+                    <button type="submit" className="button" onClick={this.props.onNext}>Next Step</button>
+                </div>
+                <div className="flex-row-right-item">
+                    <button type="submit" className="button button-outline" onClick={this.props.onReset}>Reset</button>
+                </div>
             </div>
         );
     }
