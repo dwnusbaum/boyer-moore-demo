@@ -3,7 +3,10 @@ const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const config = {
-    entry: path.resolve(__dirname, "src", "Demo.tsx"),
+    entry: [
+        "babel-polyfill",
+        path.resolve(__dirname, "src", "Demo.tsx")
+    ],
     output: {
         filename: "bundle.js",
         path: path.resolve(__dirname, "docs"),
@@ -13,10 +16,25 @@ const config = {
             {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
-                loader: "ts-loader",
-                options: {
-                    transpileOnly: true
-                }
+                use: [
+                    {
+                        loader: "babel-loader",
+                        options: {
+                            presets: [
+                                "react",
+                                [
+                                    "es2015",
+                                    {
+                                        "modules": false
+                                    }
+                                ],
+                            ]
+                        }
+                    },
+                    {
+                        loader: "ts-loader",
+                    },
+                ],
             },
         ]
     },
