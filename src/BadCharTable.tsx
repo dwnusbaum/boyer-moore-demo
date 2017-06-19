@@ -24,7 +24,7 @@ let BadCharTable = ({ruleTable, logEntry, haystack, needle}: RuleTableProps<BadC
     }
 
     let tableHeader: JSX.Element[] = [];
-    needleSet.forEach(function(char, index) {
+    needleSet.forEach(function(char: string, index: string) {
         tableHeader.push(
             <th key={index}>
                 <span style={char === highlightChar ? highlightStyle : {}}>
@@ -35,7 +35,7 @@ let BadCharTable = ({ruleTable, logEntry, haystack, needle}: RuleTableProps<BadC
     });
 
     let tableBody: JSX.Element[] = [];
-    needleSet.forEach(function(char, index) {
+    needleSet.forEach(function(char: string, index: string) {
         tableBody.push(
             <td key={index}>
                 <span style={char === highlightChar ? highlightStyle : {}}>

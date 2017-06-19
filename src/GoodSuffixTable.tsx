@@ -15,7 +15,7 @@ let GoodSuffixTable = ({ruleTable, logEntry, haystack, needle}: RuleTableProps<G
         highlightIndex = logEntry.needleIndex;
     }
 
-    let tableHeader = needleArray.map(function(char, index) {
+    let tableHeader = needleArray.map(function(char: string, index: number) {
         return (
             <th key={index}>
                 <span style={index === highlightIndex ? highlightStyle : {}}>{char}<sub>{index}</sub></span>
@@ -23,7 +23,7 @@ let GoodSuffixTable = ({ruleTable, logEntry, haystack, needle}: RuleTableProps<G
         );
     });
 
-    let tableBody = needleArray.map(function(_, index) {
+    let tableBody = needleArray.map(function(_, index: number) {
         return (
             <td key={index}>
                 <span style={index === highlightIndex ? highlightStyle : {}}>{ruleTable[index]}</span>
