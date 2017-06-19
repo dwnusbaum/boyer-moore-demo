@@ -9,6 +9,7 @@ const modalStyle = {
     content : {
         maxHeight: "600px",
         maxWidth: "600px",
+        width: "100%",
         margin: "auto auto",
     }
 };
