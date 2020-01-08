@@ -9,7 +9,7 @@ export interface ControlsProps {
 const LEFT_ARROW_KEY = 37;
 const RIGHT_ARROW_KEY = 39;
 
-class Controls extends React.Component<ControlsProps, void> {
+class Controls extends React.Component<ControlsProps, Readonly<{}>> {
     constructor() {
         super();
         this.handleKeyDown = this.handleKeyDown.bind(this);

@@ -5,7 +5,7 @@ export interface SearchFormProps {
     onHaystackAndNeedleSubmit: (haystack: string, needle: string) => void;
 }
 
-class SearchForm extends React.Component<SearchFormProps, void> {
+class SearchForm extends React.Component<SearchFormProps, Readonly<{}>> {
     private haystackInput: HTMLInputElement|null;
     private needleInput: HTMLInputElement|null;
 
