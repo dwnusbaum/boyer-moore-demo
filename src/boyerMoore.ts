@@ -98,7 +98,7 @@ export function makeBadCharTable(needle: string): BadCharTable {
     }
 
     var lookup = function(badChar: string): number {
-        if (rightmostIndex[badChar]) {
+        if (rightmostIndex.hasOwnProperty(badChar)) {
             return needle.length - 1 - rightmostIndex[badChar];
         } else {
             return needle.length;

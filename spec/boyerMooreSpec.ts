@@ -137,7 +137,7 @@ describe("boyerMoore.js", function() {
                     },
                     {
                         comparisons: 3,
-                        haystackIndex: 5,
+                        haystackIndex: 4,
                         needleIndex: 1,
                         action: SearchAction.NO_MATCH,
                     }
@@ -151,6 +151,23 @@ describe("boyerMoore.js", function() {
                 var needle = "abcda";
                 var rightmost: { [index: string]: number } = {
                     a: 4,
+                    b: 1,
+                    c: 2,
+                    d: 3,
+                };
+                var table = makeBadCharTable(needle);
+                needle.split("").forEach(function(character) {
+                    expect(table(character)).toEqual(needle.length - 1 - rightmost[character]);
+                });
+                expect(table("other")).toEqual(needle.length);
+            });
+        });
+
+        describe("boyerMoore.makeBadCharTable", function() {
+            it ("creates the proper table for \"abcd\"", function() {
+                var needle = "abcd";
+                var rightmost: { [index: string]: number } = {
+                    a: 0,
                     b: 1,
                     c: 2,
                     d: 3,
