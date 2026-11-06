@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import {
+    Algorithm,
     BadCharTable as BadCharTableType,
     GoodSuffixTable as GoodSuffixTableType,
     SearchLogEntry
@@ -12,11 +13,13 @@ import Explanation from "./Explanation";
 import GoodSuffixModal from "./GoodSuffixModal";
 import GoodSuffixTable from "./GoodSuffixTable";
 import Haystack from "./Haystack";
+import HorspoolModal from "./HorspoolModal";
 import Needle from "./Needle";
 import Pointer from "./Pointer";
 import SearchInfo from "./SearchInfo"
 
 export interface SearchData {
+    algorithm: Algorithm;
     haystack: string;
     needle: string;
     badCharTable: BadCharTableType;
@@ -37,6 +40,16 @@ export class SearchVisualization extends React.Component<SearchData, Visualizati
         this.state = {
             logEntryIndex: 0
         };
+    }
+
+    componentWillReceiveProps(nextProps: SearchData): void {
+        // A new search (or algorithm) produces a different log, so the
+        // current step may no longer exist.
+        if (nextProps.log !== this.props.log) {
+            this.setState({
+                logEntryIndex: 0
+            });
+        }
     }
 
     handleNext(): void {
@@ -66,6 +79,7 @@ export class SearchVisualization extends React.Component<SearchData, Visualizati
 
         const currentCharsMatch = haystack.charAt(haystackIndex) === needle.charAt(needleIndex);
         const matchLength = needle.length - needleIndex;
+        const isHorspool = this.props.algorithm === Algorithm.HORSPOOL;
 
         return (
             <div style={{display: "flex", flexDirection: "column"}}>
@@ -95,6 +109,7 @@ export class SearchVisualization extends React.Component<SearchData, Visualizati
                 <div className="flex-row flex-wrap">
                     <div className="flex-row-item" style={{flex: "2 0 400px"}}>
                         <Explanation
+                            algorithm={this.props.algorithm}
                             logEntry={currentLogEntry}
                             haystack={haystack}
                             needle={needle}
@@ -102,18 +117,22 @@ export class SearchVisualization extends React.Component<SearchData, Visualizati
                             goodSuffixTable={this.props.goodSuffixTable} />
                     </div>
                     <div className="flex-row-item margin-top">
-                        <BadCharModal />
+                        { isHorspool ? <HorspoolModal /> : <BadCharModal /> }
                         <BadCharTable
+                            algorithm={this.props.algorithm}
                             ruleTable={this.props.badCharTable}
                             logEntry={currentLogEntry}
                             haystack={haystack}
                             needle={needle} />
-                        <GoodSuffixModal />
-                        <GoodSuffixTable
-                            ruleTable={this.props.goodSuffixTable}
-                            logEntry={currentLogEntry}
-                            haystack=""
-                            needle={needle} />
+                        { isHorspool ? undefined : <GoodSuffixModal /> }
+                        { isHorspool
+                            ? undefined
+                            : <GoodSuffixTable
+                                ruleTable={this.props.goodSuffixTable}
+                                logEntry={currentLogEntry}
+                                haystack=""
+                                needle={needle} />
+                        }
                     </div>
                 </div>
             </div>

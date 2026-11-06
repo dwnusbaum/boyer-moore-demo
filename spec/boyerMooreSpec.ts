@@ -2,7 +2,9 @@ import {
     getSuffixLength,
     makeBadCharTable,
     makeGoodSuffixTable,
+    makeHorspoolTable,
     search,
+    searchHorspool,
     SearchAction,
 } from "../src/boyerMoore";
 
@@ -143,6 +145,92 @@ describe("boyerMoore.js", function() {
                     }
                 ];
                 expect(search("ab", "cbba").log).toEqual(correctActionList);
+            });
+        });
+
+        describe("boyerMoore.searchHorspool", function() {
+            it("finds \"puter\" in \"computer\"", function() {
+                expect(searchHorspool("puter", "computer").isMatch).toBe(true);
+            });
+
+            it("finds the empty string in any string", function() {
+                expect(searchHorspool("", "computer").isMatch).toBe(true);
+                expect(searchHorspool("", "").isMatch).toBe(true);
+            });
+
+            it("does not find \"muter\" in \"computer\"", function() {
+                expect(searchHorspool("muter", "computer").isMatch).toBe(false);
+            });
+
+            it("shifts using the character aligned with the end of the needle", function() {
+                // The mismatch is at haystack index 1 ('x' vs 'a'), but the
+                // shift is determined by the 'b' at haystack index 2, which
+                // occurs at needle index 0, giving a shift of 2.
+                var correctActionList = [
+                    {
+                        comparisons: 1,
+                        haystackIndex: 2,
+                        needleIndex: 2,
+                        action: SearchAction.COMPARE_EQUAL,
+                    },
+                    {
+                        comparisons: 2,
+                        haystackIndex: 1,
+                        needleIndex: 1,
+                        action: SearchAction.SHIFT,
+                    },
+                    {
+                        comparisons: 3,
+                        haystackIndex: 4,
+                        needleIndex: 2,
+                        action: SearchAction.SHIFT,
+                    },
+                    {
+                        comparisons: 3,
+                        haystackIndex: 7,
+                        needleIndex: 2,
+                        action: SearchAction.NO_MATCH,
+                    }
+                ];
+                expect(searchHorspool("bab", "cxbcc").log).toEqual(correctActionList);
+            });
+
+            it("agrees with indexOf for random inputs", function() {
+                // Fixed-seed LCG so that failures are reproducible.
+                var seed = 12345;
+                var random = function(): number {
+                    seed = (seed * 1103515245 + 12345) % 2147483648;
+                    return seed / 2147483648;
+                };
+                var alphabet = "abc";
+                var randomString = function(maxLength: number): string {
+                    var length = Math.floor(random() * (maxLength + 1));
+                    var result = "";
+                    for (var i = 0; i < length; i++) {
+                        result += alphabet.charAt(Math.floor(random() * alphabet.length));
+                    }
+                    return result;
+                };
+                for (var i = 0; i < 2000; i++) {
+                    var needle = randomString(5);
+                    var haystack = randomString(15);
+                    var expected = haystack.indexOf(needle) !== -1;
+                    expect(searchHorspool(needle, haystack).isMatch).toBe(expected, needle + " in " + haystack);
+                }
+            });
+        });
+
+        describe("boyerMoore.makeHorspoolTable", function() {
+            it("ignores the last character of the needle", function() {
+                var table = makeHorspoolTable("example");
+                expect(table("e")).toEqual(6);
+                expect(table("x")).toEqual(5);
+                expect(table("l")).toEqual(1);
+                expect(table("other")).toEqual(7);
+            });
+
+            it("shifts by the needle length for a character only at the end", function() {
+                expect(makeHorspoolTable("abcd")("d")).toEqual(4);
             });
         });
 

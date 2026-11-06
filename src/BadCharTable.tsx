@@ -1,13 +1,22 @@
 import * as React from "react";
 
-import { BadCharTable as BadCharTableType, SearchAction } from "./boyerMoore";
+import {
+    Algorithm,
+    BadCharTable as BadCharTableType,
+    getAlignmentEnd,
+    SearchAction,
+} from "./boyerMoore";
 import { RuleTableProps } from "./RuleTableProps";
 
 const highlightStyle = {
     color: "blue",
 }
 
-let BadCharTable = ({ruleTable, logEntry, haystack, needle}: RuleTableProps<BadCharTableType>) => {
+export interface BadCharTableProps extends RuleTableProps<BadCharTableType> {
+    algorithm?: Algorithm;
+}
+
+let BadCharTable = ({ruleTable, logEntry, haystack, needle, algorithm}: BadCharTableProps) => {
     let needleSet = new Set(needle.split(""));
     // Add a dummy element that is not in the needle array to show the shift
     // amount for characters not in the needle.
@@ -15,7 +24,12 @@ let BadCharTable = ({ruleTable, logEntry, haystack, needle}: RuleTableProps<BadC
 
     let highlightChar = "";
     if (logEntry && logEntry.action === SearchAction.SHIFT) {
-        const haystackChar = haystack.charAt(logEntry.haystackIndex);
+        // Horspool looks up the haystack character aligned with the end of
+        // the needle rather than the mismatched character.
+        const lookupIndex = algorithm === Algorithm.HORSPOOL
+            ? getAlignmentEnd(needle, logEntry.haystackIndex, logEntry.needleIndex)
+            : logEntry.haystackIndex;
+        const haystackChar = haystack.charAt(lookupIndex);
         if (needleSet.has(haystackChar)) {
             highlightChar = haystackChar;
         } else {
