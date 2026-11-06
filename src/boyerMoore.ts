@@ -4,6 +4,11 @@ export interface BadCharTable {
 
 export type GoodSuffixTable = number[];
 
+export enum Algorithm {
+    BOYER_MOORE,
+    HORSPOOL,
+}
+
 export enum SearchAction {
     COMPARE_EQUAL,
     GALIL_RULE_MATCH,
@@ -91,7 +96,76 @@ export function search(needle: string, haystack: string): SearchResult {
     return { isMatch: false, log: log };
 }
 
-export function makeBadCharTable(needle: string): BadCharTable {
+// The Boyer-Moore-Horspool variant. Only the bad character rule is used, and
+// the character that determines the shift is always the haystack character
+// aligned with the last character of the needle, regardless of where the
+// mismatch happened.
+export function searchHorspool(needle: string, haystack: string): SearchResult {
+    var log: SearchLogEntry[] = [];
+    var comparisons = 0;
+    var shiftTable = makeHorspoolTable(needle);
+
+    var haystackIndex = needle.length - 1;
+    var needleIndex = needle.length - 1;
+
+    while (haystackIndex < haystack.length) {
+        if (needleIndex < 0) {
+            log.push({
+                comparisons: comparisons,
+                haystackIndex: haystackIndex,
+                needleIndex: needleIndex,
+                action: SearchAction.MATCH,
+            });
+            return { isMatch: true, log: log };
+        } else if (needle.charAt(needleIndex) === haystack.charAt(haystackIndex)) {
+            comparisons++;
+            log.push({
+                comparisons: comparisons,
+                haystackIndex: haystackIndex,
+                needleIndex: needleIndex,
+                action: SearchAction.COMPARE_EQUAL,
+            });
+            haystackIndex--;
+            needleIndex--;
+        } else {
+            comparisons++;
+            log.push({
+                comparisons: comparisons,
+                haystackIndex: haystackIndex,
+                needleIndex: needleIndex,
+                action: SearchAction.SHIFT,
+            });
+
+            var alignmentEnd = getAlignmentEnd(needle, haystackIndex, needleIndex);
+            haystackIndex = alignmentEnd + shiftTable(haystack.charAt(alignmentEnd));
+            needleIndex = needle.length - 1;
+        }
+    }
+
+    log.push({
+        comparisons: comparisons,
+        haystackIndex: haystackIndex,
+        needleIndex: needleIndex,
+        action: SearchAction.NO_MATCH,
+    });
+
+    return { isMatch: false, log: log };
+}
+
+export function searchWith(algorithm: Algorithm, needle: string, haystack: string): SearchResult {
+    return algorithm === Algorithm.HORSPOOL
+        ? searchHorspool(needle, haystack)
+        : search(needle, haystack);
+}
+
+// Returns the haystack index aligned with the last character of the needle.
+export function getAlignmentEnd(needle: string, haystackIndex: number, needleIndex: number): number {
+    return haystackIndex + (needle.length - 1 - needleIndex);
+}
+
+// The optional needleLength allows building the table from a prefix of the
+// needle while computing shifts relative to the full needle.
+export function makeBadCharTable(needle: string, needleLength: number = needle.length): BadCharTable {
     var rightmostIndex: { [index: string]: number } = {};
     for (var i = 0; i < needle.length; i++) {
         rightmostIndex[needle.charAt(i)] = i;
@@ -99,13 +173,20 @@ export function makeBadCharTable(needle: string): BadCharTable {
 
     var lookup = function(badChar: string): number {
         if (rightmostIndex.hasOwnProperty(badChar)) {
-            return needle.length - 1 - rightmostIndex[badChar];
+            return needleLength - 1 - rightmostIndex[badChar];
         } else {
-            return needle.length;
+            return needleLength;
         }
     }
 
     return lookup;
+}
+
+// Like the bad character table, but the last character of the needle is
+// ignored, so that the shift is always at least 1 even when the haystack
+// character aligned with the end of the needle matches it.
+export function makeHorspoolTable(needle: string): BadCharTable {
+    return makeBadCharTable(needle.substring(0, needle.length - 1), needle.length);
 }
 
 export function makeGoodSuffixTable(needle: string): GoodSuffixTable {

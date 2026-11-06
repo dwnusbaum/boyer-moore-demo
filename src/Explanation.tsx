@@ -1,13 +1,16 @@
 import * as React from "react";
 
 import {
+    Algorithm,
     BadCharTable,
+    getAlignmentEnd,
     GoodSuffixTable,
     SearchAction,
     SearchLogEntry
 } from "./boyerMoore"
 
 export interface ExplanationProps {
+    algorithm: Algorithm;
     logEntry: SearchLogEntry;
     haystack: string;
     needle: string;
@@ -82,6 +85,34 @@ function shiftRule({logEntry, haystack, needle, badCharTable, goodSuffixTable}: 
     );
 }
 
+function horspoolShiftRule({logEntry, haystack, needle, badCharTable}: ExplanationProps): JSX.Element {
+    const needleIndex = logEntry.needleIndex;
+    const alignmentEnd = getAlignmentEnd(needle, logEntry.haystackIndex, needleIndex);
+    const alignedChar = haystack.charAt(alignmentEnd);
+    const shift = badCharTable(alignedChar);
+
+    return (
+        <div>
+            <p>
+                The current character in the text and pattern do not match.
+                Horspool's variant ignores which character mismatched, and
+                instead looks up the text character aligned with the last
+                character of the pattern (index {alignmentEnd}) in the shift
+                table.
+            </p>
+            <div>shiftTable['{alignedChar}'] = {shift}</div>
+            <p>
+                We shift the pattern {shift} to the right, so the text index
+                becomes {alignmentEnd} + {shift} = {alignmentEnd + shift}.
+            </p>
+            { needleIndex == needle.length - 1
+                ? undefined
+                : <p>We also reset the pattern index to {needle.length - 1}.</p>
+            }
+        </div>
+    );
+}
+
 const explanations: Map<SearchAction, (props?: ExplanationProps) => JSX.Element> = new Map([
     [SearchAction.COMPARE_EQUAL, compareEqual],
     [SearchAction.GALIL_RULE_MATCH, galilRuleMatch],
@@ -90,12 +121,14 @@ const explanations: Map<SearchAction, (props?: ExplanationProps) => JSX.Element>
     [SearchAction.SHIFT, shiftRule],
 ]);
 
-let Explanation = ({logEntry, haystack, needle, badCharTable, goodSuffixTable}: ExplanationProps) => {
-    const explanation = explanations.get(logEntry.action);
+let Explanation = ({algorithm, logEntry, haystack, needle, badCharTable, goodSuffixTable}: ExplanationProps) => {
+    const explanation = algorithm === Algorithm.HORSPOOL && logEntry.action === SearchAction.SHIFT
+        ? horspoolShiftRule
+        : explanations.get(logEntry.action);
     return (
         <div>
             { explanation
-                ? explanation({logEntry, haystack, needle, badCharTable, goodSuffixTable})
+                ? explanation({algorithm, logEntry, haystack, needle, badCharTable, goodSuffixTable})
                 : <p></p>
             }
         </div>
